@@ -30,34 +30,9 @@ struct Ranking: View {
                         .imageScale(.large)
                         .foregroundStyle(.tint)
                     
-                    //ICONES
-                    //HStack define a ordem dos itens na horizontal
-                    HStack (spacing: 50){
-                        NavigationLink(destination: Home()) {
-                            Image("AppIcon29x29 1")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                        
-                        NavigationLink(destination: Badges()) {
-                            Image("AppIcon29x29 2")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                        
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Image("AppIcon29x29 3")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        })
-                        
-                        NavigationLink(destination: Me()) {
-                            Image("AppIcon29x29")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
                     
-                    }
+                    
+                
                 }
 
             }
