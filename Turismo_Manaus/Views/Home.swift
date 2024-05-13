@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @State var isShowingFilterView = false
+    
     var body: some View {
         //ZStack define a ordem dos itens na layer
         NavigationStack {
@@ -21,9 +24,14 @@ struct Home: View {
                 //VStack define a ordem dos itens na vertical
                 VStack (spacing: 250){//spacing é um parametro de espacamento geral entre os itens
                     //FILTROS
-                    Image("btn_adjust")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
+                    Button(action: {
+                        isShowingFilterView.toggle()
+                    }, label: {
+                        Image("btn_adjust")
+                            .imageScale(.large)
+                            .foregroundStyle(.tint)
+                    })
+                    
                     
                     //ROLAGEM DE DADOS
                     Image("dice6")
@@ -61,11 +69,15 @@ struct Home: View {
                     
                     }
                 }
+                .sheet(isPresented: $isShowingFilterView, content: {
+                    FilterView()
+                })
                 //POPUP NA TELA DO LOCAL SPAWMADO
                 //CODIGO DO POPUP
                 //-----------xxxxx----------
             }
             .padding()
+            
         }
     }
 }

@@ -59,9 +59,7 @@ struct Ranking: View {
                     
                     }
                 }
-                //POPUP NA TELA DO LOCAL SPAWMADO
-                //CODIGO DO POPUP
-                //-----------xxxxx----------
+
             }
             .padding()
         }
