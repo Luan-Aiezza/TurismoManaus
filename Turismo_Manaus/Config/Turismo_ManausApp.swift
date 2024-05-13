@@ -11,7 +11,7 @@ import SwiftUI
 struct Turismo_ManausApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Home()
         }
     }
 }
