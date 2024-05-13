@@ -39,7 +39,7 @@ struct Home: View {
                     //ROLAGEM DE DADOS
                     SceneKitView(scene: scene)
                         .frame(width: 200, height: 200)
-                        .background(UIColor.clear)
+//                    scene.background.contents = UIColor.clear
                                         
                     
                     //ICONES
@@ -99,6 +99,7 @@ struct SceneKitView: UIViewRepresentable {
         let scnView = SCNView()
         scnView.scene = scene
         scnView.allowsCameraControl = true
+        scnView.backgroundColor = .clear
         scene.background.contents = UIColor.clear
         // Configura a cor do material do objeto
 //        let color = UIColor.red
