@@ -13,75 +13,60 @@ struct Home: View {
     
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
-
+    @State private var selectedTab: Int = 0
     
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        NavigationStack {
-            ZStack{
-                //FUNDO
-                //CODIGO DE FUNDO
-                Image("background_1")
-                    .imageScale(.large)
-                    .foregroundStyle(.brown)
-                //VStack define a ordem dos itens na vertical
-                VStack (spacing: 200){//spacing é um parametro de espacamento geral entre os itens
-                    //FILTROS
-                    Button(action: {
-                        isShowingFilterView.toggle()
-                    }, label: {
-                        Image("btn_adjust")
+        TabView (selection: $selectedTab) {
+            GeometryReader { geometry in
+                NavigationStack {
+                    ZStack{
+                        Image("background_1")
                             .imageScale(.large)
-                            .foregroundStyle(.tint)
-                    })
-                    
-                    
-                    //ROLAGEM DE DADOS
-                    SceneKitView(scene: scene)
-                        .frame(width: 200, height: 200)
-//                    scene.background.contents = UIColor.clear
-                                        
-                    
-                    //ICONES
-                    //HStack define a ordem dos itens na horizontal
-                    HStack (spacing: 50){
-                        
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Image("AppIcon29x29 1")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        })
-        
-
-                        NavigationLink(destination: Badges()) {
-                            Image("AppIcon29x29 2")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                        
-                        NavigationLink(destination: Ranking()) {
-                            Image("AppIcon29x29 3")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                        
-                        NavigationLink(destination: Me()) {
-                            Image("AppIcon29x29")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                    
-                    }
-                }
-                .sheet(isPresented: $isShowingFilterView, content: {
-                    FilterView()
-                })
-                //POPUP NA TELA DO LOCAL SPAWMADO
-                //CODIGO DO POPUP
-                //-----------xxxxx----------
-            }
-            .padding()
+                            .foregroundStyle(.brown)
             
+                        VStack (spacing: 200){
+                            Button(action: {
+                                isShowingFilterView.toggle()
+                            }, label: {
+                                Image("btn_adjust")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                            })
+                            
+                            SceneKitView(scene: scene)
+                                .frame(width: 200, height: 200)
+                            
+                            Text("")
+                            
+                        }
+                        .sheet(isPresented: $isShowingFilterView, content: {
+                            FilterView()
+                        })
+                        
+                    }
+                    .padding()
+                    
+                }
+            }
+            .tabItem {
+                Label("Dados", systemImage: "dice.fill")
+            }
+            
+            Badges()
+                .tabItem {
+                    Label("Badges", systemImage: "rosette")
+                }
+            
+            Ranking()
+                .tabItem {
+                    Label("Badges", systemImage: "crown")
+                }
+            
+            Me()
+                .tabItem {
+                    Label("Badges", systemImage: "person.fill")
+                }
         }
     }
 }

@@ -9,59 +9,34 @@
 import SwiftUI
 
 struct Ranking: View {
+    @State private var selectedTab: Int = 1
+    
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        NavigationStack {
-            ZStack{
-                //FUNDO
-                //CODIGO DE FUNDO
-                Image("background_1")
-                    .imageScale(.large)
-                    .foregroundStyle(.brown)
-                //VStack define a ordem dos itens na vertical
-                VStack (spacing: 250){//spacing é um parametro de espacamento geral entre os itens
-                    //FILTROS
-                    Image("btn_adjust")
+        GeometryReader { geometry in
+            NavigationStack {
+                ZStack{
+                    //FUNDO
+                    //CODIGO DE FUNDO
+                    Image("background_1")
                         .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    
-                    //ROLAGEM DE DADOS
-                    Image("dice6")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    
-                    //ICONES
-                    //HStack define a ordem dos itens na horizontal
-                    HStack (spacing: 50){
-                        NavigationLink(destination: Home()) {
-                            Image("AppIcon29x29 1")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
+                        .foregroundStyle(.brown)
+                    //VStack define a ordem dos itens na vertical
+                    VStack (spacing: 250){
+                        //FILTROS
+                        Text("Ranking")
                         
-                        NavigationLink(destination: Badges()) {
-                            Image("AppIcon29x29 2")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
+                        //ROLAGEM DE DADOS
+                        Text("Aqui vai o ranking")
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Image("AppIcon29x29 3")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        })
-                        
-                        NavigationLink(destination: Me()) {
-                            Image("AppIcon29x29")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        }
-                    
-                    }
-                }
+                        Text("")
 
+                        
+                    }
+                    
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }
