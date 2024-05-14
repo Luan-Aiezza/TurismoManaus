@@ -16,10 +16,10 @@ enum Tabs: Int {
 
 struct TabBar: View {
     
+    @Binding var selectTab: Tabs
+
     var body: some View {
-        
-        //        @State private var selectTab: Int = 0
-        
+            
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
                 .frame(width: 358, height: 70) // Ajuste o tamanho conforme necessário
@@ -27,53 +27,78 @@ struct TabBar: View {
             
             HStack (alignment: .center, spacing: 40){
                 Button(action: {
-                    
+                    selectTab = .dice
                 }, label: {
                     VStack{
-                        Image(systemName: "dice.fill")
+                        var dice = Image(systemName: "dice.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 34)
+                        if selectTab == .dice {
+                            dice
+                        } else {
+                            dice
+                                .tint(.gray)
+                        }
                         
                     }
                 })
                 
                 Button(action: {
-                    
+                    selectTab = .achievement
                 }, label: {
                     VStack{
-                        Image(systemName: "rosette")
+                        var achievement =  Image(systemName: "rosette")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24)
-                            .tint(.gray)
                         
+                        if selectTab == .achievement {
+                            achievement
+                        } else {
+                            achievement
+                                .tint(.gray)
+                        }
                     }
                     
                 })
                 
                 Button(action: {
-                    
+                    selectTab = .ranking
+
                 }, label: {
                     VStack (alignment: .center, spacing: 10){
-                        Image(systemName: "crown.fill")
+                        
+                        var ranking = Image(systemName: "crown.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 44)
-                            .tint(.gray)
+                        
+                        if selectTab == .ranking {
+                            ranking
+                        } else {
+                            ranking
+                                .tint(.gray)
+                        }
                     }
                 })
                 
                 Button(action: {
-                    
+                    selectTab = .me
                 }, label: {
                     VStack{
-                        Image(systemName: "person.fill")
+                        var me = Image(systemName: "person.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 34)
-                            .tint(.gray)
+                            
                         
+                        if selectTab == .me {
+                            me
+                        } else {
+                            me
+                                .tint(.gray)
+                        }
                     }
                 })
             }
@@ -84,5 +109,5 @@ struct TabBar: View {
 }
 
 #Preview {
-    TabBar()
+    TabBar(selectTab: .constant(.dice))
 }

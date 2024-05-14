@@ -13,7 +13,7 @@ struct Home: View {
     
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
-    @State private var selectedTab: Int = 0
+    @State private var selectedTab: Tabs = .dice
     
     var body: some View {
         GeometryReader { geometry in
@@ -34,7 +34,7 @@ struct Home: View {
                         SceneKitView(scene: scene)
                             .frame(width: 150, height: 150)
                         
-                        TabBar()
+                        TabBar(selectTab: $selectedTab)
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
