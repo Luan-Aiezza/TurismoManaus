@@ -9,27 +9,6 @@
 import SwiftUI
 import SceneKit
 
-struct GlassRectangle: View {
-    var body: some View {
-        ZStack {
-            // Gradiente para simular o efeito de vidro fosco
-            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
-                .frame(width: 350, height: 100) // Ajuste o tamanho conforme necessário
-                .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-
-            
-//            // Retângulo arredondado
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color.clear)
-//                .frame(width: 200, height: 100) // Ajuste o tamanho conforme necessário
-//                .overlay(
-//                    Text("Seu texto aqui")
-//                        .foregroundColor(.white) // Cor do texto
-//                )
-        }
-    }
-}
-
 struct Home: View {
     
     @State var isShowingFilterView = false
@@ -41,7 +20,7 @@ struct Home: View {
             NavigationStack {
                 ZStack{
                     
-                    VStack (spacing: 200){
+                    VStack (spacing: 250){
                         Button(action: {
                             isShowingFilterView.toggle()
                         }, label: {
@@ -50,11 +29,12 @@ struct Home: View {
                                 .foregroundStyle(.tint)
                         })
                         
+                        
+                        
                         SceneKitView(scene: scene)
-                            .frame(width: 200, height: 200)
+                            .frame(width: 150, height: 150)
                         
                         TabBar()
-//                        GlassRectangle()
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
@@ -62,39 +42,37 @@ struct Home: View {
                     })
                     
                 }
-                
             }
         }
-                       
     }
-        
+    
 }
-        
+
 
 
 
 struct SceneKitView: UIViewRepresentable {
-//    let sceneName: String
+    //    let sceneName: String
     let scene: SCNScene
-
+    
     func makeUIView(context: Context) -> SCNView {
         // Cria uma cena do SceneKit
-//        let scene = SCNScene(named: sceneName + ".scn")!
-//        let scene = SCNScene(named: sceneName + ".scn")!
-
+        //        let scene = SCNScene(named: sceneName + ".scn")!
+        //        let scene = SCNScene(named: sceneName + ".scn")!
+        
         // Cria uma SCNView para exibir a cena
         let scnView = SCNView()
         scnView.scene = scene
-        scnView.allowsCameraControl = false
+        scnView.allowsCameraControl = true
         scnView.backgroundColor = .clear
         scene.background.contents = UIColor.clear
         // Configura a cor do material do objeto
-//        let color = UIColor.red
-//        scene.rootNode.childNode(withName: "dice", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = color
-
+        //        let color = UIColor.red
+        //        scene.rootNode.childNode(withName: "dice", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = color
+        
         return scnView
     }
-
+    
     func updateUIView(_ uiView: SCNView, context: Context) {
         // Atualiza a cena, se necessário
     }
