@@ -42,6 +42,7 @@ struct Home: View {
                         }
                         .sheet(isPresented: $isShowingFilterView, content: {
                             FilterView()
+                                .presentationDetents([.height(UIScreen.main.bounds.height/1.75)]) //Define o tamanho da aba de filtos
                         })
                         
                     }
