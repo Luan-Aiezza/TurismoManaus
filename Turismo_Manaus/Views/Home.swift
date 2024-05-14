@@ -42,7 +42,6 @@ struct Home: View {
             NavigationStack {
                 ZStack{
                     
-                    
                     VStack (spacing: 200){
                         Button(action: {
                             isShowingFilterView.toggle()
@@ -61,6 +60,7 @@ struct Home: View {
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
                         FilterView()
+                            .presentationDetents([.height(UIScreen.main.bounds.height/1.75)]) //Define o tamanho da aba de filtos
                     })
                     
                 }
@@ -113,7 +113,7 @@ struct SceneKitView: UIViewRepresentable {
         // Cria uma SCNView para exibir a cena
         let scnView = SCNView()
         scnView.scene = scene
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl = false
         scnView.backgroundColor = .clear
         scene.background.contents = UIColor.clear
         // Configura a cor do material do objeto
