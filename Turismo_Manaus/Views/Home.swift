@@ -9,6 +9,27 @@
 import SwiftUI
 import SceneKit
 
+struct GlassRectangle: View {
+    var body: some View {
+        ZStack {
+            // Gradiente para simular o efeito de vidro fosco
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                .frame(width: 350, height: 100) // Ajuste o tamanho conforme necessário
+                .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
+
+            
+//            // Retângulo arredondado
+//            RoundedRectangle(cornerRadius: 20)
+//                .fill(Color.clear)
+//                .frame(width: 200, height: 100) // Ajuste o tamanho conforme necessário
+//                .overlay(
+//                    Text("Seu texto aqui")
+//                        .foregroundColor(.white) // Cor do texto
+//                )
+        }
+    }
+}
+
 struct Home: View {
     
     @State var isShowingFilterView = false
@@ -16,60 +37,42 @@ struct Home: View {
     @State private var selectedTab: Int = 0
     
     var body: some View {
-        //ZStack define a ordem dos itens na layer
-        TabView (selection: $selectedTab) {
-            GeometryReader { geometry in
-                NavigationStack {
-                    ZStack{
-                        Image("background_1")
-                            .imageScale(.large)
-                            .foregroundStyle(.brown)
-            
-                        VStack (spacing: 200){
-                            Button(action: {
-                                isShowingFilterView.toggle()
-                            }, label: {
-                                Image("btn_adjust")
-                                    .imageScale(.large)
-                                    .foregroundStyle(.tint)
-                            })
-                            
-                            SceneKitView(scene: scene)
-                                .frame(width: 200, height: 200)
-                            
-                            Text("")
-                            
-                        }
-                        .sheet(isPresented: $isShowingFilterView, content: {
-                            FilterView()
+        GeometryReader { geometry in
+            NavigationStack {
+                ZStack{
+                    
+                    
+                    VStack (spacing: 200){
+                        Button(action: {
+                            isShowingFilterView.toggle()
+                        }, label: {
+                            Image("btn_adjust")
+                                .imageScale(.large)
+                                .foregroundStyle(.tint)
                         })
                         
+                        SceneKitView(scene: scene)
+                            .frame(width: 200, height: 200)
+                        
+                        TabBar()
+//                        GlassRectangle()
+                        
                     }
-                    .padding()
+                    .sheet(isPresented: $isShowingFilterView, content: {
+                        FilterView()
+                    })
                     
                 }
+                
             }
-            .tabItem {
-                Label("Dados", systemImage: "dice.fill")
-            }
-            
-            Badges()
-                .tabItem {
-                    Label("Badges", systemImage: "rosette")
-                }
-            
-            Ranking()
-                .tabItem {
-                    Label("Badges", systemImage: "crown")
-                }
-            
-            Me()
-                .tabItem {
-                    Label("Badges", systemImage: "person.fill")
-                }
         }
+                       
     }
+        
 }
+        
+
+
 
 struct SceneKitView: UIViewRepresentable {
 //    let sceneName: String
