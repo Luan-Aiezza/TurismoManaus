@@ -42,7 +42,7 @@ struct Home: View {
             NavigationStack {
                 ZStack{
                     
-                    VStack (spacing: 200){
+                    VStack (spacing: 250){
                         Button(action: {
                             isShowingFilterView.toggle()
                         }, label: {
@@ -51,11 +51,12 @@ struct Home: View {
                                 .foregroundStyle(.tint)
                         })
                         
+                        
+                        
                         SceneKitView(scene: scene)
-                            .frame(width: 200, height: 200)
+                            .frame(width: 150, height: 150)
                         
                         TabBar()
-//                        GlassRectangle()
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
@@ -69,8 +70,8 @@ struct Home: View {
                 authenticateUser()
             }
         }
-                       
     }
+    
     private func authenticateUser() {
             let player = GKLocalPlayer.local
             player.authenticateHandler = { vc, error in
@@ -97,32 +98,32 @@ struct Home: View {
         }
         
 }
-        
+
 
 
 
 struct SceneKitView: UIViewRepresentable {
-//    let sceneName: String
+    //    let sceneName: String
     let scene: SCNScene
-
+    
     func makeUIView(context: Context) -> SCNView {
         // Cria uma cena do SceneKit
-//        let scene = SCNScene(named: sceneName + ".scn")!
-//        let scene = SCNScene(named: sceneName + ".scn")!
-
+        //        let scene = SCNScene(named: sceneName + ".scn")!
+        //        let scene = SCNScene(named: sceneName + ".scn")!
+        
         // Cria uma SCNView para exibir a cena
         let scnView = SCNView()
         scnView.scene = scene
-        scnView.allowsCameraControl = false
+        scnView.allowsCameraControl = true
         scnView.backgroundColor = .clear
         scene.background.contents = UIColor.clear
         // Configura a cor do material do objeto
-//        let color = UIColor.red
-//        scene.rootNode.childNode(withName: "dice", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = color
-
+        //        let color = UIColor.red
+        //        scene.rootNode.childNode(withName: "dice", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = color
+        
         return scnView
     }
-
+    
     func updateUIView(_ uiView: SCNView, context: Context) {
         // Atualiza a cena, se necessário
     }

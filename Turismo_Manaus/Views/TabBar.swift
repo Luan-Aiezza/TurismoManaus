@@ -18,7 +18,7 @@ struct TabBar: View {
     
     var body: some View {
         
-//        @State private var selectTab: Int = 0
+        //        @State private var selectTab: Int = 0
         
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
@@ -47,7 +47,7 @@ struct TabBar: View {
                             .scaledToFit()
                             .frame(width: 24)
                             .tint(.gray)
-
+                        
                     }
                     
                 })
@@ -73,7 +73,7 @@ struct TabBar: View {
                             .scaledToFit()
                             .frame(width: 34)
                             .tint(.gray)
-
+                        
                     }
                 })
             }
