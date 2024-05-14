@@ -9,34 +9,34 @@
 import SwiftUI
 
 struct Ranking: View {
+    @State private var selectedTab: Int = 1
+    
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        NavigationStack {
-            ZStack{
-                //FUNDO
-                //CODIGO DE FUNDO
-                Image("background_1")
-                    .imageScale(.large)
-                    .foregroundStyle(.brown)
-                //VStack define a ordem dos itens na vertical
-                VStack (spacing: 250){//spacing é um parametro de espacamento geral entre os itens
-                    //FILTROS
-                    Image("btn_adjust")
+        GeometryReader { geometry in
+            NavigationStack {
+                ZStack{
+                    //FUNDO
+                    //CODIGO DE FUNDO
+                    Image("background_1")
                         .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    
-                    //ROLAGEM DE DADOS
-                    Image("dice6")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    
-                    
-                    
-                
-                }
+                        .foregroundStyle(.brown)
+                    //VStack define a ordem dos itens na vertical
+                    VStack (spacing: 250){
+                        //FILTROS
+                        Text("Ranking")
+                        
+                        //ROLAGEM DE DADOS
+                        Text("Aqui vai o ranking")
+                        
+                        Text("")
 
+                        
+                    }
+                    
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }

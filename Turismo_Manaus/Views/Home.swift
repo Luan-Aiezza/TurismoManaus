@@ -17,62 +17,56 @@ struct Home: View {
     
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        GeometryReader { geometry in
-            NavigationStack {
-                ZStack{
-                    Image("background_1")
-                        .imageScale(.large)
-                        .foregroundStyle(.brown)
-                    //VStack define a ordem dos itens na vertical
-                    VStack (spacing: 200){//spacing é um parametro de espacamento geral entre os itens
-                        //FILTROS
-                        Button(action: {
-                            isShowingFilterView.toggle()
-                        }, label: {
-                            Image("btn_adjust")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
+        TabView (selection: $selectedTab) {
+            GeometryReader { geometry in
+                NavigationStack {
+                    ZStack{
+                        Image("background_1")
+                            .imageScale(.large)
+                            .foregroundStyle(.brown)
+            
+                        VStack (spacing: 200){
+                            Button(action: {
+                                isShowingFilterView.toggle()
+                            }, label: {
+                                Image("btn_adjust")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                            })
+                            
+                            SceneKitView(scene: scene)
+                                .frame(width: 200, height: 200)
+                            
+                            Text("")
+                            
+                        }
+                        .sheet(isPresented: $isShowingFilterView, content: {
+                            FilterView()
                         })
-                                                
-                        SceneKitView(scene: scene)
-                            .frame(width: 200, height: 200)
-                        
                         
                     }
-                    .sheet(isPresented: $isShowingFilterView, content: {
-                        FilterView()
-                        })
+                    .padding()
                     
                 }
-                .padding()
-                
             }
-        }
-        
-        TabView(selection: $selectedTab) {
-            Home
-                .tabItem {
-                    Label("Dados", systemImage: "dice.fill")
-                }
-                .tag(0)
-
+            .tabItem {
+                Label("Dados", systemImage: "dice.fill")
+            }
+            
             Badges()
                 .tabItem {
                     Label("Badges", systemImage: "rosette")
                 }
-                .tag(1)
-
+            
             Ranking()
                 .tabItem {
-                    Label("Ranking", systemImage: "crown")
+                    Label("Badges", systemImage: "crown")
                 }
-                .tag(2)
-
+            
             Me()
                 .tabItem {
-                    Label("Me", systemImage: "person.fill")
+                    Label("Badges", systemImage: "person.fill")
                 }
-                .tag(3)
         }
     }
 }

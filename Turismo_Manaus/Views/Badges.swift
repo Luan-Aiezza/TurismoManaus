@@ -29,7 +29,8 @@ struct Badges: View {
                         //ROLAGEM DE DADOS
                         Text("Aqui vai as conquistas")
                         
-                        
+                        Text("")
+
                         
                     }
                     
