@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GameKit
 
 enum Tabs: Int {
     case dice = 0
@@ -15,7 +16,9 @@ enum Tabs: Int {
 }
 
 struct TabBar: View {
-    
+    @State private var isPresentingGameCenter = false
+    @State private var isPresentingGameCenter2 = false
+
     var body: some View {
         
         //        @State private var selectTab: Int = 0
@@ -27,7 +30,6 @@ struct TabBar: View {
             
             HStack (alignment: .center, spacing: 40){
                 Button(action: {
-                    
                 }, label: {
                     VStack{
                         Image(systemName: "dice.fill")
@@ -39,7 +41,7 @@ struct TabBar: View {
                 })
                 
                 Button(action: {
-                    
+                    isPresentingGameCenter = true
                 }, label: {
                     VStack{
                         Image(systemName: "rosette")
@@ -50,10 +52,12 @@ struct TabBar: View {
                         
                     }
                     
-                })
+                }).sheet(isPresented: $isPresentingGameCenter, onDismiss: {}) {
+                    GameCenterAchievementsViewControllerWrapper()
+                }
                 
                 Button(action: {
-                    
+                    isPresentingGameCenter2 = true
                 }, label: {
                     VStack (alignment: .center, spacing: 10){
                         Image(systemName: "crown.fill")
@@ -62,7 +66,9 @@ struct TabBar: View {
                             .frame(width: 44)
                             .tint(.gray)
                     }
-                })
+                }).sheet(isPresented: $isPresentingGameCenter2, onDismiss: {}) {
+                    GameCenterLeaderboardsViewControllerWrapper()
+                }
                 
                 Button(action: {
                     
@@ -80,9 +86,56 @@ struct TabBar: View {
             .padding(20)
             
         }
+        
     }
 }
 
+
 #Preview {
     TabBar()
+}
+
+
+struct GameCenterAchievementsViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let viewController = GKGameCenterViewController(state: .achievements)
+        viewController.gameCenterDelegate = context.coordinator
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        // No update needed
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+    
+    class Coordinator: NSObject, GKGameCenterControllerDelegate {
+        func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+            gameCenterViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+struct GameCenterLeaderboardsViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let viewController = GKGameCenterViewController(state: .leaderboards)
+        viewController.gameCenterDelegate = context.coordinator
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        // No update needed
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+    
+    class Coordinator: NSObject, GKGameCenterControllerDelegate {
+        func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+            gameCenterViewController.dismiss(animated: true, completion: nil)
+        }
+    }
 }
