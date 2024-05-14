@@ -16,9 +16,10 @@ enum Tabs: Int {
 }
 
 struct TabBar: View {
-    @State private var isPresentingGameCenter = false
-    @State private var isPresentingGameCenter2 = false
-
+    @State private var isPresentingAchievements = false
+    @State private var isPresentingLeaderboard = false
+    @State private var isPresentingProfile = false
+    
     var body: some View {
         
         //        @State private var selectTab: Int = 0
@@ -41,7 +42,7 @@ struct TabBar: View {
                 })
                 
                 Button(action: {
-                    isPresentingGameCenter = true
+                    isPresentingAchievements = true
                 }, label: {
                     VStack{
                         Image(systemName: "rosette")
@@ -52,12 +53,12 @@ struct TabBar: View {
                         
                     }
                     
-                }).sheet(isPresented: $isPresentingGameCenter, onDismiss: {}) {
+                }).sheet(isPresented: $isPresentingAchievements, onDismiss: {}) {
                     GameCenterAchievementsViewControllerWrapper()
                 }
                 
                 Button(action: {
-                    isPresentingGameCenter2 = true
+                    isPresentingLeaderboard = true
                 }, label: {
                     VStack (alignment: .center, spacing: 10){
                         Image(systemName: "crown.fill")
@@ -66,12 +67,12 @@ struct TabBar: View {
                             .frame(width: 44)
                             .tint(.gray)
                     }
-                }).sheet(isPresented: $isPresentingGameCenter2, onDismiss: {}) {
+                }).sheet(isPresented: $isPresentingLeaderboard, onDismiss: {}) {
                     GameCenterLeaderboardsViewControllerWrapper()
                 }
                 
                 Button(action: {
-                    
+                    isPresentingProfile = true
                 }, label: {
                     VStack{
                         Image(systemName: "person.fill")
@@ -81,7 +82,9 @@ struct TabBar: View {
                             .tint(.gray)
                         
                     }
-                })
+                }).sheet(isPresented: $isPresentingProfile, onDismiss: {}) {
+                    GameCenterProfileViewControllerWrapper()
+                }
             }
             .padding(20)
             
@@ -121,6 +124,28 @@ struct GameCenterAchievementsViewControllerWrapper: UIViewControllerRepresentabl
 struct GameCenterLeaderboardsViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let viewController = GKGameCenterViewController(state: .leaderboards)
+        viewController.gameCenterDelegate = context.coordinator
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        // No update needed
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+    
+    class Coordinator: NSObject, GKGameCenterControllerDelegate {
+        func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+            gameCenterViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+struct GameCenterProfileViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let viewController = GKGameCenterViewController(state: .localPlayerProfile)
         viewController.gameCenterDelegate = context.coordinator
         return viewController
     }
