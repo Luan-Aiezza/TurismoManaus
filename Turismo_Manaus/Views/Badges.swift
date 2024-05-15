@@ -1,15 +1,46 @@
-import SwiftUI
-import GameKit
+//
+//  ContentView.swift
+//  Turismo_Manaus
+//
+//  Created by Luan Aiezza on 10/05/24.
+//  Created by Luan Aiezza on 10/05/24.
+//
 
-struct GameCenterAchievementsView: View {
-    @State private var isPresentingGameCenter = false
+import SwiftUI
+
+struct Badges: View {
+    @State private var selectedTab: Int = 1
     
     var body: some View {
-        Button("Show Achievements") {
-            isPresentingGameCenter = true
-        }
-        .sheet(isPresented: $isPresentingGameCenter, onDismiss: {}) {
-            GameCenterAchievementsViewControllerWrapper()
+        //ZStack define a ordem dos itens na layer
+        GeometryReader { geometry in
+            NavigationStack {
+                ZStack{
+                    //FUNDO
+                    //CODIGO DE FUNDO
+                    Image("background_1")
+                        .imageScale(.large)
+                        .foregroundStyle(.brown)
+                    //VStack define a ordem dos itens na vertical
+                    VStack (spacing: 250){//spacing é um parametro de espacamento geral entre os itens
+                        //FILTROS
+                        Text("Conquistas")
+                        
+                        //ROLAGEM DE DADOS
+                        Text("Aqui vai as conquistas")
+                        
+                        Text("")
+
+                        
+                    }
+                    
+                }
+                .padding()
+            }
         }
     }
+}
+
+#Preview {
+    Badges()
 }
