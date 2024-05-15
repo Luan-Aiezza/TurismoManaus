@@ -1,54 +1,67 @@
 import Foundation
 
-var PontosTuristicos: [PontoTurisco] = [
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>),
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>),
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>),
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>),
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>),
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-    PontoTurisco(name: <#T##String#>, desc: <#T##String#>, categoria: <#T##String#>, latitude: <#T##String#>, longitude: <#T##String#>, horario: <#T##String#>, preco: <#T##String#>, id: <#T##Int#>)
-]
+enum Categorias {
+    case tradicionais
+    case culinaria
+    case festas
+}
+
+enum Precos {
+    case barato
+    case medio
+    case caro
+}
+
+var PontosTuristicos: [PontoTuristico] = [
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.tradicionais, latitude: "", longitude: "", preco: Precos, horarios: ["05:00-21:00", "", "", "", "", "", ""]),
+    
+    ]
