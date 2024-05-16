@@ -41,22 +41,28 @@ struct Home: View {
         GeometryReader { geometry in
             NavigationStack {
                 ZStack{
-                    
-                    VStack (spacing: 250){
-                        Button(action: {
-                            isShowingFilterView.toggle()
-                        }, label: {
-                            Image("btn_adjust")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        })
+                    Image("Background")
+                        .blur(radius: 80)
+                    VStack (spacing: 220){
                         
                         
+                        Text("Turistando")
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .bold()
                         
                         SceneKitView(scene: scene)
                             .frame(width: 150, height: 150)
-                        
-                        TabBar()
+                        VStack{
+                            Button(action: {
+                                isShowingFilterView.toggle()
+                            }, label: {
+                                Image("btn_adjust")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                            })
+                            TabBar()
+
+                        }
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
