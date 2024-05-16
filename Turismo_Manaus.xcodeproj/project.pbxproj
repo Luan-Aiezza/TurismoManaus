@@ -31,6 +31,7 @@
 		CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFF78F102BF25D5A00B9D55A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turismo_ManausDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 		CFEC5C182BEE5337004FCA4C /* Turismo_Manaus */ = {
 			isa = PBXGroup;
 			children = (
+				D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */,
 				6F0E80E62BEE899800D2A8F5 /* Config */,
 				6F0E80E52BEE899000D2A8F5 /* Models */,
 				6F0E80E42BEE897F00D2A8F5 /* Views */,
@@ -317,10 +319,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Turismo_Manaus/Turismo_ManausDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Turismo_Manaus/Preview Content\"";
-				DEVELOPMENT_TEAM = 4XY84J5345;
+				DEVELOPMENT_TEAM = 9F6L7TWMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

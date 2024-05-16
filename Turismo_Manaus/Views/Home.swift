@@ -8,6 +8,28 @@
 
 import SwiftUI
 import SceneKit
+import GameKit
+
+struct GlassRectangle: View {
+    var body: some View {
+        ZStack {
+            // Gradiente para simular o efeito de vidro fosco
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                .frame(width: 350, height: 100) // Ajuste o tamanho conforme necessário
+                .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
+
+            
+//            // Retângulo arredondado
+//            RoundedRectangle(cornerRadius: 20)
+//                .fill(Color.clear)
+//                .frame(width: 200, height: 100) // Ajuste o tamanho conforme necessário
+//                .overlay(
+//                    Text("Seu texto aqui")
+//                        .foregroundColor(.white) // Cor do texto
+//                )
+        }
+    }
+}
 
 struct Home: View {
     
@@ -19,33 +41,68 @@ struct Home: View {
         GeometryReader { geometry in
             NavigationStack {
                 ZStack{
-                    
-                    VStack (spacing: 250){
-                        Button(action: {
-                            isShowingFilterView.toggle()
-                        }, label: {
-                            Image("btn_adjust")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                        })
+                    Image("Background")
+                        .blur(radius: 80)
+                    VStack (spacing: 220){
                         
                         
+                        Text("Turistando")
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .bold()
                         
                         SceneKitView(scene: scene)
                             .frame(width: 150, height: 150)
-                        
-                        TabBar(selectTab: $selectedTab)
+                        VStack{
+                            Button(action: {
+                                isShowingFilterView.toggle()
+                            }, label: {
+                                Image("btn_adjust")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                            })
+                            TabBar()
+
+                        }
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
                         FilterView()
+                            .presentationDetents([.height(UIScreen.main.bounds.height/1.75)]) //Define o tamanho da aba de filtos
                     })
                     
                 }
+                
+            }.onAppear {
+                authenticateUser()
             }
         }
     }
     
+    private func authenticateUser() {
+            let player = GKLocalPlayer.local
+            player.authenticateHandler = { vc, error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                if let vc = vc {
+                    // Present the Game Center view controller
+                    DispatchQueue.main.async {
+                        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            if let window = scene.windows.first {
+                                window.rootViewController?.present(vc, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                } else if player.isAuthenticated {
+                    // Player is authenticated
+                    print("Player authenticated!")
+                    
+                    // You can perform additional actions here
+                }
+            }
+        }
+        
 }
 
 
