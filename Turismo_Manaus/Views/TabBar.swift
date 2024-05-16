@@ -9,10 +9,10 @@ import SwiftUI
 import GameKit
 
 enum Tabs: Int {
-    case dice = 0
-    case achievement = 1
-    case ranking = 2
-    case me = 3
+    case dice
+    case achievement
+    case ranking
+    case me
 }
 
 struct TabBar: View {
@@ -31,37 +31,48 @@ struct TabBar: View {
             
             HStack (alignment: .center, spacing: 40){
                 Button(action: {
-                    selectTab = .dice
+                    withAnimation(.easeIn(duration: 0.1)){
+                        selectTab = .dice
+                    }
                 }, label: {
                     VStack{
-                        var dice = Image(systemName: "dice.fill")
+                        let dice = Image(systemName: "dice.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 34)
                         if selectTab == .dice {
                             dice
+                                .scaleEffect(1.15)
                         } else {
                             dice
                                 .tint(.gray)
+                                .scaleEffect(1)
                         }
                         
                     }
                 })
                 
                 Button(action: {
-                    isPresentingAchievements = true
+//                    isPresentingAchievements = true
+                    withAnimation(.easeIn(duration: 0.1)){
+                        selectTab = .achievement
+                    }
                 }, label: {
                     VStack{
-                        var achievement =  Image(systemName: "rosette")
+                        let achievement =  Image(systemName: "rosette")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24)
                         
                         if selectTab == .achievement {
                             achievement
+                                .scaleEffect(1.15)
+
                         } else {
                             achievement
                                 .tint(.gray)
+                                .scaleEffect(1)
+
                         }
                     }
                     
@@ -70,20 +81,27 @@ struct TabBar: View {
                 }
                 
                 Button(action: {
-                    isPresentingLeaderboard = true
+                    withAnimation(.easeIn(duration: 0.1)){
+                        selectTab = .ranking
+                    }
+//                    isPresentingLeaderboard = true
                 }, label: {
                     VStack (alignment: .center, spacing: 10){
                         
-                        var ranking = Image(systemName: "crown.fill")
+                        let ranking = Image(systemName: "crown.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 44)
                         
                         if selectTab == .ranking {
                             ranking
+                                .scaleEffect(1.15)
+
                         } else {
                             ranking
                                 .tint(.gray)
+                                .scaleEffect(1.0)
+
                         }
                     }
                 }).sheet(isPresented: $isPresentingLeaderboard, onDismiss: {}) {
@@ -91,10 +109,13 @@ struct TabBar: View {
                 }
                 
                 Button(action: {
-                    isPresentingProfile = true
+                    withAnimation(.easeIn(duration: 0.1)){
+                        selectTab = .me
+                    }
+//                    isPresentingProfile = true
                 }, label: {
                     VStack{
-                        var me = Image(systemName: "person.fill")
+                        let me = Image(systemName: "person.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 34)
@@ -102,12 +123,16 @@ struct TabBar: View {
                         
                         if selectTab == .me {
                             me
+                            .scaleEffect(1.15)
                         } else {
                             me
-                                .tint(.gray)
+                            .tint(.gray)
+                            .scaleEffect(1.0)
+
                         }
                     }
-                }).sheet(isPresented: $isPresentingProfile, onDismiss: {}) {
+                })
+                .sheet(isPresented: $isPresentingProfile, onDismiss: {}) {
                     GameCenterProfileViewControllerWrapper()
                 }
             }

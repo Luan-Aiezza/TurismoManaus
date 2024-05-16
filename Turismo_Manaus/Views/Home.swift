@@ -35,11 +35,16 @@ struct Home: View {
     
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
+    
     @State private var selectedTab: Tabs = .dice
+    
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
     
     var body: some View {
         GeometryReader { geometry in
-            NavigationStack {
+            TabView(selection: $selectedTab) {
                 ZStack{
                     Image("Background")
                         .blur(radius: 80)
@@ -52,6 +57,7 @@ struct Home: View {
                         
                         SceneKitView(scene: scene)
                             .frame(width: 150, height: 150)
+                        
                         VStack{
                             Button(action: {
                                 isShowingFilterView.toggle()
@@ -60,7 +66,9 @@ struct Home: View {
                                     .imageScale(.large)
                                     .foregroundStyle(.tint)
                             })
-                            TabBar()
+                            
+                            
+                            TabBar(selectTab: $selectedTab)
 
                         }
                         
@@ -71,10 +79,14 @@ struct Home: View {
                     })
                     
                 }
+                    .tag(0)
                 
-            }.onAppear {
-                authenticateUser()
+                Achievements()
+                    .tag(1)
             }
+        }
+        .onAppear {
+            authenticateUser()
         }
     }
     

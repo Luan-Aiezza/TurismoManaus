@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F1773BC2BF3C15F00CA8A63 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1773BB2BF3C15F00CA8A63 /* TabBar.swift */; };
-		6F79CAF72BF203810038090E /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79CAF62BF203810038090E /* Badges.swift */; };
+		6F79CAF72BF203810038090E /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79CAF62BF203810038090E /* Achievements.swift */; };
 		6F79CAF92BF203AD0038090E /* Ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79CAF82BF203AD0038090E /* Ranking.swift */; };
 		6F79CAFB2BF203C60038090E /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79CAFA2BF203C60038090E /* Me.swift */; };
 		6F79CAFF2BF2827D0038090E /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79CAFE2BF2827D0038090E /* FilterView.swift */; };
@@ -21,7 +21,7 @@
 
 /* Begin PBXFileReference section */
 		6F1773BB2BF3C15F00CA8A63 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		6F79CAF62BF203810038090E /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
+		6F79CAF62BF203810038090E /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		6F79CAF82BF203AD0038090E /* Ranking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranking.swift; sourceTree = "<group>"; };
 		6F79CAFA2BF203C60038090E /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		6F79CAFE2BF2827D0038090E /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				CFEC5C1B2BEE5337004FCA4C /* Home.swift */,
-				6F79CAF62BF203810038090E /* Badges.swift */,
+				6F79CAF62BF203810038090E /* Achievements.swift */,
 				6F79CAF82BF203AD0038090E /* Ranking.swift */,
 				6F79CAFA2BF203C60038090E /* Me.swift */,
 				6F79CAFE2BF2827D0038090E /* FilterView.swift */,
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F79CAFF2BF2827D0038090E /* FilterView.swift in Sources */,
-				6F79CAF72BF203810038090E /* Badges.swift in Sources */,
+				6F79CAF72BF203810038090E /* Achievements.swift in Sources */,
 				CFEC5C1C2BEE5337004FCA4C /* Home.swift in Sources */,
 				6F79CAF92BF203AD0038090E /* Ranking.swift in Sources */,
 				6F79CAFB2BF203C60038090E /* Me.swift in Sources */,

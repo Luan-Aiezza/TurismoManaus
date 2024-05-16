@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-
-struct Badges: View {
+struct Achievements: View {
     @State private var selectedTab: Int = 1
     
     var body: some View {
@@ -42,5 +41,5 @@ struct Badges: View {
 }
 
 #Preview {
-    Badges()
+    Achievements()
 }
