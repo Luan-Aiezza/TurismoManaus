@@ -36,6 +36,7 @@ struct Home: View {
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Int = 0
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         GeometryReader { geometry in
@@ -47,7 +48,7 @@ struct Home: View {
                         
                         
                         Text("Turistando")
-                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .font(.title)
                             .bold()
                         
                         SceneKitView(scene: scene)
@@ -61,7 +62,7 @@ struct Home: View {
                                     .foregroundStyle(.tint)
                             })
                             TabBar()
-
+                            
                         }
                         
                     }
@@ -74,6 +75,28 @@ struct Home: View {
                 
             }.onAppear {
                 authenticateUser()
+                
+            }
+        }
+        
+    }
+  
+    private func addItem() {
+        let player = GKLocalPlayer.local
+        withAnimation {
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.gamePlayerID
+
+            do {
+                try viewContext.save()
+                print(newItem)
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
@@ -102,7 +125,6 @@ struct Home: View {
                 }
             }
         }
-        
 }
 
 
@@ -138,4 +160,5 @@ struct SceneKitView: UIViewRepresentable {
 
 #Preview {
     Home()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

@@ -19,6 +19,7 @@ struct TabBar: View {
     @State private var isPresentingAchievements = false
     @State private var isPresentingLeaderboard = false
     @State private var isPresentingProfile = false
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         
@@ -30,7 +31,7 @@ struct TabBar: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             
             HStack (alignment: .center, spacing: 40){
-                Button(action: {
+                Button(action:  { addItem()
                 }, label: {
                     VStack{
                         Image(systemName: "dice.fill")
@@ -41,7 +42,7 @@ struct TabBar: View {
                     }
                 })
                 
-                Button(action: {
+                Button(action:  {
                     isPresentingAchievements = true
                 }, label: {
                     VStack{
@@ -89,6 +90,20 @@ struct TabBar: View {
             .padding(20)
             
         }
+        
+    }
+    private func addItem() {
+        let player = GKLocalPlayer.local
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.teamPlayerID
+            print(newItem)
+            do {
+                try viewContext.save()
+                print(newItem)
+            } catch {
+            }
         
     }
 }

@@ -17,11 +17,8 @@
 		CFEC5C1E2BEE5338004FCA4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */; };
 		CFEC5C212BEE5338004FCA4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */; };
 		CFF78F112BF25D5A00B9D55A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CFF78F102BF25D5A00B9D55A /* art.scnassets */; };
-		D39DCA522BF6423D00B98167 /* CoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D39DCA502BF6423D00B98167 /* CoreModel.xcdatamodeld */; };
-		D39DCA702BF6463700B98167 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DCA6C2BF6463700B98167 /* User+CoreDataClass.swift */; };
-		D39DCA712BF6463700B98167 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DCA6D2BF6463700B98167 /* User+CoreDataProperties.swift */; };
-		D39DCA722BF6463700B98167 /* Visited_Point+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DCA6E2BF6463700B98167 /* Visited_Point+CoreDataClass.swift */; };
-		D39DCA732BF6463700B98167 /* Visited_Point+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DCA6F2BF6463700B98167 /* Visited_Point+CoreDataProperties.swift */; };
+		D36259D02BF68DEE008A2ADD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36259CF2BF68DEE008A2ADD /* Persistence.swift */; };
+		D3BA33B62BF68213000903C7 /* PontosDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3BA33B42BF68213000903C7 /* PontosDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +34,10 @@
 		CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFF78F102BF25D5A00B9D55A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turismo_ManausDebug.entitlements; sourceTree = "<group>"; };
-		D39DCA512BF6423D00B98167 /* CoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreModel.xcdatamodel; sourceTree = "<group>"; };
-		D39DCA6C2BF6463700B98167 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D39DCA6D2BF6463700B98167 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D39DCA6E2BF6463700B98167 /* Visited_Point+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Visited_Point+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D39DCA6F2BF6463700B98167 /* Visited_Point+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Visited_Point+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D36259CF2BF68DEE008A2ADD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		D36259D12BF6FB14008A2ADD /* Turismo_Manaus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turismo_Manaus.entitlements; sourceTree = "<group>"; };
+		D36259D22BF6FB90008A2ADD /* Turismo-Manaus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Turismo-Manaus-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D3BA33B52BF68213000903C7 /* PontosDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PontosDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +67,8 @@
 		6F0E80E52BEE899000D2A8F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D39DCA502BF6423D00B98167 /* CoreModel.xcdatamodeld */,
+				D3BA33B42BF68213000903C7 /* PontosDataModel.xcdatamodeld */,
+				D36259CF2BF68DEE008A2ADD /* Persistence.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -103,7 +100,8 @@
 		CFEC5C182BEE5337004FCA4C /* Turismo_Manaus */ = {
 			isa = PBXGroup;
 			children = (
-				D39DCA5B2BF642B600B98167 /* NSManagedObjects */,
+				D36259D22BF6FB90008A2ADD /* Turismo-Manaus-Info.plist */,
+				D36259D12BF6FB14008A2ADD /* Turismo_Manaus.entitlements */,
 				D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */,
 				6F0E80E62BEE899800D2A8F5 /* Config */,
 				6F0E80E52BEE899000D2A8F5 /* Models */,
@@ -121,17 +119,6 @@
 				CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D39DCA5B2BF642B600B98167 /* NSManagedObjects */ = {
-			isa = PBXGroup;
-			children = (
-				D39DCA6C2BF6463700B98167 /* User+CoreDataClass.swift */,
-				D39DCA6D2BF6463700B98167 /* User+CoreDataProperties.swift */,
-				D39DCA6E2BF6463700B98167 /* Visited_Point+CoreDataClass.swift */,
-				D39DCA6F2BF6463700B98167 /* Visited_Point+CoreDataProperties.swift */,
-			);
-			path = NSManagedObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,17 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39DCA522BF6423D00B98167 /* CoreModel.xcdatamodeld in Sources */,
+				D36259D02BF68DEE008A2ADD /* Persistence.swift in Sources */,
 				6F79CAFF2BF2827D0038090E /* FilterView.swift in Sources */,
 				6F79CAF72BF203810038090E /* Badges.swift in Sources */,
+				D3BA33B62BF68213000903C7 /* PontosDataModel.xcdatamodeld in Sources */,
 				CFEC5C1C2BEE5337004FCA4C /* Home.swift in Sources */,
-				D39DCA722BF6463700B98167 /* Visited_Point+CoreDataClass.swift in Sources */,
-				D39DCA732BF6463700B98167 /* Visited_Point+CoreDataProperties.swift in Sources */,
 				6F79CAF92BF203AD0038090E /* Ranking.swift in Sources */,
-				D39DCA702BF6463700B98167 /* User+CoreDataClass.swift in Sources */,
 				6F79CAFB2BF203C60038090E /* Me.swift in Sources */,
 				CFEC5C1A2BEE5337004FCA4C /* Turismo_ManausApp.swift in Sources */,
-				D39DCA712BF6463700B98167 /* User+CoreDataProperties.swift in Sources */,
 				6F1773BC2BF3C15F00CA8A63 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +338,7 @@
 				DEVELOPMENT_TEAM = 9F6L7TWMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Turismo-Manaus-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -381,12 +366,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Turismo_Manaus/Turismo_Manaus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Turismo_Manaus/Preview Content\"";
-				DEVELOPMENT_TEAM = 4XY84J5345;
+				DEVELOPMENT_TEAM = 9F6L7TWMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Turismo-Manaus-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -433,13 +420,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D39DCA502BF6423D00B98167 /* CoreModel.xcdatamodeld */ = {
+		D3BA33B42BF68213000903C7 /* PontosDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D39DCA512BF6423D00B98167 /* CoreModel.xcdatamodel */,
+				D3BA33B52BF68213000903C7 /* PontosDataModel.xcdatamodel */,
 			);
-			currentVersion = D39DCA512BF6423D00B98167 /* CoreModel.xcdatamodel */;
-			path = CoreModel.xcdatamodeld;
+			currentVersion = D3BA33B52BF68213000903C7 /* PontosDataModel.xcdatamodel */;
+			path = PontosDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
