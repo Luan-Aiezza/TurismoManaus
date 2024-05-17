@@ -8,144 +8,169 @@
 import SwiftUI
 import GameKit
 
-enum Tabs: Int {
-    case dice
-    case achievement
-    case ranking
-    case me
+enum Tabs: String, CaseIterable {
+    case home = "rectangle.on.rectangle"
+    case achievements = "star"
+    case ranking = "crown"
+    case me = "person"
 }
 
-struct TabBar: View {
-    @State private var isPresentingAchievements = false
-    @State private var isPresentingLeaderboard = false
-    @State private var isPresentingProfile = false
+struct CustomTabBar: View {
     
     @Binding var selectTab: Tabs
-
+    var fill: String {
+        selectTab.rawValue + ".fill"
+    }
+    
     var body: some View {
-            
-        ZStack{
-            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
-                .frame(width: 358, height: 70) // Ajuste o tamanho conforme necessário
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            HStack (alignment: .center, spacing: 40){
-                Button(action: {
-                    withAnimation(.easeIn(duration: 0.1)){
-                        selectTab = .dice
-                    }
-                }, label: {
-                    VStack{
-                        let dice = Image(systemName: "dice.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 34)
-                        if selectTab == .dice {
-                            dice
-                                .scaleEffect(1.15)
-                        } else {
-                            dice
-                                .tint(.gray)
-                                .scaleEffect(1)
+        VStack {
+            HStack{
+                ForEach(Tabs.allCases, id: \.rawValue) { tab in
+                    Spacer()
+                    Image(systemName: selectTab == tab ? fill : tab.rawValue)
+                        .scaleEffect(selectTab == tab ? 1.15 : 1)
+                        .foregroundStyle(Color.gray)
+                        .font(.system(size: 34))
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.1)) {
+                                selectTab = tab
+                            }
                         }
-                        
-                    }
-                })
-                
-                Button(action: {
-//                    isPresentingAchievements = true
-                    withAnimation(.easeIn(duration: 0.1)){
-                        selectTab = .achievement
-                    }
-                }, label: {
-                    VStack{
-                        let achievement =  Image(systemName: "rosette")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24)
-                        
-                        if selectTab == .achievement {
-                            achievement
-                                .scaleEffect(1.15)
-
-                        } else {
-                            achievement
-                                .tint(.gray)
-                                .scaleEffect(1)
-
-                        }
-                    }
-                    
-                }).sheet(isPresented: $isPresentingAchievements, onDismiss: {}) {
-                    GameCenterAchievementsViewControllerWrapper()
-                }
-                
-                Button(action: {
-                    withAnimation(.easeIn(duration: 0.1)){
-                        selectTab = .ranking
-                    }
-//                    isPresentingLeaderboard = true
-                }, label: {
-                    VStack (alignment: .center, spacing: 10){
-                        
-                        let ranking = Image(systemName: "crown.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 44)
-                        
-                        if selectTab == .ranking {
-                            ranking
-                                .scaleEffect(1.15)
-
-                        } else {
-                            ranking
-                                .tint(.gray)
-                                .scaleEffect(1.0)
-
-                        }
-                    }
-                }).sheet(isPresented: $isPresentingLeaderboard, onDismiss: {}) {
-                    GameCenterLeaderboardsViewControllerWrapper()
-                }
-                
-                Button(action: {
-                    withAnimation(.easeIn(duration: 0.1)){
-                        selectTab = .me
-                    }
-//                    isPresentingProfile = true
-                }, label: {
-                    VStack{
-                        let me = Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 34)
-                            
-                        
-                        if selectTab == .me {
-                            me
-                            .scaleEffect(1.15)
-                        } else {
-                            me
-                            .tint(.gray)
-                            .scaleEffect(1.0)
-
-                        }
-                    }
-                })
-                .sheet(isPresented: $isPresentingProfile, onDismiss: {}) {
-                    GameCenterProfileViewControllerWrapper()
+                    Spacer()
+                //
                 }
             }
-            .padding(20)
-            
         }
         
     }
 }
 
+//struct TabBar: View {
+//    @State private var isPresentingAchievements = false
+//    @State private var isPresentingLeaderboard = false
+//    @State private var isPresentingProfile = false
+//    
+//    @Binding var selectTab: Tabs
+//
+//    var body: some View {
+//                        
+//            VStack (alignment: .center, spacing: 40){
+//                Button(action: {
+//                    withAnimation(.easeIn(duration: 0.1)){
+//                        selectTab = .home
+//                    }
+//                }, label: {
+//                    VStack{
+//                        let home = Image(systemName: "dice")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 34)
+//                        if selectTab == .home {
+//                            home
+//                                .scaleEffect(1.15)
+//                        } else {
+//                            home
+//                                .tint(.gray)
+//                                .scaleEffect(1)
+//                        }
+//                        
+//                    }
+//                })
+//                
+//                Button(action: {
+////                    isPresentingAchievements = true
+//                    withAnimation(.easeIn(duration: 0.1)){
+//                        selectTab = .achievements
+//                    }
+//                }, label: {
+//                    VStack{
+//                        let achievement =  Image(systemName: "rosette")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 24)
+//                        
+//                        if selectTab == .achievements {
+//                            achievement
+//                                .scaleEffect(1.15)
+//
+//                        } else {
+//                            achievement
+//                                .tint(.gray)
+//                                .scaleEffect(1)
+//
+//                        }
+//                    }
+//                    
+//                }).sheet(isPresented: $isPresentingAchievements, onDismiss: {}) {
+//                    GameCenterAchievementsViewControllerWrapper()
+//                }
+//                
+//                Button(action: {
+//                    withAnimation(.easeIn(duration: 0.1)){
+//                        selectTab = .crown
+//                    }
+////                    isPresentingLeaderboard = true
+//                }, label: {
+//                    VStack (alignment: .center, spacing: 10){
+//                        
+//                        let ranking = Image(systemName: "crown")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 44)
+//                        
+//                        if selectTab == .crown {
+//                            ranking
+//                                .scaleEffect(1.15)
+//
+//                        } else {
+//                            ranking
+//                                .tint(.gray)
+//                                .scaleEffect(1.0)
+//
+//                        }
+//                    }
+//                }).sheet(isPresented: $isPresentingLeaderboard, onDismiss: {}) {
+//                    GameCenterLeaderboardsViewControllerWrapper()
+//                }
+//                
+//                Button(action: {
+//                    withAnimation(.easeIn(duration: 0.1)){
+//                        selectTab = .person
+//                    }
+////                    isPresentingProfile = true
+//                }, label: {
+//                    VStack{
+//                        let person = Image(systemName: "person")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 34)
+//                            
+//                        
+//                        if selectTab == .person {
+//                            person
+//                            .scaleEffect(1.15)
+//                        } else {
+//                            person
+//                            .tint(.gray)
+//                            .scaleEffect(1.0)
+//
+//                        }
+//                    }
+//                })
+//                .sheet(isPresented: $isPresentingProfile, onDismiss: {}) {
+//                    GameCenterProfileViewControllerWrapper()
+//                }
+//            }
+//            .padding(20)
+//            
+//        }
+//        
+//    
+//}
+
 
 #Preview {
-    TabBar(selectTab: .constant(.dice))
+    CustomTabBar(selectTab: .constant(.home))
 }
 
 
