@@ -87,15 +87,14 @@ struct UI: View {
                     Home()
                         .tag(Tabs.home)
                     
-                    VStack{
-                        Text("achievements")
-                    }
+                    
+                    Achievements()
                         .tag(Tabs.achievements)
                     
-                    Text("ranking")
+                    Ranking()
                         .tag(Tabs.ranking)
                     
-                    Text("me")
+                    Me()
                         .tag(Tabs.me)
                 }
                 CustomTabBar(selectTab: $selectedTab)
@@ -106,8 +105,6 @@ struct UI: View {
         .onAppear {
             authenticateUser()
         }
-        .ignoresSafeArea()
-        
     }
 //        GeometryReader { geometry in
 //            ZStack{
