@@ -11,7 +11,7 @@ import SwiftUI
 struct Turismo_ManausApp: App {
     var body: some Scene {
         WindowGroup {
-            Home()
+            Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos)
         }
     }
 }

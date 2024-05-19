@@ -17,25 +17,31 @@ struct GlassRectangle: View {
             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
                 .frame(width: 350, height: 100) // Ajuste o tamanho conforme necessário
                 .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-
             
-//            // Retângulo arredondado
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color.clear)
-//                .frame(width: 200, height: 100) // Ajuste o tamanho conforme necessário
-//                .overlay(
-//                    Text("Seu texto aqui")
-//                        .foregroundColor(.white) // Cor do texto
-//                )
         }
     }
 }
+struct Filtros {
+    var categoria: Categorias?
+    var preco: Precos?
+}
+
 
 struct Home: View {
+    @State var selectedCategoria: Categorias
+    @State var selectedHorario: Horarios
+    @State var selectedDistancia: Distancias
+    @State var selectedPreco: Precos
+    
     
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Int = 0
+    
+    //    @State private var filtros = FilterView(selectedCategoria: .todos, selectedPreco: .todos)
+    
+    @State private var pontoSelecionado: PontoTuristico?
+    @State private var isShowingModal = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -43,15 +49,41 @@ struct Home: View {
                 ZStack{
                     Image("Background")
                         .blur(radius: 80)
-                    VStack (spacing: 220){
+                    VStack (spacing: 50){
                         
                         
                         Text("Turistando")
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .bold()
+                        // Botão para selecionar aleatoriamente um ponto turístico
+                        Button("Selecionar Ponto Turístico") {
+                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            isShowingModal = true
+                        }
+                        // Exibir o ponto turístico selecionado
+                        .sheet(isPresented: $isShowingModal) {
+                            if let ponto = pontoSelecionado {
+                                Text(ponto.name)
+                                Text(ponto.desc)
+                                Text(ponto.id.uuidString)
+                                Button("Selecionar Ponto Turístico") {
+                                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                                }
+                            } else {
+                                Text("Nenhum filtro selecionado")
+                            }
+                        }
+//                        if let ponto = pontoSelecionado {
+//                            Text(ponto.name)
+//                            Text(ponto.desc)
+//                            Text(ponto.id.uuidString)
+//                            Button("Selecionar Ponto Turístico") {
+//                                pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                            }
+//                        } else {
+//                        Text("Nenhum ponto turístico selecionado")
+//                        }
                         
-                        SceneKitView(scene: scene)
-                            .frame(width: 150, height: 150)
                         VStack{
                             Button(action: {
                                 isShowingFilterView.toggle()
@@ -61,12 +93,12 @@ struct Home: View {
                                     .foregroundStyle(.tint)
                             })
                             TabBar()
-
+                            
                         }
                         
                     }
                     .sheet(isPresented: $isShowingFilterView, content: {
-                        FilterView()
+                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
                             .presentationDetents([.height(UIScreen.main.bounds.height/1.75)]) //Define o tamanho da aba de filtos
                     })
                     
@@ -79,63 +111,56 @@ struct Home: View {
     }
     
     private func authenticateUser() {
-            let player = GKLocalPlayer.local
-            player.authenticateHandler = { vc, error in
-                guard error == nil else {
-                    print(error?.localizedDescription ?? "")
-                    return
-                }
-                if let vc = vc {
-                    // Present the Game Center view controller
-                    DispatchQueue.main.async {
-                        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                            if let window = scene.windows.first {
-                                window.rootViewController?.present(vc, animated: true, completion: nil)
-                            }
+        let player = GKLocalPlayer.local
+        player.authenticateHandler = { vc, error in
+            guard error == nil else {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            if let vc = vc {
+                // Present the Game Center view controller
+                DispatchQueue.main.async {
+                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        if let window = scene.windows.first {
+                            window.rootViewController?.present(vc, animated: true, completion: nil)
                         }
                     }
-                } else if player.isAuthenticated {
-                    // Player is authenticated
-                    print("Player authenticated!")
-                    
-                    // You can perform additional actions here
                 }
+            } else if player.isAuthenticated {
+                // Player is authenticated
+                print("Player authenticated!")
+                
+                // You can perform additional actions here
             }
         }
+    }
+    
+    func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
         
+        
+        let pontosFiltrados = PontosTuristicos.filter { ponto in
+            var corresponde = true
+            
+            if ponto.categoria != selectedCategoria {
+                corresponde = false
+            }
+            
+            if ponto.preco != selectedPreco {
+                corresponde = false
+            }
+            
+            
+            return corresponde
+        }
+        
+        return pontosFiltrados.randomElement()
+    }
+    
 }
 
 
-
-
-struct SceneKitView: UIViewRepresentable {
-    //    let sceneName: String
-    let scene: SCNScene
-    
-    func makeUIView(context: Context) -> SCNView {
-        // Cria uma cena do SceneKit
-        //        let scene = SCNScene(named: sceneName + ".scn")!
-        //        let scene = SCNScene(named: sceneName + ".scn")!
-        
-        // Cria uma SCNView para exibir a cena
-        let scnView = SCNView()
-        scnView.scene = scene
-        scnView.allowsCameraControl = true
-        scnView.backgroundColor = .clear
-        scene.background.contents = UIColor.clear
-        // Configura a cor do material do objeto
-        //        let color = UIColor.red
-        //        scene.rootNode.childNode(withName: "dice", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = color
-        
-        return scnView
-    }
-    
-    func updateUIView(_ uiView: SCNView, context: Context) {
-        // Atualiza a cena, se necessário
-    }
-}
 
 
 #Preview {
-    Home()
+    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos)
 }

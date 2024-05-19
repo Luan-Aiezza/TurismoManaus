@@ -4,11 +4,11 @@ import SwiftUI
 
 
 struct FilterView: View {
-    @State private var selectedTab: Int = 0
-    @State private var selectedLocal: Int = 0
-    @State private var selectedHorario: Int = 0
-    @State private var selectedDistancia: Int = 0
-    @State private var selectedPreco: Int = 0
+    
+    @Binding var selectedCategoria: Categorias
+    @Binding var selectedHorario: Horarios
+    @Binding var selectedDistancia: Distancias
+    @Binding var selectedPreco: Precos
     
     var body: some View {
         
@@ -26,11 +26,11 @@ struct FilterView: View {
                     Spacer()
                 }
 
-                Picker(selection: $selectedLocal, label: Text("")) {
-                    Text("Aleatório").tag(0)
-                    Text("Tradicional").tag(1)
-                    Text("Culinária").tag(2)
-                    Text("Festas").tag(3)
+                Picker(selection: $selectedCategoria, label: Text("")) {
+                    Text("Todos").tag(Categorias.todos)
+                    Text("Tradicional").tag(Categorias.tradicionais)
+                    Text("Culinária").tag(Categorias.culinaria)
+                    Text("Festas").tag(Categorias.festas)
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
@@ -42,7 +42,7 @@ struct FilterView: View {
                     Spacer()
                 }
                 Picker(selection: $selectedHorario, label: Text("")) {
-                    Text("Aleatório").tag(0)
+                    Text("Todos").tag(0)
                     Text("Manhã").tag(1)
                     Text("Tarde").tag(2)
                     Text("Noite").tag(3)
@@ -51,20 +51,20 @@ struct FilterView: View {
             }
             .padding()
             
-            VStack {
-                HStack{
-                    Text("Distância")
-                    Spacer()
-                }
-                Picker(selection: $selectedDistancia, label: Text("")) {
-                    Text("Aleatório").tag(0)
-                    Text("Até 3km").tag(1)
-                    Text("Até 5km").tag(2)
-                    Text("Até 10km").tag(3)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-            }
-            .padding()
+//            VStack {
+//                HStack{
+//                    Text("Distância")
+//                    Spacer()
+//                }
+//                Picker(selection: $selectedDistancia, label: Text("")) {
+//                    Text("Todos").tag(0)
+//                    Text("Até 3km").tag(1)
+//                    Text("Até 5km").tag(2)
+//                    Text("Até 10km").tag(3)
+//                }
+//                .pickerStyle(SegmentedPickerStyle())
+//            }
+//            .padding()
             
             VStack {
                 HStack{
@@ -72,10 +72,10 @@ struct FilterView: View {
                     Spacer()
                 }
                 Picker(selection: $selectedPreco, label: Text("")) {
-                    Text("Aleatório").tag(0)
-                    Text("0-50 R$").tag(1)
-                    Text("50-100 R$").tag(2)
-                    Text("100+ R$").tag(3)
+                    Text("Todos").tag(Precos.todos)
+                    Text("$").tag(Precos.barato)
+                    Text("$$").tag(Precos.medio)
+                    Text("$$$").tag(Precos.caro)
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
@@ -86,6 +86,4 @@ struct FilterView: View {
     }
 }
 
-#Preview {
-    FilterView()
-}
+

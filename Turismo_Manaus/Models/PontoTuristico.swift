@@ -9,7 +9,7 @@ import Foundation
 
 class PontoTuristico {
     let id: UUID
-    var name, desc, latitude, longitude, preco: String
+    var name, desc, latitude, longitude: String
     let horarios: [String]
     var categoria: Categorias
     var preco: Precos
