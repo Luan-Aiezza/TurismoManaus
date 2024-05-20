@@ -21,6 +21,8 @@ struct CustomTabBar: View {
     var fill: String {
         selectTab.rawValue + ".fill"
     }
+    @Environment(\.managedObjectContext) private var viewContext
+        
     
     var body: some View {
         VStack {

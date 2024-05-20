@@ -10,12 +10,43 @@ import SwiftUI
 import GameKit
 struct Achievements: View {
     @State private var selectedTab: Int = 1
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        //ZStack define a ordem dos itens na layer
-        GameCenterAchievementsViewControllerWrapper()
-            
+            GameCenterAchievementsViewControllerWrapper()
+                .onAppear{
+                    addItem()
+                }
+        
         }
+    private func addItem() {
+        let player = GKLocalPlayer.local
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.teamPlayerID
+            print(newItem)
+            do {
+                try viewContext.save()
+                print(newItem)
+                unlockAchievement()
+            } catch {
+            }
+        
+    }
+    private func unlockAchievement() {
+            let achievement = GKAchievement(identifier: "kajnfkajnkfna")
+            achievement.percentComplete = 100
+            achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        }
+
     }
 
 

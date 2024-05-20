@@ -9,6 +9,53 @@
 import SwiftUI
 import SceneKit
 import GameKit
+import CoreLocation
+import CoreImage
+
+class LocationViewModel: NSObject, ObservableObject {
+    private var locationManager: CLLocationManager?
+    @Published var latitude: Double = 0.0
+    @Published var longitude: Double = 0.0
+
+    @Published var log: String = ""
+    
+    
+    init(locationManager: CLLocationManager = CLLocationManager()) {
+        super.init()
+        self.locationManager = locationManager
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+}
+
+extension LocationViewModel: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            log = "Location authorization not determined"
+        case .restricted:
+            log = "Location authorization restricted"
+        case .denied:
+            log = "Location authorization denied"
+        case .authorizedAlways:
+            manager.requestLocation()
+            log = "Location authorization always granted"
+        case .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+            log = "Location authorization when in use granted"
+        @unknown default:
+            log = "Unknown authorization status"
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locations.forEach { location in
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+        }
+    }
+}
 
 struct GlassRectangle : View {
     
@@ -28,8 +75,9 @@ struct Home : View {
     
     @State private var pontoSelecionado: PontoTuristico?
     @State var isShowingFilterView = false
+
     @State var isShowingModal = false
-    
+
     @State private var selectedTab: Tabs = .home
     
     var body: some View {
@@ -110,14 +158,12 @@ struct Home : View {
     
 }
 
-
-
-struct UI: View {
+struct UI: View{
     
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
-    
     @State private var selectedTab: Tabs = .home
+    @ObservedObject private var locationViewModel = LocationViewModel()
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -149,13 +195,10 @@ struct UI: View {
             }
             
             
-        }
-        .onAppear {
+        }.onAppear {
             authenticateUser()
         }
     }
-    
-    
     private func authenticateUser() {
         let player = GKLocalPlayer.local
         player.authenticateHandler = { vc, error in
@@ -175,7 +218,11 @@ struct UI: View {
             } else if player.isAuthenticated {
                 // Player is authenticated
                 print("Player authenticated!")
-                
+                GKAccessPoint.shared.location = .topLeading
+                GKAccessPoint.shared.showHighlights = false
+                GKAccessPoint.shared.isActive = true
+                print(locationViewModel.latitude)
+                print(locationViewModel.longitude)
                 // You can perform additional actions here
             }
         }
@@ -185,5 +232,5 @@ struct UI: View {
 
 #Preview {
     UI()
+    
 }
-
