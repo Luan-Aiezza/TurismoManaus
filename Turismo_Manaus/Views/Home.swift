@@ -48,7 +48,7 @@ struct Home : View {
                 Button(action: {
                     pontoSelecionado = selecionarPontoTuristicoAleatorio()
                     isShowingModal.toggle()
-
+//sadawd
                 }, label: {
                     Image("Card")
                 })
