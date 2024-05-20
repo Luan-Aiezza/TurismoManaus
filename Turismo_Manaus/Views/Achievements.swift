@@ -13,9 +13,8 @@ struct Achievements: View {
     
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        GeometryReader { geometry in
-            GameCenterAchievementsViewControllerWrapper()
-            }
+        GameCenterAchievementsViewControllerWrapper()
+            
         }
     }
 

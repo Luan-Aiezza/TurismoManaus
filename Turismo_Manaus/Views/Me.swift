@@ -14,10 +14,10 @@ struct Me: View {
     
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        GeometryReader { geometry in
-            NavigationStack {
-                GameCenterProfileViewControllerWrapper()
-            }
+         
+        NavigationStack {
+            GameCenterProfileViewControllerWrapper()
+            
         }
     }
 }

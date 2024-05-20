@@ -14,9 +14,7 @@ struct Ranking: View {
     
     var body: some View {
         //ZStack define a ordem dos itens na layer
-        GeometryReader { geometry in
-            GameCenterLeaderboardsViewControllerWrapper()
-        }
+        GameCenterLeaderboardsViewControllerWrapper()
     }
 }
 
