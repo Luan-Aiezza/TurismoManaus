@@ -77,12 +77,9 @@ var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(id: UUID(), name: "Restaurante Banzeiro Manaus", desc: "A cozinha informal à la carte de pratos da região amazônica e vinhos, com temas discretos da vida ribeirinha.", categoria: Categorias.culinaria, latitude: "-3.1101712809745763", longitude: "-60.016826599186885", preco: Precos.caro, horarios: ["11:30–23:00", "11:30–23:00", "11:30–23:00", "11:30–23:00", "11:30–23:00", "11:30–23:00", "11:00–22:00"]),
     
-    
     PontoTuristico(id: UUID(), name: "Balneário José Ribeiro Soares SESC", desc: "Parques Aquáticos I e II; 9h às 16h30 (domingos e feriados)", categoria: Categorias.tradicionais, latitude: "-3.0679256505131125", longitude: "-60.044545826691326", preco: Precos.medio, horarios: ["Fechado", "Fechado", "Fechado", "Fechado", "Fechado", "Fechado", "08:30–17:00"]),
     
     PontoTuristico(id: UUID(), name: "Cantare Karaoke & Pub", desc: "Ponto de encontro aconchegante e descontraído para fãs de karaokê, com diversas opções de petiscos e drinques.", categoria: Categorias.festas, latitude: "-3.0985964278517333", longitude: "-60.02067005547076", preco: Precos.medio, horarios: ["Fechado", "19:00–00:00", "19:00–00:00", "19:00–00:00", "19:00–02:00", "19:00–02:00", "Fechado"]),
-    
-    PontoTuristico(id: UUID(), name: "All Night Pub", desc: "Happy hours e comidinhas em casa de entretenimento noturno com apresentações ao vivo de pop, rock e sertanejo.", categoria: Categorias.festas, latitude: "-3.0848611174598015", longitude: "-59.99972264384931", preco: Precos.caro, horarios: ["Fechado", "Fechado", "Fechado", "22:00–05:00", "22:00–06:00", "22:00–06:00", "Fechado"]),
     
     PontoTuristico(id: UUID(), name: "Coco Bambu Manaus", desc: "Restaurante de frutos do mar", categoria: Categorias.culinaria, latitude: "-3.0850076042000887", longitude: "-60.07218105716932", preco: Precos.caro, horarios: ["11:30–15:00, 17:00–00:00", "11:30–15:00, 17:00–00:00", "11:30–15:00, 17:00–00:00", "11:30–15:00, 17:00–00:00", "11:30–00:00", "11:30–00:00", "11:30–00:00"]),
     
@@ -105,32 +102,14 @@ var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(id: UUID(), name: "Caritó Bar & Restaurante", desc: "Tira-gostos variados, além de chopes e caipirinhas, em boteco com transmissão dos jogos e música ao vivo.", categoria: Categorias.culinaria, latitude: "-3.0913426207249524", longitude: "-59.998011433058075", preco: Precos.medio, horarios: ["Fechado", "Fechado", "Fechado", "20:00–02:30", "20:00–04:00", "20:00–04:00", "18:00–00:00"]),
     
     PontoTuristico(id: UUID(), name: "Cachaçaria do Dedé - Parque 10", desc: "Rótulos de cachaças feitas em diferentes regiões e pratos como joelho de porco ou picanha em clima intimista.", categoria: Categorias.culinaria, latitude: "-3.079874253230125", longitude: "-60.01019442885381", preco: Precos.caro, horarios: ["11:00–17:00", "11:00–00:00", "11:00–00:00", "11:00–00:00", "11:00–00:00", "11:00–00:00", "11:00–22:00"]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
-//    
-//    PontoTuristico(id: UUID(), name: "", desc: "", categoria: Categorias.festas, latitude: "", longitude: "", preco: Precos.caro, horarios: ["", "", "", "", "", "", ""]),
     
+    PontoTuristico(id: UUID(), name: "RED DOG PUB", desc: "Bar com variedade de drinques, cervejas e aperitivos, atmosfera alternativa e noites com shows de rock.", categoria: Categorias.festas, latitude: "-3.1006533335674256", longitude: "-60.02195218904709", preco: Precos.medio, horarios: ["Fechado", "Fechado", "18:00–02:00", "18:00–02:00", "18:00–05:00", "18:00–05:00", "18:00–02:00"]),
     
-    ]
+    PontoTuristico(id: UUID(), name: "Flutuante Amazônia", desc: "Comida é muito boa, ambiente bem familiar.", categoria: Categorias.culinaria, latitude: "-3.0143763833065744", longitude: "-60.094720088222395", preco: Precos.caro, horarios: ["06:00–18:00", "06:00–18:00", "06:00–18:00", "06:00–18:00", "06:00–18:00", "06:00–18:00", "06:00–18:00"]),
+    
+    PontoTuristico(id: UUID(), name: "Zoológico Do Cigs", desc: "O Zoológico do CIGS teve sua origem em 1967, a partir da necessidade de apresentar aos alunos do então Curso de Guerra na Selva (CGS) elementos da fauna e da flora amazônica, conhecimentos esses importantes na formação dos Guerreiros de Selva.", categoria: Categorias.tradicionais, latitude: "-3.0982717849028756", longitude: "-60.044888053326446", preco: Precos.barato, horarios: ["09:00–16:00", "09:00–16:00", "09:00–16:00", "09:00–16:00", "09:00–16:00", "09:00–16:30", "09:00–16:30"]),
+    
+    PontoTuristico(id: UUID(), name: "Bosque da Ciência - INPA - Instituto Nacional de Pesquisa da Amazônia", desc: "Você poderá permanecer no Bosque da Ciência somente em seu período de acesso. Faça seu agendamento! https://bosquedacienciaam.wixsite.com/agendamento", categoria: Categorias.tradicionais, latitude: "-3.097255580164747", longitude: "-59.98778515716932", preco: Precos.barato, horarios: ["09:00–16:30", "09:00–16:30", "09:00–16:30", "09:00–16:30", "09:00–16:30", "09:00–16:30", "09:00–16:30"]),
+    
+]
+
