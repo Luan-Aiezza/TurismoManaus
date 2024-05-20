@@ -29,8 +29,10 @@ struct Home : View {
     init() {
         UITabBar.appearance().isHidden = true
     }
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
+        GeometryReader { geo in
         GeometryReader { geo in
             ZStack {
                 
@@ -59,7 +61,7 @@ struct Home : View {
                                 .foregroundStyle(.tint)
                         })
 
-                    }
+                }.padding().padding()
                 }.padding().padding()
                 
             }
@@ -96,9 +98,32 @@ struct UI: View {
                     
                     Me()
                         .tag(Tabs.me)
-                }
                 CustomTabBar(selectTab: $selectedTab)
+                
+            }.onAppear {
+                authenticateUser()
+                
             }
+        }
+        
+    }
+  
+    private func addItem() {
+        let player = GKLocalPlayer.local
+        withAnimation {
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.gamePlayerID
+
+            do {
+                try viewContext.save()
+                print(newItem)
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             
             
         }
@@ -205,5 +230,5 @@ struct SceneKitView: UIViewRepresentable {
 
 #Preview {
     UI()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
-

@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Turismo_ManausApp: App {
+    
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             UI()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
