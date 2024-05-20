@@ -21,6 +21,8 @@ struct CustomTabBar: View {
     var fill: String {
         selectTab.rawValue + ".fill"
     }
+    @Environment(\.managedObjectContext) private var viewContext
+        
     
     var body: some View {
         VStack {
@@ -41,20 +43,6 @@ struct CustomTabBar: View {
                 }
             }
         }
-        
-    }
-    private func addItem() {
-        let player = GKLocalPlayer.local
-            let newItem = Pontos_Visitados(context: viewContext)
-            newItem.id = UUID()
-            newItem.quant_idas = 1
-            newItem.user_id = player.teamPlayerID
-            print(newItem)
-            do {
-                try viewContext.save()
-                print(newItem)
-            } catch {
-            }
         
     }
 }
