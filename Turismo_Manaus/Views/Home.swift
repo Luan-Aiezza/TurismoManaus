@@ -203,16 +203,11 @@ struct UI: View{
             let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
             let distanceinMeters = (location1.distance(from: location2))
             let distanceInKilometers = distanceinMeters/1000
-            print(distanceInKilometers)
             if distanceInKilometers <= 3.0 {
-                print(PontosTuristicos[i].name)
                 PontosTuristicos[i].distancia = Distancias.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                print(PontosTuristicos[i].name)
-
                 PontosTuristicos[i].distancia = Distancias.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
-                print(PontosTuristicos[i].name)
 
                 PontosTuristicos[i].distancia = Distancias.dez
             }
