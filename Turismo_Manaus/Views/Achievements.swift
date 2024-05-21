@@ -35,7 +35,7 @@ struct Achievements: View {
         
     }
     private func unlockAchievement() {
-            let achievement = GKAchievement(identifier: "kajnfkajnkfna")
+            let achievement = GKAchievement(identifier: "cigs_1")
             achievement.percentComplete = 100
             achievement.showsCompletionBanner = true
             GKAchievement.report([achievement]) { error in

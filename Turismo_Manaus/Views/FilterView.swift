@@ -1,5 +1,6 @@
 
 import SwiftUI
+import CoreLocation
 
 struct FilterView: View {
     
@@ -14,7 +15,7 @@ struct FilterView: View {
             HStack {
                 Text("Filtros")
                     .font(.headline)
-                    Spacer()
+                Spacer()
             }
             .padding()
             
@@ -23,7 +24,7 @@ struct FilterView: View {
                     Text("Local")
                     Spacer()
                 }
-
+                
                 Picker(selection: $selectedCategoria, label: Text("")) {
                     Text("Todos").tag(Categorias.todos)
                     Text("Tradicional").tag(Categorias.tradicionais)
@@ -48,21 +49,35 @@ struct FilterView: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
             .padding()
+            VStack {
+                HStack{
+                    Text("Distância")
+                    Spacer()
+                }
+                Picker(selection: $selectedDistancia, label: Text("")) {
+                    Text("Todos").tag(Distancias.todos)
+                    Text("Até 3km").tag(Distancias.tres)
+                    Text("Até 5km").tag(Distancias.cinco)
+                    Text("Até 10km").tag(Distancias.dez)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+            }
+            .padding()
             
-//            VStack {
-//                HStack{
-//                    Text("Distância")
-//                    Spacer()
-//                }
-//                Picker(selection: $selectedDistancia, label: Text("")) {
-//                    Text("Todos").tag(0)
-//                    Text("Até 3km").tag(1)
-//                    Text("Até 5km").tag(2)
-//                    Text("Até 10km").tag(3)
-//                }
-//                .pickerStyle(SegmentedPickerStyle())
-//            }
-//            .padding()
+            //            VStack {
+            //                HStack{
+            //                    Text("Distância")
+            //                    Spacer()
+            //                }
+            //                Picker(selection: $selectedDistancia, label: Text("")) {
+            //                    Text("Todos").tag(0)
+            //                    Text("Até 3km").tag(1)
+            //                    Text("Até 5km").tag(2)
+            //                    Text("Até 10km").tag(3)
+            //                }
+            //                .pickerStyle(SegmentedPickerStyle())
+            //            }
+            //            .padding()
             
             VStack {
                 HStack{
@@ -83,4 +98,5 @@ struct FilterView: View {
         
     }
 }
+
 

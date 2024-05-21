@@ -68,10 +68,10 @@ struct GlassRectangle : View {
 }
 
 struct Home : View {
-    @State var selectedCategoria: Categorias
+    @State var selectedCategoria = Categorias.todos
     @State var selectedHorario: Horarios
-    @State var selectedDistancia: Distancias
-    @State var selectedPreco: Precos
+    @State var selectedDistancia = Distancias.todos
+    @State var selectedPreco = Precos.todos
     
     @State private var pontoSelecionado: PontoTuristico?
     @State var isShowingFilterView = false
@@ -141,14 +141,23 @@ struct Home : View {
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
-            if ponto.categoria != selectedCategoria {
+            if selectedCategoria == Categorias.todos{
+                corresponde = true
+            } else if ponto.categoria != selectedCategoria {
                 corresponde = false
             }
             
-            if ponto.preco != selectedPreco {
+            if selectedPreco == Precos.todos {
+                corresponde = true
+            } else if ponto.preco != selectedPreco {
                 corresponde = false
             }
             
+            if selectedDistancia == Distancias.todos {
+                corresponde = true
+            } else if ponto.distancia != selectedDistancia {
+                corresponde = false
+            }
             
             return corresponde
         }
@@ -199,6 +208,26 @@ struct UI: View{
             authenticateUser()
         }
     }
+    
+    func calculaDistancias() {
+        
+        for i in 0..<PontosTuristicos.count {
+            let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+            let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
+            let distanceInKilometers = (location1.distance(from: location2)) / 1000
+            
+            if distanceInKilometers <= 3.0 {
+                PontosTuristicos[i].distancia = Distancias.tres
+            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
+                PontosTuristicos[i].distancia = Distancias.cinco
+            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+                PontosTuristicos[i].distancia = Distancias.dez
+            }
+
+        }
+        print("calculei")
+    }
+    
     private func authenticateUser() {
         let player = GKLocalPlayer.local
         player.authenticateHandler = { vc, error in
@@ -223,6 +252,7 @@ struct UI: View{
                 GKAccessPoint.shared.isActive = true
                 print(locationViewModel.latitude)
                 print(locationViewModel.longitude)
+                calculaDistancias()
                 // You can perform additional actions here
             }
         }
