@@ -9,13 +9,13 @@ import Foundation
 
 class PontoTuristico {
     let id: UUID
-    var name, desc, latitude, longitude: String
+    var name, desc, latitude, longitude, status: String
     let horarios: [String]
     var categoria: Categorias
     var preco: Precos
     var distancia: Distancias
     
-    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [String], distancia: Distancias) {
+    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [String], distancia: Distancias, status: String) {
         self.id = id
         self.name = name
         self.desc = desc
@@ -25,5 +25,6 @@ class PontoTuristico {
         self.preco = preco
         self.horarios = horarios
         self.distancia = distancia
+        self.status = status
     }
 }
