@@ -1,10 +1,10 @@
 import Foundation
 
-enum Categorias {
-    case todos
-    case tradicionais
-    case culinaria
-    case festas
+enum Categorias: String {
+    case todos = "todos"
+    case tradicionais = "tradicionais"
+    case culinaria = "culinaria"
+    case festas = "festas"
 }
 
 enum Precos {
