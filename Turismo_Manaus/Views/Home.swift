@@ -12,50 +12,6 @@ import GameKit
 import CoreLocation
 import CoreImage
 
-class LocationViewModel: NSObject, ObservableObject {
-    private var locationManager: CLLocationManager?
-    @Published var latitude: Double = 0.0
-    @Published var longitude: Double = 0.0
-
-    @Published var log: String = ""
-    
-    
-    init(locationManager: CLLocationManager = CLLocationManager()) {
-        super.init()
-        self.locationManager = locationManager
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-}
-
-extension LocationViewModel: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .notDetermined:
-            log = "Location authorization not determined"
-        case .restricted:
-            log = "Location authorization restricted"
-        case .denied:
-            log = "Location authorization denied"
-        case .authorizedAlways:
-            manager.requestLocation()
-            log = "Location authorization always granted"
-        case .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-            log = "Location authorization when in use granted"
-        @unknown default:
-            log = "Unknown authorization status"
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locations.forEach { location in
-            self.latitude = location.coordinate.latitude
-            self.longitude = location.coordinate.longitude
-        }
-    }
-}
 
 struct GlassRectangle : View {
     
@@ -68,10 +24,10 @@ struct GlassRectangle : View {
 }
 
 struct Home : View {
-    @State var selectedCategoria: Categorias
+    @State var selectedCategoria = Categorias.todos
     @State var selectedHorario: Horarios
-    @State var selectedDistancia: Distancias
-    @State var selectedPreco: Precos
+    @State var selectedDistancia = Distancias.todos
+    @State var selectedPreco = Precos.todos
     
     @State private var pontoSelecionado: PontoTuristico?
     @State var isShowingFilterView = false
@@ -145,14 +101,23 @@ struct Home : View {
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
-            if ponto.categoria != selectedCategoria {
+            if selectedCategoria == Categorias.todos{
+                corresponde = true
+            } else if ponto.categoria != selectedCategoria {
                 corresponde = false
             }
             
-            if ponto.preco != selectedPreco {
+            if selectedPreco == Precos.todos {
+                corresponde = true
+            } else if ponto.preco != selectedPreco {
                 corresponde = false
             }
             
+            if selectedDistancia == Distancias.todos {
+                corresponde = true
+            } else if ponto.distancia != selectedDistancia {
+                corresponde = false
+            }
             
             return corresponde
         }
@@ -203,6 +168,8 @@ struct UI: View{
             authenticateUser()
         }
     }
+    
+    
     private func authenticateUser() {
         let player = GKLocalPlayer.local
         player.authenticateHandler = { vc, error in
@@ -227,8 +194,33 @@ struct UI: View{
                 GKAccessPoint.shared.isActive = true
                 print(locationViewModel.latitude)
                 print(locationViewModel.longitude)
+                calculaDistancias()
                 // You can perform additional actions here
             }
+        }
+    }
+    
+    func calculaDistancias() {
+        
+        for i in 0..<PontosTuristicos.count {
+            let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+            let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
+            let distanceinMeters = (location1.distance(from: location2))
+            let distanceInKilometers = distanceinMeters/1000
+            print(distanceInKilometers)
+            if distanceInKilometers <= 3.0 {
+                print(PontosTuristicos[i].name)
+                PontosTuristicos[i].distancia = Distancias.tres
+            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
+                print(PontosTuristicos[i].name)
+
+                PontosTuristicos[i].distancia = Distancias.cinco
+            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+                print(PontosTuristicos[i].name)
+
+                PontosTuristicos[i].distancia = Distancias.dez
+            }
+
         }
     }
     

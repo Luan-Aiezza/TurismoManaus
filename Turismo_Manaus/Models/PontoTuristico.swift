@@ -13,8 +13,9 @@ class PontoTuristico {
     let horarios: [String]
     var categoria: Categorias
     var preco: Precos
+    var distancia: Distancias
     
-    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [String]) {
+    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [String], distancia: Distancias) {
         self.id = id
         self.name = name
         self.desc = desc
@@ -23,5 +24,6 @@ class PontoTuristico {
         self.longitude = longitude
         self.preco = preco
         self.horarios = horarios
+        self.distancia = distancia
     }
 }
