@@ -3,6 +3,7 @@ import SwiftUI
 struct CardPoint: View {
     var name: String
     
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0)
@@ -13,15 +14,16 @@ struct CardPoint: View {
                 .font(.title)
                 .frame(width: 250)
         }
+        
     }
 }
 
 
 struct Carrossel: View {
     
-    @State var currentIndex: Int = 0
+    @Binding var currentIndex: Int
     @State var dragOfset: CGFloat = 0
-    private var  cores = [".yellow", ".red", ".blue"]
+
     var body: some View {
         VStack{
             ZStack{
@@ -106,6 +108,3 @@ struct Carrossel: View {
 //    }
 //}
 
-#Preview {
-    Carrossel()
-}
