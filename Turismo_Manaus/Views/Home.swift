@@ -11,6 +11,7 @@ import SceneKit
 import GameKit
 import CoreLocation
 import CoreImage
+import Foundation
 
 
 struct GlassRectangle : View {
@@ -203,20 +204,18 @@ struct UI: View{
     func calculaDistancias() {
         
         for i in 0..<PontosTuristicos.count {
+            let transformedString = transformString(PontosTuristicos[i].name)
+            print(transformedString)
             let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
             let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
             let distanceinMeters = (location1.distance(from: location2))
             let distanceInKilometers = distanceinMeters/1000
-            print(distanceInKilometers)
             if distanceInKilometers <= 3.0 {
-                print(PontosTuristicos[i].name)
+
                 PontosTuristicos[i].distancia = Distancias.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                print(PontosTuristicos[i].name)
-
                 PontosTuristicos[i].distancia = Distancias.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
-                print(PontosTuristicos[i].name)
 
                 PontosTuristicos[i].distancia = Distancias.dez
             }
@@ -224,6 +223,34 @@ struct UI: View{
         }
     }
     
+    func removeAccents(from string: String) -> String {
+        return string.applyingTransform(.stripCombiningMarks, reverse: false) ?? string
+    }
+    
+    func removeSymbols(from string: String) -> String {
+        return string.replacingOccurrences(of: "'", with: "")
+    }
+    
+    func removeSpaces(from string: String) -> String {
+        return string.replacingOccurrences(of: " ", with: "")
+    }
+    
+    func removeTrates(from string: String) -> String {
+        return string.replacingOccurrences(of: "-", with: "")
+    }
+    
+    func convertToLowerCase(_ string: String) -> String {
+        return string.lowercased()
+    }
+    
+    func transformString(_ string: String) -> String {
+        let stringWithoutAccents = removeAccents(from: string)
+        let stringWithoutSpaces = removeSpaces(from: stringWithoutAccents)
+        let stringWithoutSymbols = removeSymbols(from: stringWithoutSpaces)
+        let stringWithoutTrates = removeTrates(from: stringWithoutSymbols)
+        let lowercasedString = convertToLowerCase(stringWithoutTrates)
+        return lowercasedString
+    }
 }
 
 #Preview {
