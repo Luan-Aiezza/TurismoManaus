@@ -30,11 +30,12 @@ struct Home : View {
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
     
-    @State private var pontoSelecionado: PontoTuristico?
+    @State var pontoSelecionado: PontoTuristico?
+    
     @State var isShowingFilterView = false
-
     @State var isShowingModal = false
-
+    
+    @State var currentIndex = 10
     @State private var selectedTab: Tabs = .home
     
     var body: some View {
@@ -43,60 +44,82 @@ struct Home : View {
             Color.black
             
             VStack{
-                Text("Olá Samuel!")
-                    .font(.title)
-                    .foregroundStyle(.white)
-                
+                VStack{
+                    Text("Olá Samuel!")
+                        .font(.title)
+                    Text("Pra onde vamos hoje?")
+                        .font(.title2)
+                }
                 
                 Spacer()
                 
-//                Carrossel()
-//                Button(action: {
-//                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
-//                    isShowingModal.toggle()
-////sadawd
-//                }, label: {
-//                    Image("Card")
-//                })
-//                .sheet(isPresented: $isShowingModal) {
-//                    if let ponto = pontoSelecionado {
-//                        Text(ponto.name)
-//                        Text(ponto.desc)
-//                        Text(ponto.id.uuidString)
-//                        Button("Selecionar Ponto Turístico") {
-//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                Carrossel(currentIndex: $currentIndex, isShowingModal: $isShowingModal)
+//                    .sheet(isPresented: $isShowingModal) {
+//                        if let ponto = pontoSelecionado {
+//                            Text(ponto.name)
+//                            Text(ponto.desc)
+//                            Text(ponto.id.uuidString)
+//                            Button("Selecionar Ponto Turístico") {
+//                                pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                            }
+//                        } else {
+//                            Text("Nenhum filtro selecionado")
 //                        }
-//                    } else {
-//                        Text("Nenhum filtro selecionado")
 //                    }
-//                }
-
+                
                 Spacer()
                 
-                Button(action: {
-                    isShowingFilterView.toggle()
-                }, label: {
-                    Image("btn_adjust")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                }).padding()
-                    .sheet(isPresented: $isShowingFilterView) {
-                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
+                HStack {
+                    Button(action: {
+                        pontoSelecionado = selecionarPontoTuristicoAleatorio()
+
+                        for (index, element) in PontosTuristicos.enumerated(){
+                            if pontoSelecionado?.name == element.name{
+                                withAnimation {
+                                    currentIndex = index
+
+                                }
+                            }
+                        }
+                    }, label: {
+                        Text("Clique")
+                    })
+                    .sheet(isPresented: $isShowingModal) {
+                        if let ponto = pontoSelecionado {
+                            Text(ponto.name)
+                            Text(ponto.desc)
+                            Text(ponto.id.uuidString)
+                            Button("Selecionar Ponto Turístico") {
+                                pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            }
+                        } else {
+                            Text("Nenhum filtro selecionado")
+                        }
                     }
+                    Button(action: {
+                        isShowingFilterView.toggle()
+                    }, label: {
+                        Text("Filtros")
+                            .imageScale(.large)
+                            .foregroundStyle(.tint)
+                    }).padding()
+                        .sheet(isPresented: $isShowingFilterView) {
+                            FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
+                        }
+                }
                 
-                    
-                
-                
+//                
+   
             }
             .padding()
-            
-            Carrossel()
+            .foregroundStyle(.white)
+
             
         }
         
     }
     
-    func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
+    public func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
         
         
         let pontosFiltrados = PontosTuristicos.filter { ponto in
@@ -149,19 +172,9 @@ struct UI: View{
                     Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos)
                         .tag(Tabs.home)
                         .background(Color.black)
-                    
-                    Achievements()
-                        .tag(Tabs.achievements)
-                    
-                    Ranking()
-                        .tag(Tabs.ranking)
-                    
-                    Me()
-                        .tag(Tabs.me)
                 }
                 
                 
-                CustomTabBar(selectTab: $selectedTab)
             }
             
             
