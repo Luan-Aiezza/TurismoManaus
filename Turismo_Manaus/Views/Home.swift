@@ -50,6 +50,7 @@ struct Home : View {
                 
                 Spacer()
                 
+
                 Button(action: {
                     pontoSelecionado = selecionarPontoTuristicoAleatorio()
                     isShowingModal.toggle()
@@ -86,6 +87,27 @@ struct Home : View {
                     }
                     
                 }
+//                Carrossel()
+//                Button(action: {
+//                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                    isShowingModal.toggle()
+////sadawd
+//                }, label: {
+//                    Image("Card")
+//                })
+//                .sheet(isPresented: $isShowingModal) {
+//                    if let ponto = pontoSelecionado {
+//                        Text(ponto.name)
+//                        Text(ponto.desc)
+//                        Text(ponto.id.uuidString)
+//                        Button("Selecionar Ponto Turístico") {
+//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                        }
+//                    } else {
+//                        Text("Nenhum filtro selecionado")
+//                    }
+//                }
+
                 Spacer()
                 
                 Button(action: {
@@ -102,7 +124,10 @@ struct Home : View {
                     
                 
                 
-            }.padding()
+            }
+            .padding()
+            
+            Carrossel()
             
         }
         
