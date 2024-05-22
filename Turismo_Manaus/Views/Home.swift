@@ -57,19 +57,35 @@ struct Home : View {
                 }, label: {
                     Image("Card")
                 })
+
                 .sheet(isPresented: $isShowingModal) {
                     if let ponto = pontoSelecionado {
-                        Text(ponto.name)
-                        Text(ponto.desc)
-                        Text(ponto.id.uuidString)
-                        Button("Selecionar Ponto Turístico") {
-                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                        Text("Desafio lançado!")
+                            .font(.title)
+                        Text("Visite o(a) \(ponto.name) em até uma semana!")
+                        Image("Card")
+                        
+                        HStack{
+                            Text(String(describing: ponto.categoria))
+                            Text(String(describing: ponto.preco))
+                            Text(String(describing: ponto.status))
                         }
+                        
+                        HStack{
+                            Button("Recusar") {
+                                isShowingModal = false
+                            }
+                            
+                            Button("Aceitar") {
+                                isShowingModal = false
+                            }
+                        }
+                        
                     } else {
                         Text("Nenhum filtro selecionado")
                     }
+                    
                 }
-
                 Spacer()
                 
                 Button(action: {
