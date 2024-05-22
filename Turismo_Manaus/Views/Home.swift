@@ -29,12 +29,12 @@ struct Home : View {
     @State var selectedHorario: Horarios
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
+    var playerName = GKLocalPlayer.local.displayName
     
     @State private var pontoSelecionado: PontoTuristico?
     @State var isShowingFilterView = false
 
     @State var isShowingModal = false
-
     @State private var selectedTab: Tabs = .home
     
     var body: some View {
@@ -43,7 +43,7 @@ struct Home : View {
             Color.black
             
             VStack{
-                Text("Olá Samuel!")
+                Text("Olá, \(playerName)!")
                     .font(.title)
                     .foregroundStyle(.white)
                 
@@ -130,7 +130,7 @@ struct UI: View{
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Tabs = .home
     @ObservedObject private var locationViewModel = LocationViewModel()
-    
+    @State private var playerName = GKLocalPlayer.local.displayName
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -186,6 +186,7 @@ struct UI: View{
             } else if player.isAuthenticated {
                 // Player is authenticated
                 print("Player authenticated!")
+                print(player.displayName)
                 GKAccessPoint.shared.location = .topLeading
                 GKAccessPoint.shared.showHighlights = false
                 GKAccessPoint.shared.isActive = true
@@ -228,7 +229,9 @@ struct UI: View{
     }
     
     func removeSpaces(from string: String) -> String {
-        return string.replacingOccurrences(of: " ", with: "")
+        let newstring = string.replacingOccurrences(of: "(", with: "")
+        let otherstring = newstring.replacingOccurrences(of: ")", with: "")
+        return otherstring.replacingOccurrences(of: " ", with: "")
     }
     
     func removeTrates(from string: String) -> String {
