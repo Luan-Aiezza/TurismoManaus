@@ -63,21 +63,16 @@ struct Home : View {
                     
                     // Iniciar Random
                     Button(action: {
-                        Task{
-                            pontoSelecionado = await selecionarPontoTuristicoAleatorio()
-                        }
+                        pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                        
                         for (index, element) in PontosTuristicos.enumerated(){
                             if pontoSelecionado?.name == element.name{
                                 withAnimation(Animation.smooth) {
                                     currentIndex = index
-                                    Task {
-                                        try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
-                                            hasTimeElapsed = true
-                                        isShowingModal.toggle()
-                                        hasTimeElapsed = false
-
-                                        }
+                                    
                                 }
+                                isShowingModal.toggle()
+
                             }
                         }
                         
@@ -145,7 +140,7 @@ struct Home : View {
         
     }
     
-    func selecionarPontoTuristicoAleatorio() async -> PontoTuristico? {
+    func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
         
         
         let pontosFiltrados = PontosTuristicos.filter { ponto in
@@ -171,7 +166,7 @@ struct Home : View {
             
             return corresponde
         }
-        
+        print(pontosFiltrados.randomElement() ?? "noth")
         return pontosFiltrados.randomElement()
     }
     
