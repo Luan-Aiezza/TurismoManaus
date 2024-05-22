@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CardPoint: View {
     var name: String
-    @Binding var isShowingModal: Bool
+    
 
     var body: some View {
         ZStack {
@@ -14,9 +14,6 @@ struct CardPoint: View {
                 .font(.title)
                 .frame(width: 250)
         }
-        .onTapGesture {
-            isShowingModal.toggle()
-        }
         
     }
 }
@@ -25,14 +22,13 @@ struct CardPoint: View {
 struct Carrossel: View {
     
     @Binding var currentIndex: Int
-    @Binding var isShowingModal: Bool
     @State var dragOfset: CGFloat = 0
 
     var body: some View {
         VStack{
             ZStack{
                 ForEach(0 ..< PontosTuristicos.count, id: \.self) { index in
-                    CardPoint(name: PontosTuristicos[index].name, isShowingModal: $isShowingModal)
+                    CardPoint(name: PontosTuristicos[index].name)
                         .scaleEffect(currentIndex == index ? 1.0 : 0.8)
                         .opacity(currentIndex == index ? 1.0 : 0.5)
                         .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)

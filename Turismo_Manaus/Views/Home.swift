@@ -14,6 +14,7 @@ import CoreImage
 import Foundation
 
 
+
 struct GlassRectangle : View {
     
     var body: some View {
@@ -37,7 +38,8 @@ struct Home : View {
     
     @State var currentIndex = 10
     @State private var selectedTab: Tabs = .home
-    
+    @State private var hasTimeElapsed = false
+
     var body: some View {
         ZStack {
             
@@ -53,49 +55,40 @@ struct Home : View {
                 
                 Spacer()
                 
-                Carrossel(currentIndex: $currentIndex, isShowingModal: $isShowingModal)
-//                    .sheet(isPresented: $isShowingModal) {
-//                        if let ponto = pontoSelecionado {
-//                            Text(ponto.name)
-//                            Text(ponto.desc)
-//                            Text(ponto.id.uuidString)
-//                            Button("Selecionar Ponto Turístico") {
-//                                pontoSelecionado = selecionarPontoTuristicoAleatorio()
-//                            }
-//                        } else {
-//                            Text("Nenhum filtro selecionado")
-//                        }
-//                    }
+                Carrossel(currentIndex: $currentIndex)
                 
                 Spacer()
                 
                 HStack {
+                    
+                    // Iniciar Random
                     Button(action: {
-                        pontoSelecionado = selecionarPontoTuristicoAleatorio()
-
+                        Task{
+                            pontoSelecionado = await selecionarPontoTuristicoAleatorio()
+                        }
                         for (index, element) in PontosTuristicos.enumerated(){
                             if pontoSelecionado?.name == element.name{
-                                withAnimation {
+                                withAnimation(Animation.smooth) {
                                     currentIndex = index
+                                    Task {
+                                        try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
+                                            hasTimeElapsed = true
+                                        isShowingModal.toggle()
+                                        hasTimeElapsed = false
 
+                                        }
                                 }
                             }
                         }
+                        
+                        print(pontoSelecionado?.name ?? "nothing")
+                        
                     }, label: {
                         Text("Clique")
                     })
-                    .sheet(isPresented: $isShowingModal) {
-                        if let ponto = pontoSelecionado {
-                            Text(ponto.name)
-                            Text(ponto.desc)
-                            Text(ponto.id.uuidString)
-                            Button("Selecionar Ponto Turístico") {
-                                pontoSelecionado = selecionarPontoTuristicoAleatorio()
-                            }
-                        } else {
-                            Text("Nenhum filtro selecionado")
-                        }
-                    }
+                    
+                    
+                    // Filtros
                     Button(action: {
                         isShowingFilterView.toggle()
                     }, label: {
@@ -106,41 +99,74 @@ struct Home : View {
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
                         }
+                    
+                    Button(action: {
+                        isShowingModal.toggle()
+                    }, label: {
+                        Text("RESULT")
+                    })
                 }
-                
-//                
-   
+
             }
             .padding()
             .foregroundStyle(.white)
+            .sheet(isPresented: $isShowingModal) {
 
+                if let ponto = pontoSelecionado {
+                    Text("Desafio lançado!")
+                        .font(.title)
+                        .foregroundStyle(.black)
+                    Text("Visite o(a) \(ponto.name) em até uma semana!")
+                    Image("Card")
+                    
+                    HStack{
+                        Text(String(describing: ponto.categoria))
+                        Text(String(describing: ponto.preco))
+                        Text(String(describing: ponto.status))
+                    }
+                    
+                    HStack{
+                        Button("Recusar") {
+                            isShowingModal = false
+                        }
+                        
+                        Button("Aceitar") {
+                            isShowingModal = false
+                        }
+                    }
+                    
+                } else {
+                    Text("Nenhum filtro selecionado")
+                }
+                
+            }
             
         }
         
     }
     
-    public func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
+    func selecionarPontoTuristicoAleatorio() async -> PontoTuristico? {
         
         
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
-            if selectedCategoria == Categorias.todos{
-                corresponde = true
-            } else if ponto.categoria != selectedCategoria {
+            if selectedCategoria != Categorias.todos{
+             if ponto.categoria != selectedCategoria {
                 corresponde = false
             }
-            
-            if selectedPreco == Precos.todos {
-                corresponde = true
-            } else if ponto.preco != selectedPreco {
-                corresponde = false
             }
             
-            if selectedDistancia == Distancias.todos {
-                corresponde = true
-            } else if ponto.distancia != selectedDistancia {
-                corresponde = false
+            if selectedPreco != Precos.todos {
+                if ponto.preco != selectedPreco {
+                    corresponde = false
+                }
+            }
+            
+            if selectedDistancia != Distancias.todos {
+                if ponto.distancia != selectedDistancia {
+                    corresponde = false
+                }
             }
             
             return corresponde
@@ -215,7 +241,7 @@ struct UI: View{
     }
     
     func calculaDistancias() {
-        
+        print(".....")
         for i in 0..<PontosTuristicos.count {
             let transformedString = transformString(PontosTuristicos[i].name)
             print(transformedString)
@@ -223,16 +249,16 @@ struct UI: View{
             let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
             let distanceinMeters = (location1.distance(from: location2))
             let distanceInKilometers = distanceinMeters/1000
-            if distanceInKilometers <= 3.0 {
-
-                PontosTuristicos[i].distancia = Distancias.tres
+            print(PontosTuristicos[i].name)
+            print(distanceInKilometers)
+            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distancia = Distancias.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
                 PontosTuristicos[i].distancia = Distancias.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
-
+                
                 PontosTuristicos[i].distancia = Distancias.dez
             }
-
+            
         }
     }
     
