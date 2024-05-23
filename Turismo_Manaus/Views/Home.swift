@@ -39,7 +39,7 @@ struct Home : View {
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
     @State var locationViewModel: LocationViewModel
-    var playerName = GKLocalPlayer.local.displayName
+    @State var player = GKLocalPlayer.local
     var vm = HomeViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
@@ -55,10 +55,10 @@ struct Home : View {
             
             VStack{
                 VStack{
-                    Text("Olá, \(playerName)!")
+                    Text("Olá\(player.displayName)!")
                         .font(.title)
-                    Text("Pra onde vamos hoje?")
-                        .font(.title2)
+                    Text("Para onde vamos hoje?")
+                        .font(.title3)
                 }
                 
                 Spacer()
@@ -92,7 +92,21 @@ struct Home : View {
                         
                         
                     }, label: {
-                        Text("Clique")
+                        ZStack {
+                                Color.bgGlass1
+                                    .cornerRadius(100.0)
+                                Text("Sortear")
+                                    .font(.headline)
+                                    .foregroundColor(.accentColorYellow)
+                                    .padding(.horizontal, 16.0)
+                                    .padding(.vertical, 12.0)
+                        }
+                        .frame(width: 96, height: 46)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 100.0)
+                                .stroke(Color.bgGlass1, lineWidth: 2)
+                                )
+                        
                     })
                     
                     
@@ -100,19 +114,14 @@ struct Home : View {
                     Button(action: {
                         isShowingFilterView.toggle()
                     }, label: {
-                        Text("Filtros")
-                            .imageScale(.large)
-                            .foregroundStyle(.tint)
+                        
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .frame(width: 21.662, height: 18.056)
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
                         }
-                    
-                    Button(action: {
-                        isShowingModal.toggle()
-                    }, label: {
-                        Text("RESULT")
-                    })
                 }
                 
             }
@@ -186,8 +195,7 @@ struct Home : View {
                 
             }
             .padding()
-            
-            Carrossel(currentIndex: $currentIndex)
+
             
         }
         
@@ -247,7 +255,7 @@ struct UI: View{
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Tabs = .home
     @ObservedObject var locationViewModel = LocationViewModel()
-    @State private var playerName = GKLocalPlayer.local.displayName
+    @State private var player = GKLocalPlayer.local
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
         animation: .default)
@@ -263,7 +271,7 @@ struct UI: View{
             
             VStack{
                 TabView (selection: $selectedTab) {
-                    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos, locationViewModel: locationViewModel)
+                    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos, locationViewModel: locationViewModel, player: player)
                         .tag(Tabs.home)
                         .background(Color.black)
                 }
@@ -376,3 +384,12 @@ struct UI: View{
     UI()
     
 }
+
+extension Color {
+    static let bgGlass1 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1))
+    static let bgGlass2 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.77))
+    static let neutral = Color(UIColor(red: 185/255, green: 184/255, blue: 179/255, alpha: 1.0))
+    static let accentColorYellow = Color(UIColor(red: 252/255, green: 255/255, blue: 130/255, alpha: 1))
+}
+
+

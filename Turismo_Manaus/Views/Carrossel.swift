@@ -1,22 +1,64 @@
 import SwiftUI
 
+struct CardPointSelected: View {
+    var name: String
+    
+
+    var body: some View {
+        ZStack {
+            Color.teste
+                .cornerRadius(24.0)
+            Image(transformString(name))
+                .resizable()
+                .frame(width: 300, height: 342)
+                .scaledToFit()
+                .cornerRadius(24.0)
+            VStack {
+                Spacer()
+                Text(name)
+                    .foregroundColor(.white)
+                    .font(.title2)
+                    .frame(width: 250)
+                    
+            }
+            .padding(16.0)
+        }
+        .frame(width: 316, height: 358)
+            .overlay(
+                RoundedRectangle(cornerRadius: 24.0)
+                    .stroke(Color.bgGlass1, lineWidth: 2)
+                    )
+
+        
+        
+    }
+}
+
 struct CardPoint: View {
     var name: String
     
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 25.0)
-                .frame(width: 300, height: 300)
-                .foregroundStyle(Color.green)
-            Text(name)
-                .foregroundColor(.white)
-                .font(.title)
-                .frame(width: 250)
+            
+            Image(transformString(name))
+                .resizable()
+                .scaledToFit()
+            VStack {
+                Spacer()
+                Text(name)
+                    .foregroundColor(.white)
+                    .font(.title2)
+                    .frame(width: 250)
+            }
         }
+        .cornerRadius(15.0)
+        .frame(width: 300, height: 342)
         
     }
 }
+
+
 
 
 struct Carrossel: View {
@@ -28,10 +70,17 @@ struct Carrossel: View {
         VStack{
             ZStack{
                 ForEach(0 ..< PontosTuristicos.count, id: \.self) { index in
-                    CardPoint(name: PontosTuristicos[index].name)
-                        .scaleEffect(currentIndex == index ? 1.0 : 0.8)
-                        .opacity(currentIndex == index ? 1.0 : 0.5)
-                        .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+                    if index == currentIndex {
+                        CardPointSelected(name: PontosTuristicos[index].name)
+                            .scaleEffect(currentIndex == index ? 1.0 : 0.8)
+                            .opacity(currentIndex == index ? 1.0 : 0.5)
+                            .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+                    } else {
+                        CardPoint(name: PontosTuristicos[index].name)
+                            .scaleEffect(currentIndex == index ? 1.0 : 0.8)
+                            .opacity(currentIndex == index ? 1.0 : 0.5)
+                            .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+                    }
                     
                 }
             }
@@ -47,7 +96,7 @@ struct Carrossel: View {
                                 print("aqui", currentIndex)
                                 
                             }
-                        } 
+                        }
                         
                         //arrastando pra direita
                         else if value.translation.width  > threshold {
@@ -71,7 +120,7 @@ struct Carrossel: View {
 //struct Carrossel: View {
 //    @State private var cardCenters: [CGFloat] = []
 //    @State private var selectedCardIndex: Int? = nil
-//    
+//
 //    var body: some View {
 //        GeometryReader { outerGeometry in
 //            let midX = outerGeometry.frame(in: .global).midX
@@ -83,7 +132,7 @@ struct Carrossel: View {
 //                                GeometryReader { innerGeometry in
 //                                    let cardMidX = innerGeometry.frame(in: .global).midX
 //                                    let isCentered = abs(cardMidX - midX) < 180
-//                                    
+//
 //                                    CardPoint(name: PontosTuristicos[index].name, isCentered: isCentered)
 //                                        .id(index)
 //                                        .onChange(of: isCentered) {
@@ -100,7 +149,7 @@ struct Carrossel: View {
 //                        }
 //                        .padding()
 //                        .background(Color.clear)
-//                        
+//
 //                    }
 //                }
 //            }

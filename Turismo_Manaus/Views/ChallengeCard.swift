@@ -51,8 +51,3 @@ struct ChallengeCard: View {
 #Preview {
     ChallengeCard()
 }
-
-extension Color {
-    static let bgGlass1 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1))
-    static let neutral = Color(UIColor(red: 185/255, green: 184/255, blue: 179/255, alpha: 1.0))
-}
