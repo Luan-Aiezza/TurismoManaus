@@ -38,10 +38,10 @@ struct Home : View {
     @State var selectedHorario: Horarios
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
+    @State var locationViewModel: LocationViewModel
     var playerName = GKLocalPlayer.local.displayName
-    
     var vm = HomeViewModel()
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
@@ -139,6 +139,7 @@ struct Home : View {
                         }
                         
                         Button("Aceitar") {
+                            addDesafio(pontoId: transformString(ponto.name))
                             isShowingModal = false
                         }
                     }
@@ -186,7 +187,7 @@ struct Home : View {
             }
             .padding()
             
-            Carrossel()
+            Carrossel(currentIndex: $currentIndex)
             
         }
         
@@ -222,6 +223,22 @@ struct Home : View {
         return pontosFiltrados.randomElement()
     }
     
+    private func addDesafio( pontoId: String ) {
+        let player = GKLocalPlayer.local
+            let newItem = Desafios(context: viewContext)
+            newItem.id = UUID()
+        newItem.data_lancado = Date()
+        newItem.data_termino = Calendar.current.date(byAdding: .day, value: 7, to: Date())
+        newItem.ponto_id = pontoId
+        newItem.user_id = player.gamePlayerID
+            do {
+                try viewContext.save()
+                print(newItem)          
+            } catch {
+            }
+        
+    }
+    
 }
 
 struct UI: View{
@@ -229,7 +246,7 @@ struct UI: View{
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Tabs = .home
-    @ObservedObject private var locationViewModel = LocationViewModel()
+    @ObservedObject var locationViewModel = LocationViewModel()
     @State private var playerName = GKLocalPlayer.local.displayName
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
@@ -246,7 +263,7 @@ struct UI: View{
             
             VStack{
                 TabView (selection: $selectedTab) {
-                    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos)
+                    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos, locationViewModel: locationViewModel)
                         .tag(Tabs.home)
                         .background(Color.black)
                 }
@@ -259,7 +276,6 @@ struct UI: View{
             authenticateUser()
         }
     }
-    
     
     private func authenticateUser() {
         let player = GKLocalPlayer.local
@@ -316,36 +332,6 @@ struct UI: View{
         }
     }
     
-    func removeAccents(from string: String) -> String {
-        return string.applyingTransform(.stripCombiningMarks, reverse: false) ?? string
-    }
-    
-    func removeSymbols(from string: String) -> String {
-        return string.replacingOccurrences(of: "'", with: "")
-    }
-    
-    func removeSpaces(from string: String) -> String {
-        let newstring = string.replacingOccurrences(of: "(", with: "")
-        let otherstring = newstring.replacingOccurrences(of: ")", with: "")
-        return otherstring.replacingOccurrences(of: " ", with: "")
-    }
-    
-    func removeTrates(from string: String) -> String {
-        return string.replacingOccurrences(of: "-", with: "")
-    }
-    
-    func convertToLowerCase(_ string: String) -> String {
-        return string.lowercased()
-    }
-    
-    func transformString(_ string: String) -> String {
-        let stringWithoutAccents = removeAccents(from: string)
-        let stringWithoutSpaces = removeSpaces(from: stringWithoutAccents)
-        let stringWithoutSymbols = removeSymbols(from: stringWithoutSpaces)
-        let stringWithoutTrates = removeTrates(from: stringWithoutSymbols)
-        let lowercasedString = convertToLowerCase(stringWithoutTrates)
-        return lowercasedString
-    }
     
     private func addItem() {
         let player = GKLocalPlayer.local
@@ -380,7 +366,6 @@ struct UI: View{
         for i in 0..<items.count {
             print("Idas \(items[i].quant_idas)")
             print("UserId \(items[i].user_id ?? "")")
-
         }
         
     }

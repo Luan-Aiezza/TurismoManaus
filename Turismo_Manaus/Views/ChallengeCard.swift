@@ -11,17 +11,48 @@ import GameKit
 
 struct ChallengeCard: View {
     
-    @Binding var selectedPoint: PontoTuristico
-    @Environment(\.managedObjectContext) private var viewContext
+   @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        VStack {
-            HStack{
-                
+        
+            VStack {
+                HStack{
                     Spacer()
-                //
+                    Image(.card1)
+                        .resizable()
+                        .frame(width: 48, height: 63)
+                        .scaledToFit()
+                    Spacer()
+                    VStack (alignment: .leading, content: {
+                        Text("Visite o Teatro Amazonas pela primeira vez")
+                            .font(.system(size: 15.0))
+                            .foregroundColor(.white)
+                        Text("2 dias restantes")
+                            .font(.system(size: 12.0))
+                            .foregroundColor(.neutral)
+                    })
+                    Spacer()
+                    Image(systemName: "chevron.forward")
+                        .resizable()
+                        .frame(width: 11.689, height: 16.963)
+                        .scaledToFit()
+                        Spacer()
+                    //
                 }
+                .padding(12)
             }
-        }
+            .background(Color.bgGlass1)
+            .cornerRadius(24.0)
+       
+    }
         
     }
+
+#Preview {
+    ChallengeCard()
+}
+
+extension Color {
+    static let bgGlass1 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1))
+    static let neutral = Color(UIColor(red: 185/255, green: 184/255, blue: 179/255, alpha: 1.0))
+}
