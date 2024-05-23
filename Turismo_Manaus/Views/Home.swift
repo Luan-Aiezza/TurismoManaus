@@ -186,7 +186,7 @@ struct Home : View {
             }
             .padding()
             
-            Carrossel()
+            Carrossel(currentIndex: $currentIndex)
             
         }
         
