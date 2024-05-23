@@ -14,7 +14,9 @@ struct ChallengeCard: View {
    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        
+        ZStack {
+            Color.bgGlass1
+                .cornerRadius(24.0)
             VStack {
                 HStack{
                     Spacer()
@@ -41,8 +43,11 @@ struct ChallengeCard: View {
                 }
                 .padding(12)
             }
-            .background(Color.bgGlass1)
-            .cornerRadius(24.0)
+        }.overlay(
+            RoundedRectangle(cornerRadius: 24.0)
+                .stroke(Color.bgGlass1, lineWidth: 2)
+                )        
+        .frame(width: 350, height: 94)
        
     }
         
@@ -51,3 +56,4 @@ struct ChallengeCard: View {
 #Preview {
     ChallengeCard()
 }
+

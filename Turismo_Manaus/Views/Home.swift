@@ -10,7 +10,6 @@ import SwiftUI
 import SceneKit
 import GameKit
 import CoreLocation
-import CoreImage
 import Foundation
 
 
