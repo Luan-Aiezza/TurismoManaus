@@ -11,11 +11,16 @@ import GameKit
 struct Achievements: View {
     @State private var selectedTab: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Pontos_Visitados>
     
     var body: some View {
             GameCenterAchievementsViewControllerWrapper()
                 .onAppear{
                     addItem()
+                    viewItem()
                 }
         
         }
@@ -46,7 +51,13 @@ struct Achievements: View {
                 print("done!")
             }
         }
-
+    
+    private func viewItem() {
+        for i in 0..<items.count {
+            print(items[i])
+        }
+        
+    }
     }
 
 

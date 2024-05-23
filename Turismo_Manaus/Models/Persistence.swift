@@ -19,6 +19,12 @@ struct PersistenceController {
             newItem.quant_idas = 0
             newItem.user_id = ""
         }
+        for _ in 0..<10 {
+            let newItem = Desafios(context: viewContext)
+            newItem.id = UUID()
+            newItem.data_lancado = Date.now
+        }
+
         do {
             try viewContext.save()
         } catch {

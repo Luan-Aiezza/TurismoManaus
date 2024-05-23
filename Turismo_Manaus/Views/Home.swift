@@ -37,9 +37,7 @@ struct Home : View {
     @State var isShowingFilterView = false
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
-    
     @State var currentIndex = 10
-    @State private var selectedTab: Tabs = .home
     @State private var hasTimeElapsed = false
 
     var body: some View {
@@ -180,12 +178,16 @@ struct Home : View {
 }
 
 struct UI: View{
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
     @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
     @State private var selectedTab: Tabs = .home
     @ObservedObject private var locationViewModel = LocationViewModel()
     @State private var playerName = GKLocalPlayer.local.displayName
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Pontos_Visitados>
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -238,6 +240,8 @@ struct UI: View{
                 print(locationViewModel.latitude)
                 print(locationViewModel.longitude)
                 calculaDistancias()
+                addItem()
+
                 // You can perform additional actions here
             }
         }
@@ -295,7 +299,46 @@ struct UI: View{
         let lowercasedString = convertToLowerCase(stringWithoutTrates)
         return lowercasedString
     }
-}
+    
+    private func addItem() {
+        let player = GKLocalPlayer.local
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 3
+            newItem.user_id = player.teamPlayerID
+            print(newItem)
+        print(player.teamPlayerID)
+            do {
+                try viewContext.save()
+                print(newItem)
+                unlockAchievement()
+            } catch {
+            }
+        
+    }
+    private func unlockAchievement() {
+            let achievement = GKAchievement(identifier: "cigs_1")
+            achievement.percentComplete = 100
+            achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        }
+    
+    private func viewItem() {
+        for i in 0..<items.count {
+            print("Idas \(items[i].quant_idas)")
+            print("UserId \(items[i].user_id ?? "")")
+
+        }
+        
+    }
+    }
+
 
 #Preview {
     UI()
