@@ -25,6 +25,14 @@ struct GlassRectangle : View {
     }
 }
 
+class HomeViewModel {
+    var pontoSelecionado: PontoTuristico?
+    
+    init(pontoSelecionado: PontoTuristico? = nil) {
+        self.pontoSelecionado = pontoSelecionado
+    }
+}
+
 struct Home : View {
     @State var selectedCategoria = Categorias.todos
     @State var selectedHorario: Horarios
@@ -32,14 +40,14 @@ struct Home : View {
     @State var selectedPreco = Precos.todos
     var playerName = GKLocalPlayer.local.displayName
     
-    @State var pontoSelecionado: PontoTuristico?
+    var vm = HomeViewModel()
     
     @State var isShowingFilterView = false
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
     @State var currentIndex = 10
     @State private var hasTimeElapsed = false
-
+    
     var body: some View {
         ZStack {
             
@@ -64,24 +72,24 @@ struct Home : View {
                     // Iniciar Random
                     Button(action: {
                         Task{
-                            pontoSelecionado = await selecionarPontoTuristicoAleatorio()
-                        }
-                        for (index, element) in PontosTuristicos.enumerated(){
-                            if pontoSelecionado?.name == element.name{
-                                withAnimation(Animation.smooth) {
-                                    currentIndex = index
-                                    Task {
-                                        try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
+//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            vm.pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            for (index, element) in PontosTuristicos.enumerated(){
+                                if vm.pontoSelecionado?.name == element.name{
+                                    withAnimation(Animation.smooth) {
+                                        currentIndex = index
+                                        Task {
+                                            try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
                                             hasTimeElapsed = true
-                                        isShowingModal.toggle()
-                                        hasTimeElapsed = false
-
+                                            hasTimeElapsed = false
+                                            isShowingModal.toggle()
                                         }
+                                    }
+                                    
                                 }
                             }
                         }
                         
-                        print(pontoSelecionado?.name ?? "nothing")
                         
                     }, label: {
                         Text("Clique")
@@ -106,13 +114,13 @@ struct Home : View {
                         Text("RESULT")
                     })
                 }
-
+                
             }
             .padding()
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
-
-                if let ponto = pontoSelecionado {
+                
+                if let ponto = vm.pontoSelecionado {
                     Text("Desafio lançado!")
                         .font(.title)
                         .foregroundStyle(.black)
@@ -138,23 +146,62 @@ struct Home : View {
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
+//                Carrossel()
+//                Button(action: {
+//                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                    isShowingModal.toggle()
+////sadawd
+//                }, label: {
+//                    Image("Card")
+//                })
+//                .sheet(isPresented: $isShowingModal) {
+//                    if let ponto = pontoSelecionado {
+//                        Text(ponto.name)
+//                        Text(ponto.desc)
+//                        Text(ponto.id.uuidString)
+//                        Button("Selecionar Ponto Turístico") {
+//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+//                        }
+//                    } else {
+//                        Text("Nenhum filtro selecionado")
+//                    }
+//                }
+
+                Spacer()
+                
+                Button(action: {
+                    isShowingFilterView.toggle()
+                }, label: {
+                    Image("btn_adjust")
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                }).padding()
+                    .sheet(isPresented: $isShowingFilterView) {
+                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
+                    }
+                
+                    
+                
                 
             }
+            .padding()
+            
+            Carrossel()
             
         }
         
     }
     
-    func selecionarPontoTuristicoAleatorio() async -> PontoTuristico? {
+    func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
         
         
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
             if selectedCategoria != Categorias.todos{
-             if ponto.categoria != selectedCategoria {
-                corresponde = false
-            }
+                if ponto.categoria != selectedCategoria {
+                    corresponde = false
+                }
             }
             
             if selectedPreco != Precos.todos {
