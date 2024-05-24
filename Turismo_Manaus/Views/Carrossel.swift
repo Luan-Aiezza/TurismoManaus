@@ -3,7 +3,7 @@ import SwiftUI
 struct CardPointSelected: View {
     var name: String
     
-
+    
     var body: some View {
         ZStack {
             Color.teste
@@ -20,17 +20,15 @@ struct CardPointSelected: View {
                     .font(.title2)
                     .frame(width: 250)
                     .fontWeight(.semibold)
-                    
+                
             }
             .padding(16.0)
         }
         .frame(width: 316, height: 358)
-            .overlay(
-                RoundedRectangle(cornerRadius: 24.0)
-                    .stroke(Color.bgGlass1, lineWidth: 2)
-                    )
-
-        
+        .overlay(
+            RoundedRectangle(cornerRadius: 24.0)
+                .stroke(Color.bgGlass1, lineWidth: 2)
+        )
         
     }
 }
@@ -38,13 +36,15 @@ struct CardPointSelected: View {
 struct CardPoint: View {
     var name: String
     
-
     var body: some View {
         ZStack {
-            
+            Color.teste
+                .cornerRadius(24.0)
             Image(transformString(name))
                 .resizable()
+                .frame(width: 300, height: 342)
                 .scaledToFit()
+                .cornerRadius(24.0)
             VStack {
                 Spacer()
                 Text(name)
@@ -52,11 +52,16 @@ struct CardPoint: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .frame(width: 250)
+                    .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 50)
+                
             }
+            .padding(16.0)
         }
-        .cornerRadius(15.0)
-        .frame(width: 300, height: 342)
-        
+        .frame(width: 316, height: 358)
+        .overlay(
+            RoundedRectangle(cornerRadius: 24.0)
+                .stroke(Color.bgGlass1, lineWidth: 2)
+        )
     }
 }
 
@@ -69,55 +74,49 @@ struct Carrossel: View {
     
     
     @State var dragOfset: CGFloat = 0
-
+    
     var body: some View {
         VStack{
             ZStack{
                 ForEach(0 ..< PontosTuristicos.count, id: \.self) { index in
-                    if index == currentIndex {
-                        CardPointSelected(name: PontosTuristicos[index].name)
-                            .scaleEffect(currentIndex == index ? 1.0 : 0.8)
-                            .opacity(currentIndex == index ? 1.0 : 0.5)
-                            .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
-                    } else {
-                        CardPoint(name: PontosTuristicos[index].name)
-                            .scaleEffect(currentIndex == index ? 1.0 : 0.8)
-                            .opacity(currentIndex == index ? 1.0 : 0.5)
-                            .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+                    CardPoint(name: PontosTuristicos[index].name)
+                        .scaleEffect(currentIndex == index ? 1.0 : 0.8)
+                        .opacity(currentIndex == index ? 1.0 : 0.5)
+                        .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+                }
+                
+            }
+        }
+        .gesture(
+            DragGesture()
+                .onEnded({ value in
+                    let threshold: CGFloat = 50
+                    
+                    //arrastando pra esquerda
+                    if value.translation.width < threshold {
+                        withAnimation {
+                            currentIndex =  ((currentIndex + 1) % PontosTuristicos.count)
+                            print("aqui", currentIndex)
+                            
+                        }
                     }
                     
-                }
-            }
-            .gesture(
-                DragGesture()
-                    .onEnded({ value in
-                        let threshold: CGFloat = 50
-                        
-                        //arrastando pra esquerda
-                        if value.translation.width < threshold {
-                            withAnimation {
-                                currentIndex =  ((currentIndex + 1) % PontosTuristicos.count)
-                                print("aqui", currentIndex)
+                    //arrastando pra direita
+                    else if value.translation.width  > threshold {
+                        withAnimation {
+                            if currentIndex == 0 {currentIndex = PontosTuristicos.count - 1}
+                            else{
+                                currentIndex = currentIndex - 1
                                 
                             }
+                            print(currentIndex)
                         }
-                        
-                        //arrastando pra direita
-                        else if value.translation.width  > threshold {
-                            withAnimation {
-                                if currentIndex == 0 {currentIndex = PontosTuristicos.count - 1}
-                                else{
-                                    currentIndex = currentIndex - 1
-
-                                }
-                                print(currentIndex)
-                            }
-                        }
-                    })
-            )
-        }
+                    }
+                })
+        )
     }
 }
+
 
 
 //

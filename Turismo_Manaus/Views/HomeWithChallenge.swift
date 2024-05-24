@@ -18,13 +18,11 @@ struct HomeWithChallenge : View {
     @State var selectedPreco = Precos.todos
     @State var locationViewModel = LocationViewModel()
     @State var player = GKLocalPlayer.local
-    var vm = HomeViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
     @State var currentIndex = 10
-    @State private var hasTimeElapsed = false
     
     var body: some View {
         ZStack {
@@ -58,7 +56,8 @@ struct HomeWithChallenge : View {
                                 .frame(width: 21.662, height: 18.056)
                         }).padding()
                             .sheet(isPresented: $isShowingFilterView) {
-                                FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
+                                FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
+                                locationViewModel: locationViewModel)
                             }
                     }
                 }
@@ -74,7 +73,7 @@ struct HomeWithChallenge : View {
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
                 
-                if let ponto = vm.pontoSelecionado {
+                if let ponto = locationViewModel.pontoSelecionado {
                     Text("Desafio lançado!")
                         .font(.title)
                         .foregroundStyle(.black)
@@ -104,16 +103,6 @@ struct HomeWithChallenge : View {
                 
                 Spacer()
                 
-                Button(action: {
-                    isShowingFilterView.toggle()
-                }, label: {
-                    Image("btn_adjust")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                }).padding()
-                    .sheet(isPresented: $isShowingFilterView) {
-                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
-                    }
             }
             .padding()
         }

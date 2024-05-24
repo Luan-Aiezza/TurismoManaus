@@ -9,15 +9,18 @@ import Foundation
 import CoreLocation
 
 public class LocationViewModel: NSObject, ObservableObject {
-    private var locationManager: CLLocationManager?
+    var pontoSelecionado: PontoTuristico?
+    
+    var locationManager: CLLocationManager?
     @Published var latitude: Double = 0.0
     @Published var longitude: Double = 0.0
 
     @Published var log: String = ""
     
-    init(locationManager: CLLocationManager = CLLocationManager()) {
+    init(locationManager: CLLocationManager = CLLocationManager(), pontoSelecionado: PontoTuristico? = nil) {
         super.init()
         self.locationManager = locationManager
+        self.pontoSelecionado = pontoSelecionado
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
