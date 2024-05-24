@@ -19,6 +19,7 @@ struct CardPointSelected: View {
                     .foregroundColor(.white)
                     .font(.title2)
                     .frame(width: 250)
+                    .fontWeight(.semibold)
                     
             }
             .padding(16.0)
@@ -49,6 +50,7 @@ struct CardPoint: View {
                 Text(name)
                     .foregroundColor(.white)
                     .font(.title2)
+                    .fontWeight(.semibold)
                     .frame(width: 250)
             }
         }

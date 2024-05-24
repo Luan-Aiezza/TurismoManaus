@@ -16,6 +16,9 @@ struct Turismo_ManausApp: App {
         WindowGroup {
             UI()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear {
+                    
+                }
         }
     }
 }

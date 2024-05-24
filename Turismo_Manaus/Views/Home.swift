@@ -60,6 +60,7 @@ struct Home : View {
                         .bold()
                     Text("Para onde vamos hoje?")
                         .font(.title3)
+                        .fontWeight(.thin)
                 }
                 Spacer()
                 
@@ -389,9 +390,5 @@ struct UI: View{
 }
 
 extension Color {
-    static let bgGlass1 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1))
-    static let bgGlass2 = Color(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.77))
-    static let neutral = Color(UIColor(red: 185/255, green: 184/255, blue: 179/255, alpha: 1.0))
-    static let accentColorYellow = Color(UIColor(red: 252/255, green: 255/255, blue: 130/255, alpha: 1))
     static let backgroundColor = Color(UIColor(red: 17/255, green: 17/255, blue: 17/255, alpha: 1))
 }
