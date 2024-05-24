@@ -12,8 +12,6 @@ import GameKit
 import CoreLocation
 import Foundation
 
-
-
 struct GlassRectangle : View {
     
     var body: some View {
@@ -118,21 +116,23 @@ struct Home : View {
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
-                                
+                                .presentationDetents([.medium])
                         }
-                        
+                    
                 }
                 .padding()
                 Spacer()
                 Spacer()
                 
             }
+            
             .padding()
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
                 
                 if let ponto = locationViewModel.pontoSelecionado {
                     Text("Desafio lançado!")
+                        .presentationDetents([.medium])
                         .font(.title)
                         .foregroundStyle(.white)
                     Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
@@ -161,11 +161,11 @@ struct Home : View {
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
+                
             }
             .padding()
-                    
+            
         }
-        
     }
     
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
@@ -350,19 +350,19 @@ struct UI: View{
     }
     
     private func deleteAllItems() {
-            withAnimation {
-                for item in desafios {
-                    viewContext.delete(item)
-                }
-                
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    print("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
+        withAnimation {
+            for item in desafios {
+                viewContext.delete(item)
+            }
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                print("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+    }
     
     private func viewItem() {
         for i in 0..<items.count {
@@ -384,7 +384,7 @@ struct LoadingView: View {
                     .frame(width: 160, height: 160)
             }
         }
-
+        
     }
 }
 
