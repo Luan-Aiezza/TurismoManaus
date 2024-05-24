@@ -119,7 +119,6 @@ struct FilterView: View {
         }
         .foregroundStyle(Color.black)
         
-        
     }
     
 }

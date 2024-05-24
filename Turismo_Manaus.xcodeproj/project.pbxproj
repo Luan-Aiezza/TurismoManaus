@@ -20,7 +20,6 @@
 		CFEC5C1C2BEE5337004FCA4C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC5C1B2BEE5337004FCA4C /* Home.swift */; };
 		CFEC5C1E2BEE5338004FCA4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */; };
 		CFEC5C212BEE5338004FCA4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */; };
-		CFF78F112BF25D5A00B9D55A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CFF78F102BF25D5A00B9D55A /* art.scnassets */; };
 		D352D8DC2BFF69AC001D617A /* ChallengeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8DB2BFF69AC001D617A /* ChallengeCard.swift */; };
 		D352D8E02BFF8CB2001D617A /* IdString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8DF2BFF8CB2001D617A /* IdString.swift */; };
 		D352D8E22BFFD288001D617A /* HomeWithChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8E12BFFD288001D617A /* HomeWithChallenge.swift */; };
@@ -46,7 +45,6 @@
 		CFEC5C1B2BEE5337004FCA4C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CFF78F102BF25D5A00B9D55A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turismo_ManausDebug.entitlements; sourceTree = "<group>"; };
 		D352D8DB2BFF69AC001D617A /* ChallengeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCard.swift; sourceTree = "<group>"; };
 		D352D8DF2BFF8CB2001D617A /* IdString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdString.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				6F0E80E52BEE899000D2A8F5 /* Models */,
 				6F0E80E42BEE897F00D2A8F5 /* Views */,
 				CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */,
-				CFF78F102BF25D5A00B9D55A /* art.scnassets */,
 				CFEC5C1F2BEE5338004FCA4C /* Preview Content */,
 			);
 			path = Turismo_Manaus;
@@ -218,7 +215,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFEC5C212BEE5338004FCA4C /* Preview Assets.xcassets in Resources */,
-				CFF78F112BF25D5A00B9D55A /* art.scnassets in Resources */,
 				CFEC5C1E2BEE5338004FCA4C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
