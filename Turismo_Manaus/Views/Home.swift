@@ -203,6 +203,7 @@ struct Home : View {
         newItem.data_termino = Calendar.current.date(byAdding: .day, value: 7, to: Date())
         newItem.ponto_id = pontoId
         newItem.user_id = player.gamePlayerID
+        newItem.state = "inProgress"
         print(newItem)
         do {
             try viewContext.save()

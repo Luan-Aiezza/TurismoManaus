@@ -31,7 +31,7 @@ enum Distancias {
 
 
 
-var PontosTuristicos: [PontoTuristico] = [
+public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(id: UUID(), name: "Parque Senador Jefferson Péres", desc: "Parque urbano amplo ao longo de um riacho com um pórtico de arcos em ferro, uma trilha coberta e monumentos.", categoria: Categorias.tradicionais, latitude: "-3.1308190156009417", longitude: "-60.01565870581663", preco: Precos.barato, horarios: ["05:00-21:00", "05:00-21:00", "05:00-21:00", "05:00-21:00", "05:00-21:00", "05:00-21:00", "05:00-21:00"], distancia: Distancias.tres, status: "dia e noite", maps: "https://maps.app.goo.gl/q3oLwFAFjdVN9wcDA"),
     

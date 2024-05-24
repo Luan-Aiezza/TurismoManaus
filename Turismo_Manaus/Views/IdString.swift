@@ -37,3 +37,10 @@ public func transformString(_ string: String) -> String {
     let lowercasedString = convertToLowerCase(stringWithoutTrates)
     return lowercasedString
 }
+
+public func capitalizeFirstLetter(_ string: String) -> String {
+    guard let firstLetter = string.first else {
+        return string
+    }
+    return String(firstLetter).uppercased() + string.dropFirst()
+}

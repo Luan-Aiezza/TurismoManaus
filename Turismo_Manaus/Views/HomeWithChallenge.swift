@@ -23,89 +23,105 @@ struct HomeWithChallenge : View {
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
     @State var currentIndex = 10
+    @State private var isDetailViewShown = false
     
     var body: some View {
-        ZStack {
-            
-            Color.backgroundColor
-                .ignoresSafeArea()
-            VStack{
+        if isDetailViewShown {
+            ChallengeDescription(isDetailViewShown: $isDetailViewShown)
+                .onAppear {
+                    GKAccessPoint.shared.isActive = false
+                }
+        } else {
+            ZStack {
+                
+                Color.backgroundColor
+                    .ignoresSafeArea()
                 VStack{
-                    Text("Olá\(player.displayName)!")
-                        .font(.title)
-                    Text("Para onde vamos hoje?")
-                        .font(.title3)
-                }
-                Spacer()
-                Spacer()
-                VStack {
-                    Carrossel(currentIndex: $currentIndex)
-                    
-                    
-                    
-                    HStack {
+                    VStack{
+                        Text("Olá, \(player.displayName)!")
+                            .font(.title)
+                        Text("Para onde vamos hoje?")
+                            .font(.title3)
+                    }
+                    Spacer()
+                    Spacer()
+                    VStack {
+                        Carrossel(currentIndex: $currentIndex)
                         
                         
-                        // Filtros
-                        Button(action: {
-                            isShowingFilterView.toggle()
-                        }, label: {
+                        
+                        HStack {
                             
-                            Image(systemName: "slider.horizontal.3")
-                                .resizable()
-                                .frame(width: 21.662, height: 18.056)
-                        }).padding()
-                            .sheet(isPresented: $isShowingFilterView) {
-                                FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
-                                locationViewModel: locationViewModel)
-                            }
+                            
+                            // Filtros
+                            Button(action: {
+                                isShowingFilterView.toggle()
+                            }, label: {
+                                
+                                Image(systemName: "slider.horizontal.3")
+                                    .resizable()
+                                    .frame(width: 21.662, height: 18.056)
+                            }).padding()
+                                .sheet(isPresented: $isShowingFilterView) {
+                                    FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
+                                               locationViewModel: locationViewModel)
+                                }
+                        }
                     }
+                    Spacer()
+                    
+                    Spacer()
+                    Button(action: {
+                        isDetailViewShown.toggle()
+                    }, label: {
+                        ChallengeCard()
+                    })
+                    
+                    
+                    
                 }
-                Spacer()
-                
-                Spacer()
-                
-                ChallengeCard()
-                
-                
-            }
-            .padding()
-            .foregroundStyle(.white)
-            .sheet(isPresented: $isShowingModal) {
-                
-                if let ponto = locationViewModel.pontoSelecionado {
-                    Text("Desafio lançado!")
-                        .font(.title)
-                        .foregroundStyle(.black)
-                    Text("Visite o(a) \(ponto.name) em até uma semana!")
-                    Image("Card")
+                .padding()
+                .foregroundStyle(.white)
+                .sheet(isPresented: $isShowingModal) {
                     
-                    HStack{
-                        Text(String(describing: ponto.categoria))
-                        Text(String(describing: ponto.preco))
-                        Text(String(describing: ponto.status))
-                    }
-                    
-                    HStack{
-                        Button("Recusar") {
-                            isShowingModal = false
+                    if let ponto = locationViewModel.pontoSelecionado {
+                        Text("Desafio lançado!")
+                            .font(.title)
+                            .foregroundStyle(.black)
+                        Text("Visite o(a) \(ponto.name) em até uma semana!")
+                        Image("Card")
+                        
+                        HStack{
+                            Text(String(describing: ponto.categoria))
+                            Text(String(describing: ponto.preco))
+                            Text(String(describing: ponto.status))
                         }
                         
-                        Button("Aceitar") {
-                            addDesafio(pontoId: transformString(ponto.name))
-                            isShowingModal = false
+                        HStack{
+                            Button("Recusar") {
+                                isShowingModal = false
+                            }
+                            
+                            Button("Aceitar") {
+                                addDesafio(pontoId: transformString(ponto.name))
+                                isShowingModal = false
+                            }
                         }
+                        
+                    } else {
+                        Text("Nenhum filtro selecionado")
                     }
                     
-                } else {
-                    Text("Nenhum filtro selecionado")
+                    Spacer()
+                    
                 }
-                
-                Spacer()
-                
+                .padding()
             }
-            .padding()
+            .onAppear {
+                GKAccessPoint.shared.isActive = true
+            }
         }
+        
     }
     
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
