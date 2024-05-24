@@ -25,10 +25,8 @@ struct GlassRectangle : View {
 }
 
 class HomeViewModel {
-    var pontoSelecionado: PontoTuristico?
     
     init(pontoSelecionado: PontoTuristico? = nil) {
-        self.pontoSelecionado = pontoSelecionado
     }
 }
 
@@ -37,15 +35,16 @@ struct Home : View {
     @State var selectedHorario = Horarios.todos
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
-    @State var locationViewModel: LocationViewModel
+    
+    @ObservedObject var locationViewModel: LocationViewModel
+    
     @State var player = GKLocalPlayer.local
-    var vm = HomeViewModel()
+    
     @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
     @State var isShowingModal = false
     @State private var selectedTab: Tabs = .home
     @State var currentIndex = 10
-    @State private var hasTimeElapsed = false
     
     var body: some View {
         ZStack {
@@ -73,15 +72,13 @@ struct Home : View {
                     Button(action: {
                         Task{
                             //                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
-                            vm.pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            locationViewModel.pontoSelecionado = selecionarPontoTuristicoAleatorio()
                             for (index, element) in PontosTuristicos.enumerated(){
-                                if vm.pontoSelecionado?.name == element.name{
+                                if locationViewModel.pontoSelecionado?.name == element.name{
                                     withAnimation(Animation.smooth) {
                                         currentIndex = index
                                         Task {
                                             try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
-                                            hasTimeElapsed = true
-                                            hasTimeElapsed = false
                                             isShowingModal.toggle()
                                         }
                                     }
@@ -120,7 +117,7 @@ struct Home : View {
                             .frame(width: 21.662, height: 18.056)
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
-                            FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
+                            FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
                         }
                 }
                 .padding()
@@ -132,7 +129,7 @@ struct Home : View {
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
                 
-                if let ponto = vm.pontoSelecionado {
+                if let ponto = locationViewModel.pontoSelecionado {
                     Text("Desafio lançado!")
                         .font(.title)
                         .foregroundStyle(.black)

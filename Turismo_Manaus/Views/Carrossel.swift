@@ -52,6 +52,8 @@ struct CardPoint: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .frame(width: 250)
+                    .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 50)
+                
             }
             .padding(16.0)
         }
