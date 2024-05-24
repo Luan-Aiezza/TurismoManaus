@@ -159,48 +159,9 @@ struct Home : View {
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
-                //                Carrossel()
-                //                Button(action: {
-                //                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
-                //                    isShowingModal.toggle()
-                ////sadawd
-                //                }, label: {
-                //                    Image("Card")
-                //                })
-                //                .sheet(isPresented: $isShowingModal) {
-                //                    if let ponto = pontoSelecionado {
-                //                        Text(ponto.name)
-                //                        Text(ponto.desc)
-                //                        Text(ponto.id.uuidString)
-                //                        Button("Selecionar Ponto Turístico") {
-                //                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
-                //                        }
-                //                    } else {
-                //                        Text("Nenhum filtro selecionado")
-                //                    }
-                //                }
-                
-                Spacer()
-                
-                
-                Button(action: {
-                    isShowingFilterView.toggle()
-                }, label: {
-                    Image("btn_adjust")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                }).padding()
-                    .sheet(isPresented: $isShowingFilterView) {
-                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
-                    }
-                
-                
-                
-                
             }
             .padding()
-            
-            
+                    
         }
         
     }
