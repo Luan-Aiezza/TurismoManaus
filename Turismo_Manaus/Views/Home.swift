@@ -118,7 +118,6 @@ struct Home : View {
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
-                                .presentationBackground(.bgGlass2)
                                 
                         }
                         
