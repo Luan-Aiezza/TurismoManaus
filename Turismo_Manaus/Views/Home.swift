@@ -34,7 +34,7 @@ class HomeViewModel {
 
 struct Home : View {
     @State var selectedCategoria = Categorias.todos
-    @State var selectedHorario: Horarios
+    @State var selectedHorario = Horarios.todos
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
     @State var locationViewModel: LocationViewModel
@@ -55,7 +55,7 @@ struct Home : View {
             VStack{
                 Spacer()
                 VStack{
-                    Text("Oi\(player.displayName)!")
+                    Text("Oi!")
                         .font(.title)
                         .bold()
                     Text("Para onde vamos hoje?")
@@ -72,7 +72,7 @@ struct Home : View {
                     // Iniciar Random
                     Button(action: {
                         Task{
-//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                            //                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
                             vm.pontoSelecionado = selecionarPontoTuristicoAleatorio()
                             for (index, element) in PontosTuristicos.enumerated(){
                                 if vm.pontoSelecionado?.name == element.name{
@@ -93,19 +93,19 @@ struct Home : View {
                         
                     }, label: {
                         ZStack {
-                                Color.bgGlass1
-                                    .cornerRadius(100.0)
-                                Text("Sortear")
-                                    .font(.headline)
-                                    .foregroundColor(.accentColorYellow)
-                                    .padding(.horizontal, 16.0)
-                                    .padding(.vertical, 12.0)
+                            Color.bgGlass1
+                                .cornerRadius(100.0)
+                            Text("Sortear")
+                                .font(.headline)
+                                .foregroundColor(.accentColorYellow)
+                                .padding(.horizontal, 16.0)
+                                .padding(.vertical, 12.0)
                         }
                         .frame(width: 96, height: 46)
                         .overlay(
                             RoundedRectangle(cornerRadius: 100.0)
                                 .stroke(Color.bgGlass1, lineWidth: 2)
-                                )
+                        )
                         
                     })
                     
@@ -159,30 +159,30 @@ struct Home : View {
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
-//                Carrossel()
-//                Button(action: {
-//                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
-//                    isShowingModal.toggle()
-////sadawd
-//                }, label: {
-//                    Image("Card")
-//                })
-//                .sheet(isPresented: $isShowingModal) {
-//                    if let ponto = pontoSelecionado {
-//                        Text(ponto.name)
-//                        Text(ponto.desc)
-//                        Text(ponto.id.uuidString)
-//                        Button("Selecionar Ponto Turístico") {
-//                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
-//                        }
-//                    } else {
-//                        Text("Nenhum filtro selecionado")
-//                    }
-//                }
-
+                //                Carrossel()
+                //                Button(action: {
+                //                    pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                //                    isShowingModal.toggle()
+                ////sadawd
+                //                }, label: {
+                //                    Image("Card")
+                //                })
+                //                .sheet(isPresented: $isShowingModal) {
+                //                    if let ponto = pontoSelecionado {
+                //                        Text(ponto.name)
+                //                        Text(ponto.desc)
+                //                        Text(ponto.id.uuidString)
+                //                        Button("Selecionar Ponto Turístico") {
+                //                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                //                        }
+                //                    } else {
+                //                        Text("Nenhum filtro selecionado")
+                //                    }
+                //                }
+                
                 Spacer()
                 
-
+                
                 Button(action: {
                     isShowingFilterView.toggle()
                 }, label: {
@@ -194,12 +194,12 @@ struct Home : View {
                         FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco)
                     }
                 
-                    
+                
                 
                 
             }
             .padding()
-
+            
             
         }
         
@@ -237,33 +237,39 @@ struct Home : View {
     
     private func addDesafio( pontoId: String ) {
         let player = GKLocalPlayer.local
-            let newItem = Desafios(context: viewContext)
-            newItem.id = UUID()
+        let newItem = Desafios(context: viewContext)
+        newItem.id = UUID()
         newItem.data_lancado = Date()
         newItem.data_termino = Calendar.current.date(byAdding: .day, value: 7, to: Date())
         newItem.ponto_id = pontoId
         newItem.user_id = player.gamePlayerID
-            do {
-                try viewContext.save()
-                print(newItem)          
-            } catch {
-            }
+        print(newItem)
+        do {
+            try viewContext.save()
+            print(newItem)
+        } catch {
+        }
         
     }
     
 }
 
 struct UI: View{
+    @StateObject private var viewModel = MyViewModel()
     @Environment(\.managedObjectContext) private var viewContext
-    @State var isShowingFilterView = false
-    @State private var scene: SCNScene = SCNScene(named: "art.scnassets/GameScene.scn")!
-    @State private var selectedTab: Tabs = .home
     @ObservedObject var locationViewModel = LocationViewModel()
+    
     @State private var player = GKLocalPlayer.local
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Pontos_Visitados>
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
+        animation: .default)
+    private var desafios: FetchedResults<Desafios>
+    
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -272,20 +278,25 @@ struct UI: View{
         ZStack{
             Color.backgroundColor
                 .ignoresSafeArea()
-            
-            VStack{
-                TabView (selection: $selectedTab) {
-                    Home(selectedCategoria: Categorias.todos, selectedHorario: Horarios.todos, selectedDistancia: Distancias.todos, selectedPreco: Precos.todos, locationViewModel: locationViewModel, player: player)
-                        .tag(Tabs.home)
-                        .background(Color.backgroundColor)
-                }
-                
-                
-            }
-            
-            
-        }.onAppear {
-            authenticateUser()
+            Group {
+                        if viewModel.isLoading {
+                            LoadingView()
+                        } else {
+                            
+                            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                                VStack{
+                                    HomeWithChallenge()
+                                }
+                            } else {
+                                VStack{
+                                    Home(locationViewModel: locationViewModel)
+                                }
+                            }
+                        }
+                    }
+                    .onAppear {
+                        viewModel.performTask()
+                    }
         }
     }
     
@@ -315,8 +326,8 @@ struct UI: View{
                 print(locationViewModel.latitude)
                 print(locationViewModel.longitude)
                 calculaDistancias()
-                addItem()
-
+                deleteAllItems()
+                
                 // You can perform additional actions here
             }
         }
@@ -347,30 +358,45 @@ struct UI: View{
     
     private func addItem() {
         let player = GKLocalPlayer.local
-            let newItem = Pontos_Visitados(context: viewContext)
-            newItem.id = UUID()
-            newItem.quant_idas = 3
-            newItem.user_id = player.teamPlayerID
-            print(newItem)
+        let newItem = Pontos_Visitados(context: viewContext)
+        newItem.id = UUID()
+        newItem.quant_idas = 3
+        newItem.user_id = player.teamPlayerID
+        print(newItem)
         print(player.teamPlayerID)
-            do {
-                try viewContext.save()
-                print(newItem)
-                unlockAchievement()
-            } catch {
-            }
+        do {
+            try viewContext.save()
+            print(newItem)
+            unlockAchievement()
+        } catch {
+        }
         
     }
     private func unlockAchievement() {
-            let achievement = GKAchievement(identifier: "cigs_1")
-            achievement.percentComplete = 100
-            achievement.showsCompletionBanner = true
-            GKAchievement.report([achievement]) { error in
-                guard error == nil else {
-                    print(error?.localizedDescription ?? "")
-                    return
+        let achievement = GKAchievement(identifier: "cigs_1")
+        achievement.percentComplete = 100
+        achievement.showsCompletionBanner = true
+        GKAchievement.report([achievement]) { error in
+            guard error == nil else {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            print("done!")
+        }
+    }
+    
+    private func deleteAllItems() {
+            withAnimation {
+                for item in desafios {
+                    viewContext.delete(item)
                 }
-                print("done!")
+                
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    print("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
             }
         }
     
@@ -381,7 +407,23 @@ struct UI: View{
         }
         
     }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            VStack {
+                Image(.appIcon29X29)
+                    .resizable()
+                    .frame(width: 160, height: 160)
+            }
+        }
+
     }
+}
+
 
 
 #Preview {

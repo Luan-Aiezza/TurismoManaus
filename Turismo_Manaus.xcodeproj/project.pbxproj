@@ -24,6 +24,7 @@
 		D352D8DC2BFF69AC001D617A /* ChallengeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8DB2BFF69AC001D617A /* ChallengeCard.swift */; };
 		D352D8E02BFF8CB2001D617A /* IdString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8DF2BFF8CB2001D617A /* IdString.swift */; };
 		D352D8E22BFFD288001D617A /* HomeWithChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8E12BFFD288001D617A /* HomeWithChallenge.swift */; };
+		D352D8E82C00268E001D617A /* MyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352D8E72C00268E001D617A /* MyViewModel.swift */; };
 		D36259D02BF68DEE008A2ADD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36259CF2BF68DEE008A2ADD /* Persistence.swift */; };
 		D3AD233A2BFC3FAC00EDEF3C /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD23392BFC3FAC00EDEF3C /* LocationViewModel.swift */; };
 		D3BA33B62BF68213000903C7 /* PontosDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3BA33B42BF68213000903C7 /* PontosDataModel.xcdatamodeld */; };
@@ -50,6 +51,7 @@
 		D352D8DB2BFF69AC001D617A /* ChallengeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCard.swift; sourceTree = "<group>"; };
 		D352D8DF2BFF8CB2001D617A /* IdString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdString.swift; sourceTree = "<group>"; };
 		D352D8E12BFFD288001D617A /* HomeWithChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWithChallenge.swift; sourceTree = "<group>"; };
+		D352D8E72C00268E001D617A /* MyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewModel.swift; sourceTree = "<group>"; };
 		D36259CF2BF68DEE008A2ADD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D36259D12BF6FB14008A2ADD /* Turismo_Manaus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Turismo_Manaus.entitlements; sourceTree = "<group>"; };
 		D36259D22BF6FB90008A2ADD /* Turismo-Manaus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Turismo-Manaus-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -95,6 +97,7 @@
 				D3BA33B42BF68213000903C7 /* PontosDataModel.xcdatamodeld */,
 				D36259CF2BF68DEE008A2ADD /* Persistence.swift */,
 				D3AD23392BFC3FAC00EDEF3C /* LocationViewModel.swift */,
+				D352D8E72C00268E001D617A /* MyViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				6F79CAFB2BF203C60038090E /* Me.swift in Sources */,
 				D352D8E02BFF8CB2001D617A /* IdString.swift in Sources */,
 				D3AD233A2BFC3FAC00EDEF3C /* LocationViewModel.swift in Sources */,
+				D352D8E82C00268E001D617A /* MyViewModel.swift in Sources */,
 				D352D8DC2BFF69AC001D617A /* ChallengeCard.swift in Sources */,
 				6F97206B2BFBB4A4003A9578 /* PontoTuristico.swift in Sources */,
 				CFEC5C1A2BEE5337004FCA4C /* Turismo_ManausApp.swift in Sources */,

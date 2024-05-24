@@ -29,7 +29,7 @@ struct HomeWithChallenge : View {
     var body: some View {
         ZStack {
             
-            Color.black
+            Color.backgroundColor
                 .ignoresSafeArea()
             VStack{
                 VStack{
@@ -38,7 +38,7 @@ struct HomeWithChallenge : View {
                     Text("Para onde vamos hoje?")
                         .font(.title3)
                 }
-                
+                Spacer()
                 Spacer()
                 VStack {
                     Carrossel(currentIndex: $currentIndex)
