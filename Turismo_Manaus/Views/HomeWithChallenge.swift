@@ -65,7 +65,16 @@ struct HomeWithChallenge : View {
                                 .sheet(isPresented: $isShowingFilterView) {
                                     FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
                                                locationViewModel: locationViewModel)
+                                    .presentationDetents([.large])
+                                    .onAppear {
+                                        GKAccessPoint.shared.isActive = false
+                                    }
+                                    .onDisappear {
+                                        GKAccessPoint.shared.isActive = true
+                                    }
                                 }
+                            
+                            
                         }
                     }
                     Spacer()

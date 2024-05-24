@@ -24,7 +24,14 @@ struct FilterView: View {
         VStack {
             
             VStack {
-                Spacer()
+                HStack {
+                    Text("Cancelar")
+                    Spacer()
+                    Text("Filtros")
+                    Spacer()
+                    Text("Salvar")
+                }
+                .padding(.bottom, 35.0)
                 HStack{
                     Text("Horário")
                     Spacer()
@@ -110,9 +117,9 @@ struct FilterView: View {
                 .padding()
                 
             }
-
-        }
-        .foregroundStyle(Color.black)
+            Spacer()
+        }.padding(16.0)
+        Spacer()
         
     }
     
