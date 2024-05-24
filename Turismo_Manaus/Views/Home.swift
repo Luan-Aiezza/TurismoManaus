@@ -38,7 +38,7 @@ struct Home : View {
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
     @State var locationViewModel: LocationViewModel
-    @State var player = GKLocalPlayer.local
+    @State var player: GKLocalPlayer
     var vm = HomeViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
@@ -55,7 +55,7 @@ struct Home : View {
             VStack{
                 Spacer()
                 VStack{
-                    Text("Oi!")
+                    Text("Oi, \(player.displayName)!")
                         .font(.title)
                         .bold()
                     Text("Para onde vamos hoje?")
@@ -289,7 +289,7 @@ struct UI: View{
                                 }
                             } else {
                                 VStack{
-                                    Home(locationViewModel: locationViewModel)
+                                    Home(locationViewModel: locationViewModel, player: viewModel.player)
                                 }
                             }
                         }

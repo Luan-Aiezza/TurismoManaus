@@ -12,11 +12,19 @@ import GameKit
 
 class MyViewModel: ObservableObject {
     @Published var isLoading = true
+    @Published var player = GKLocalPlayer.local
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
+        animation: .default)
+    private var desafios: FetchedResults<Desafios>
     
     func performTask() {
         // Simula uma tarefa demorada
+        
         DispatchQueue.global().async {
-            self.authenticateUser() // Espera 2 segundos para simular a tarefa
+            self.authenticateUser()
+            sleep(1)
+            // Espera 2 segundos para simular a tarefa
             DispatchQueue.main.async {
                 self.isLoading = false
             }
@@ -45,9 +53,8 @@ class MyViewModel: ObservableObject {
                 GKAccessPoint.shared.location = .topLeading
                 GKAccessPoint.shared.showHighlights = false
                 GKAccessPoint.shared.isActive = true
-                
-                // You can perform additional actions here
-            }
+                self.player = player            }
         }
+        
     }
 }
