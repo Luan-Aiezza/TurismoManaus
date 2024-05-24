@@ -68,7 +68,7 @@ struct ChallengeDescription: View {
                     Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.desc)")
                         .foregroundStyle(.white)
                         .font(.body)
-                        .padding(.vertical, 16.0)
+                        .padding(.top, 16.0)
                     HStack {
                         ZStack {
                             Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
