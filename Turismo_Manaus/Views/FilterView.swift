@@ -1,6 +1,9 @@
 
 import SwiftUI
+import SceneKit
+import GameKit
 import CoreLocation
+import Foundation
 
 struct FilterView: View {
     
@@ -19,30 +22,22 @@ struct FilterView: View {
     var body: some View {
         
         VStack {
-            HStack {
-                Text("Filtros")
-                    .font(.headline)
+            
+            VStack {
                 Spacer()
+                HStack{
+                    Text("Horário")
+                    Spacer()
+                }
+                Picker(selection: $selectedHorario, label: Text("")) {
+                    Text("Todos").tag(Horarios.todos)
+                    Text("Manhã").tag(Horarios.manha)
+                    Text("Tarde").tag(Horarios.tarde)
+                    Text("Noite").tag(Horarios.noite)
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
             .padding()
-           
-            
-            //            VStack {
-            //                HStack{
-            //                    Text("Horário")
-            //                    Spacer()
-            //                }
-            //                Picker(selection: $selectedHorario, label: Text("")) {
-            //                    Text("Todos").tag(0)
-            //                    Text("Manhã").tag(1)
-            //                    Text("Tarde").tag(2)
-            //                    Text("Noite").tag(3)
-            //                }
-            //                .pickerStyle(SegmentedPickerStyle())
-            //            }
-            //            .padding()
-            
-            
             
             VStack {
                 HStack{
@@ -122,5 +117,3 @@ struct FilterView: View {
     }
     
 }
-    
-    

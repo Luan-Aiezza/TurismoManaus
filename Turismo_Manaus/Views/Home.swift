@@ -12,8 +12,6 @@ import GameKit
 import CoreLocation
 import Foundation
 
-
-
 struct GlassRectangle : View {
     
     var body: some View {
@@ -118,21 +116,23 @@ struct Home : View {
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
-                                
+                                .presentationDetents([.medium])
                         }
-                        
+                    
                 }
                 .padding()
                 Spacer()
                 Spacer()
                 
             }
+            
             .padding()
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
                 
                 if let ponto = locationViewModel.pontoSelecionado {
                     Text("Desafio lançado!")
+                        .presentationDetents([.medium])
                         .font(.title)
                         .foregroundStyle(.black)
                     Text("Visite o(a) \(ponto.name) em até uma semana!")
@@ -158,11 +158,11 @@ struct Home : View {
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
+                
             }
             .padding()
-                    
+            
         }
-        
     }
     
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
@@ -239,24 +239,24 @@ struct UI: View{
             Color.backgroundColor
                 .ignoresSafeArea()
             Group {
-                        if viewModel.isLoading {
-                            LoadingView()
-                        } else {
-                            
-                            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                                VStack{
-                                    HomeWithChallenge()
-                                }
-                            } else {
-                                VStack{
-                                    Home(locationViewModel: locationViewModel)
-                                }
-                            }
+                if viewModel.isLoading {
+                    LoadingView()
+                } else {
+                    
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        VStack{
+                            HomeWithChallenge()
+                        }
+                    } else {
+                        VStack{
+                            Home(locationViewModel: locationViewModel)
                         }
                     }
-                    .onAppear {
-                        viewModel.performTask()
-                    }
+                }
+            }
+            .onAppear {
+                viewModel.performTask()
+            }
         }
     }
     
@@ -346,19 +346,19 @@ struct UI: View{
     }
     
     private func deleteAllItems() {
-            withAnimation {
-                for item in desafios {
-                    viewContext.delete(item)
-                }
-                
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    print("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
+        withAnimation {
+            for item in desafios {
+                viewContext.delete(item)
+            }
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                print("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+    }
     
     private func viewItem() {
         for i in 0..<items.count {
@@ -380,7 +380,7 @@ struct LoadingView: View {
                     .frame(width: 160, height: 160)
             }
         }
-
+        
     }
 }
 
