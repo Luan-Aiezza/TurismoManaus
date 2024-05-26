@@ -118,10 +118,10 @@
 				D36259D22BF6FB90008A2ADD /* Turismo-Manaus-Info.plist */,
 				D36259D12BF6FB14008A2ADD /* Turismo_Manaus.entitlements */,
 				D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */,
+				6F0E80E42BEE897F00D2A8F5 /* Views */,
+				6F0E80E52BEE899000D2A8F5 /* Models */,
 				D30EFD592C01CAC90035C371 /* Components */,
 				6F0E80E62BEE899800D2A8F5 /* Config */,
-				6F0E80E52BEE899000D2A8F5 /* Models */,
-				6F0E80E42BEE897F00D2A8F5 /* Views */,
 				CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */,
 				CFEC5C1F2BEE5338004FCA4C /* Preview Content */,
 			);

@@ -40,7 +40,7 @@ struct FilterView: View {
                         Spacer()
                         Text("Salvar")
                     }
-                    .padding(.bottom, 35.0)
+                    .padding(.vertical, 8.0)
                     HStack{
                         Text("Horário")
                         Spacer()

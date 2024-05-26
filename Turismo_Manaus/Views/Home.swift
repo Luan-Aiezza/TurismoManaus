@@ -127,36 +127,85 @@ struct Home : View {
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
                 
-                if let ponto = locationViewModel.pontoSelecionado {
-                    VStack (spacing: 20) {
-                        Text("Desafio lançado!")
-                            .presentationDetents([.medium])
-                            .font(.title)
-                            .foregroundStyle(.black)
-                        Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
-                        Image(transformString(ponto.name))
-                            .resizable()
-                            .frame(width: 150, height: 171)
-                            .cornerRadius(15.0)
-                            .scaledToFill()
+                if let ponto = locationViewModel.pontoSelecionado {                    ZStack {
+                        Color.bgGlass1
+                            .ignoresSafeArea()
+                            .blur(radius: 50.0)
+                            .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                            .overlay(
+                                Rectangle()
+                                    .frame(height: 1)
+                                    .foregroundColor(.clear), alignment: .bottom
+                            )
+                        VStack {
+                            Text("Desafio lançado!")
+                                .font(.title)
+                                .foregroundStyle(.white)
+                                Spacer()
+                            Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                                .font(.headline)
+                            Image(transformString(ponto.name))
+                                .resizable()
+                                .scaledToFit()
+                                .scaledToFill()
+                                .frame(width: 358, height: 176)
+                                .cornerRadius(15.0)
+                                .padding(.vertical, 24.0)
+                            
+                            HStack{
+                                Button(action: {
+                                    isShowingModal = false
+                                }
+                                        , label: {
+                                    ZStack {
+                                        
+                                        HStack {
+                                            Text("Recusar")
+                                                .foregroundStyle(.white)
+                                                .font(.headline)
+                                        }
+                                        .padding(.vertical,12.0)
+                                    }
+                                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                                        .background(Color.bgGlass1)
+                                        .cornerRadius(100.0)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 100.0)
+                                                .stroke(Color.bgGlass1, lineWidth: 2)
+                                        )
+                                })
+                                Spacer()
+                                Button(action: {
+                                    addDesafio(pontoId: transformString(ponto.name))
+                                    isShowingModal = false
+                                }
+                                        , label: {
+                                    ZStack {
+                                        
+                                        HStack {
+                                            Text("Aceitar")
+                                                .foregroundStyle(.accentColorYellow)
+                                                .font(.headline)
+                                        }
+                                        .padding(.vertical,12.0)
+                                    }
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.bgGlass1)
+                                        .cornerRadius(100.0)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 100.0)
+                                                .stroke(Color.bgGlass1, lineWidth: 2)
+                                        )
+                                       
+                                })
+                            }
+                            Spacer()
+                        }.padding(.horizontal, 16.0)
+                            .padding(.vertical,24.0)
                         
-                        HStack{
-                            Text(String(describing: ponto.categoria))
-                            Text(String(describing: ponto.preco))
-                            Text(String(describing: ponto.status))
-                        }
-                    }.padding()
+                    }.presentationDetents([.medium])
+                        .ignoresSafeArea()
                     
-                    HStack{
-                        Button("Recusar") {
-                            isShowingModal = false
-                        }
-                        
-                        Button("Aceitar") {
-                            addDesafio(pontoId: transformString(ponto.name))
-                            isShowingModal = false
-                        }
-                    }
                     
                 } else {
                     Text("Nenhum filtro selecionado")
@@ -243,24 +292,24 @@ struct UI: View{
             Color.backgroundColor
                 .ignoresSafeArea()
             Group {
-                        if viewModel.isLoading {
-                            LoadingView()
-                        } else {
-                            
-                            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                                VStack{
-                                    HomeWithChallenge()
-                                }
-                            } else {
-                                VStack{
-                                    Home(locationViewModel: locationViewModel, player: viewModel.player)
-                                }
-                            }
+                if viewModel.isLoading {
+                    LoadingView()
+                } else {
+                    
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        VStack{
+                            HomeWithChallenge()
+                        }
+                    } else {
+                        VStack{
+                            Home(locationViewModel: locationViewModel, player: viewModel.player)
                         }
                     }
-                    .onAppear {
-                        viewModel.performTask()
-                    }
+                }
+            }
+            .onAppear {
+                viewModel.performTask()
+            }
         }
     }
     

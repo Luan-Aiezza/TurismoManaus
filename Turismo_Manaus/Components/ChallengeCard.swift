@@ -68,7 +68,4 @@ struct ChallengeCard: View {
     
 }
 
-#Preview {
-    ChallengeCard()
-}
 
