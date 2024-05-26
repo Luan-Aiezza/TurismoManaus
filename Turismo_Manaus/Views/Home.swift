@@ -116,8 +116,13 @@ struct Home : View {
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
-                                .presentationDetents([.medium])
-                        }
+                                .presentationDetents([.large])
+                                .onAppear {
+                                    GKAccessPoint.shared.isActive = false
+                                }
+                                .onDisappear {
+                                    GKAccessPoint.shared.isActive = true
+                                }                        }
                     
                 }
                 .padding()
@@ -140,6 +145,7 @@ struct Home : View {
                         .resizable()
                         .frame(width: 358, height: 176)
                         .cornerRadius(15.0)
+                        .scaledToFill()
                     
                     HStack{
                         Text(String(describing: ponto.categoria))
@@ -250,7 +256,6 @@ struct UI: View{
                             if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                                 VStack{
                                     HomeWithChallenge()
-                                        
                                 }
                             } else {
                                 VStack{

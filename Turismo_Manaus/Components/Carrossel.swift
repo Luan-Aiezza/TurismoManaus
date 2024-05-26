@@ -11,6 +11,7 @@ struct CardPointSelected: View {
             Image(transformString(name))
                 .resizable()
                 .frame(width: 300, height: 342)
+                .scaledToFill()
                 .scaledToFit()
                 .cornerRadius(24.0)
             VStack {
@@ -43,6 +44,7 @@ struct CardPoint: View {
             Image(transformString(name))
                 .resizable()
                 .frame(width: 300, height: 342)
+                .scaledToFill()
                 .scaledToFit()
                 .cornerRadius(24.0)
             VStack {

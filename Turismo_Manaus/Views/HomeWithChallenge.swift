@@ -75,6 +75,7 @@ struct HomeWithChallenge : View {
                                 }
                             
                             
+                            
                         }
                     }
                     Spacer()
