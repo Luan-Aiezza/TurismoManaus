@@ -52,7 +52,7 @@ struct Home : View {
             VStack{
                 Spacer()
                 VStack{
-                    Text("Oi!")
+                    Text("Oi, \(player.displayName)!")
                         .font(.title)
                         .bold()
                     Text("Para onde vamos hoje?")
@@ -116,8 +116,13 @@ struct Home : View {
                     }).padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
-                                .presentationDetents([.medium])
-                        }
+                                .presentationDetents([.large])
+                                .onAppear {
+                                    GKAccessPoint.shared.isActive = false
+                                }
+                                .onDisappear {
+                                    GKAccessPoint.shared.isActive = true
+                                }                        }
                     
                 }
                 .padding()
@@ -134,9 +139,13 @@ struct Home : View {
                     Text("Desafio lançado!")
                         .presentationDetents([.medium])
                         .font(.title)
-                        .foregroundStyle(.black)
-                    Text("Visite o(a) \(ponto.name) em até uma semana!")
-                    Image("Card")
+                        .foregroundStyle(.white)
+                    Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                    Image(transformString(ponto.name))
+                        .resizable()
+                        .frame(width: 358, height: 176)
+                        .cornerRadius(15.0)
+                        .scaledToFill()
                     
                     HStack{
                         Text(String(describing: ponto.categoria))
@@ -203,6 +212,7 @@ struct Home : View {
         newItem.data_termino = Calendar.current.date(byAdding: .day, value: 7, to: Date())
         newItem.ponto_id = pontoId
         newItem.user_id = player.gamePlayerID
+        newItem.state = "inProgress"
         print(newItem)
         do {
             try viewContext.save()
@@ -239,24 +249,24 @@ struct UI: View{
             Color.backgroundColor
                 .ignoresSafeArea()
             Group {
-                if viewModel.isLoading {
-                    LoadingView()
-                } else {
-                    
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                        VStack{
-                            HomeWithChallenge()
-                        }
-                    } else {
-                        VStack{
-                            Home(locationViewModel: locationViewModel)
+                        if viewModel.isLoading {
+                            LoadingView()
+                        } else {
+                            
+                            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                                VStack{
+                                    HomeWithChallenge()
+                                }
+                            } else {
+                                VStack{
+                                    Home(locationViewModel: locationViewModel, player: viewModel.player)
+                                }
+                            }
                         }
                     }
-                }
-            }
-            .onAppear {
-                viewModel.performTask()
-            }
+                    .onAppear {
+                        viewModel.performTask()
+                    }
         }
     }
     
@@ -393,4 +403,24 @@ struct LoadingView: View {
 
 extension Color {
     static let backgroundColor = Color(UIColor(red: 17/255, green: 17/255, blue: 17/255, alpha: 1))
+}
+
+struct CustomModalView: View {
+    var body: some View {
+        VStack {
+            Text("Conteúdo do Modal")
+                .font(.title)
+                .padding()
+            Spacer()
+            // Adiciona um espaço flexível para empurrar o conteúdo para cima
+            
+            // Personalize a altura ajustando o frame do conteúdo
+            Text("Este é um modal que ocupa apenas metade da tela.")
+                .padding()
+                .frame(height: UIScreen.main.bounds.height / 2)
+                .background(Color.blue)
+            
+            Spacer() // Adiciona um espaço flexível para empurrar o conteúdo para cima
+        }
+    }
 }

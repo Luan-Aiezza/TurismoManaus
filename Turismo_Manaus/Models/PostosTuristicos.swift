@@ -31,7 +31,7 @@ enum Distancias {
 
 
 
-var PontosTuristicos: [PontoTuristico] = [
+public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(id: UUID(), name: "Parque Senador Jefferson Péres", desc: "Parque urbano amplo ao longo de um riacho com um pórtico de arcos em ferro, uma trilha coberta e monumentos.", categoria: Categorias.tradicionais, latitude: "-3.1308190156009417", longitude: "-60.01565870581663", preco: Precos.barato, horarios: Horarios.todos, distancia: Distancias.tres, status: "dia e noite", maps: "https://maps.app.goo.gl/q3oLwFAFjdVN9wcDA"),
     
@@ -78,6 +78,8 @@ var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(id: UUID(), name: "Dome's Burgers - Mundi", desc: "", categoria: Categorias.culinaria, latitude: "-3.0840632322220896", longitude: "-59.99683816583337", preco: Precos.medio, horarios: Horarios.noite, distancia: Distancias.tres, status: "noite", maps: "https://maps.app.goo.gl/ioHdAnxi8gvsJsqT6"),
     
     PontoTuristico(id: UUID(), name: "Restaurante Banzeiro Manaus", desc: "A cozinha informal à la carte de pratos da região amazônica e vinhos, com temas discretos da vida ribeirinha.", categoria: Categorias.culinaria, latitude: "-3.1101712809745763", longitude: "-60.016826599186885", preco: Precos.caro, horarios: Horarios.todos, distancia: Distancias.tres, status: "tarde e noite", maps: "https://maps.app.goo.gl/aVPZ5c1DZapg8g5f7"),
+    
+    PontoTuristico(id: UUID(), name: "Restaurante Choupana", desc: "Um restaurante de comida regional. Serve Filé de tucunaré, pato no tucupi e outras comidas regionais, em casa com tijolo aparente, arte e mezanino.", categoria: Categorias.culinaria, latitude: "-3.1085431097846232, ", longitude: "-60.01264641040796", preco: Precos.caro, horarios: Horarios.todos, distancia: Distancias.tres, status: "tarde e noite", maps: "https://maps.app.goo.gl/aVPZ5c1DZapg8g5f7"),
     
     PontoTuristico(id: UUID(), name: "Balneário José Ribeiro Soares SESC", desc: "Parques Aquáticos I e II; 9h às 16h30 (domingos e feriados)", categoria: Categorias.tradicionais, latitude: "-3.0679256505131125", longitude: "-60.044545826691326", preco: Precos.medio, horarios: Horarios.manha, distancia: Distancias.tres, status: "dia", maps: "https://maps.app.goo.gl/hQQ89Nd78Zz7NZy57"),
     

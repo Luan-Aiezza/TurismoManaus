@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PontoTuristico {
+public class PontoTuristico {
     let id: UUID
     var name, desc, latitude, longitude, maps, status: String
     let horarios: Horarios
