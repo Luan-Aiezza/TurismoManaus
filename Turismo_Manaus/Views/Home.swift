@@ -12,15 +12,7 @@ import GameKit
 import CoreLocation
 import Foundation
 
-struct GlassRectangle : View {
-    
-    var body: some View {
-        // Gradiente para simular o efeito de vidro fosco
-        LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.1), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
-            .frame(width: 350, height: 100) // Ajuste o tamanho conforme necessário
-            .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-    }
-}
+
 
 class HomeViewModel {
     

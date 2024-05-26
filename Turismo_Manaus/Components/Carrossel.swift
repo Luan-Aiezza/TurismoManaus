@@ -1,5 +1,15 @@
 import SwiftUI
 
+struct GradientRectangle : View {
+    
+    var body: some View {
+        // Gradiente para simular o efeito de vidro fosco
+        LinearGradient(gradient: Gradient(colors: [Color.clear.opacity(1), Color.clear.opacity(1),Color.clear.opacity(1), Color.black.opacity(1)]), startPoint: .top, endPoint: .bottom)
+            .frame(width: 300, height: 342) // Ajuste o tamanho conforme necessário
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+    }
+}
+
 struct CardPointSelected: View {
     var name: String
     
@@ -14,6 +24,7 @@ struct CardPointSelected: View {
                 .scaledToFill()
                 .scaledToFit()
                 .cornerRadius(24.0)
+            GradientRectangle()
             VStack {
                 Spacer()
                 Text(name)
@@ -47,14 +58,16 @@ struct CardPoint: View {
                 .scaledToFill()
                 .scaledToFit()
                 .cornerRadius(24.0)
+            GradientRectangle()
+
             VStack {
                 Spacer()
                 Text(name)
                     .foregroundColor(.white)
                     .font(.title2)
                     .fontWeight(.semibold)
-                    .frame(width: 250)
-                    .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 50)
+                    .frame(width: 290)
+                    .multilineTextAlignment(.center)
                 
             }
             .padding(16.0)
