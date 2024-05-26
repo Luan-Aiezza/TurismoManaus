@@ -136,22 +136,24 @@ struct Home : View {
             .sheet(isPresented: $isShowingModal) {
                 
                 if let ponto = locationViewModel.pontoSelecionado {
-                    Text("Desafio lançado!")
-                        .presentationDetents([.medium])
-                        .font(.title)
-                        .foregroundStyle(.white)
-                    Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
-                    Image(transformString(ponto.name))
-                        .resizable()
-                        .frame(width: 358, height: 176)
-                        .cornerRadius(15.0)
-                        .scaledToFill()
-                    
-                    HStack{
-                        Text(String(describing: ponto.categoria))
-                        Text(String(describing: ponto.preco))
-                        Text(String(describing: ponto.status))
-                    }
+                    VStack (spacing: 20) {
+                        Text("Desafio lançado!")
+                            .presentationDetents([.medium])
+                            .font(.title)
+                            .foregroundStyle(.black)
+                        Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                        Image(transformString(ponto.name))
+                            .resizable()
+                            .frame(width: 150, height: 171)
+                            .cornerRadius(15.0)
+                            .scaledToFill()
+                        
+                        HStack{
+                            Text(String(describing: ponto.categoria))
+                            Text(String(describing: ponto.preco))
+                            Text(String(describing: ponto.status))
+                        }
+                    }.padding()
                     
                     HStack{
                         Button("Recusar") {
