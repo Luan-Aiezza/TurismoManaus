@@ -23,8 +23,10 @@ class MyViewModel: ObservableObject {
         
         DispatchQueue.global().async {
             self.authenticateUser()
+            
             sleep(2)
             // Espera 2 segundos para simular a tarefa
+            
             DispatchQueue.main.async {
                 self.isLoading = false
             }

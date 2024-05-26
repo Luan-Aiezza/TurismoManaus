@@ -25,6 +25,8 @@ public class LocationViewModel: NSObject, ObservableObject {
         locationManager.requestWhenInUseAuthorization()
     }
     
+    
+    
 }
 
 extension LocationViewModel: CLLocationManagerDelegate {
@@ -53,4 +55,5 @@ extension LocationViewModel: CLLocationManagerDelegate {
             self.longitude = location.coordinate.longitude
         }
     }
+    
 }

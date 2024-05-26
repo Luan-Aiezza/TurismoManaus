@@ -43,6 +43,7 @@ struct Home : View {
             
             VStack{
                 Spacer()
+                
                 VStack{
                     Text("Oi, \(player.displayName)!")
                         .font(.title)
@@ -51,6 +52,7 @@ struct Home : View {
                         .font(.title3)
                         .fontWeight(.thin)
                 }
+                
                 Spacer()
                 
                 Carrossel(currentIndex: $currentIndex)
@@ -118,7 +120,13 @@ struct Home : View {
                     
                 }
                 .padding()
-                Spacer()
+                
+                Button(action: {
+                    calculaDistancias()
+                }, label: {
+                    Text("distancias")
+                })
+                
                 Spacer()
                 
             }
@@ -216,6 +224,25 @@ struct Home : View {
         
     }
     
+    func calculaDistancias() {
+        print(".....")
+        for i in 0..<PontosTuristicos.count {
+            let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+            let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
+            let distanceinMeters = (location1.distance(from: location2))
+            let distanceInKilometers = distanceinMeters/1000
+            print(PontosTuristicos[i].name)
+            print(distanceInKilometers)
+            if distanceInKilometers <= 3.0 {
+                PontosTuristicos[i].distancia = Distancias.tres
+            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
+                PontosTuristicos[i].distancia = Distancias.cinco
+            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+                PontosTuristicos[i].distancia = Distancias.dez
+            }
+            
+        }
+    }
 }
 
 struct UI: View{
@@ -289,7 +316,6 @@ struct UI: View{
                 GKAccessPoint.shared.isActive = true
                 print(locationViewModel.latitude)
                 print(locationViewModel.longitude)
-                calculaDistancias()
                 deleteAllItems()
                 
                 // You can perform additional actions here
