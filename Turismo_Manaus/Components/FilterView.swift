@@ -67,7 +67,6 @@ struct FilterView: View {
                     }
                     .padding(.top,16.0)
                     
-                    MySegmentedControl()
                     
                     Picker(selection: $selectedHorario, label: Text("")) {
                         Text("Todos").tag(Horarios.todos)

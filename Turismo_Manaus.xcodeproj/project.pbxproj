@@ -14,6 +14,7 @@
 		6F97206C2BFBB4A4003A9578 /* PostosTuristicos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F97206A2BFBB4A4003A9578 /* PostosTuristicos.swift */; };
 		6FB51FB92C048F7500BBCD52 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB51FB82C048F7500BBCD52 /* UI.swift */; };
 		6FB51FBB2C048FA400BBCD52 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB51FBA2C048FA400BBCD52 /* LoadingView.swift */; };
+		6FD79BAA2C04DA800014739E /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD79BA92C04DA800014739E /* Onboarding.swift */; };
 		CFEC5C1A2BEE5337004FCA4C /* Turismo_ManausApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC5C192BEE5337004FCA4C /* Turismo_ManausApp.swift */; };
 		CFEC5C1C2BEE5337004FCA4C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC5C1B2BEE5337004FCA4C /* Home.swift */; };
 		CFEC5C1E2BEE5338004FCA4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		6F97206A2BFBB4A4003A9578 /* PostosTuristicos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostosTuristicos.swift; sourceTree = "<group>"; };
 		6FB51FB82C048F7500BBCD52 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		6FB51FBA2C048FA400BBCD52 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		6FD79BA92C04DA800014739E /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		CFEC5C162BEE5337004FCA4C /* Turismo_Manaus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Turismo_Manaus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEC5C192BEE5337004FCA4C /* Turismo_ManausApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turismo_ManausApp.swift; sourceTree = "<group>"; };
 		CFEC5C1B2BEE5337004FCA4C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		6F0E80E42BEE897F00D2A8F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6FD79BA92C04DA800014739E /* Onboarding.swift */,
 				CFEC5C1B2BEE5337004FCA4C /* Home.swift */,
 				D352D8E12BFFD288001D617A /* HomeWithChallenge.swift */,
 				D352D8E92C0076F8001D617A /* ChallengeDescription.swift */,
@@ -237,6 +240,7 @@
 				D3BA33B62BF68213000903C7 /* PontosDataModel.xcdatamodeld in Sources */,
 				CFEC5C1C2BEE5337004FCA4C /* Home.swift in Sources */,
 				D352D8EA2C0076F8001D617A /* ChallengeDescription.swift in Sources */,
+				6FD79BAA2C04DA800014739E /* Onboarding.swift in Sources */,
 				6FB51FB92C048F7500BBCD52 /* UI.swift in Sources */,
 				D352D8E22BFFD288001D617A /* HomeWithChallenge.swift in Sources */,
 				6F97206C2BFBB4A4003A9578 /* PostosTuristicos.swift in Sources */,

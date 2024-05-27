@@ -14,11 +14,8 @@ struct Turismo_ManausApp: App {
     
     var body: some Scene {
         WindowGroup {
-            UI()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .onAppear {
-                    
-                }
         }
     }
 }
