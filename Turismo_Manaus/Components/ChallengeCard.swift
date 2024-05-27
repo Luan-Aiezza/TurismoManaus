@@ -30,7 +30,7 @@ struct ChallengeCard: View {
                             .scaledToFit()
                             .cornerRadius(16.0)
                         VStack (alignment: .leading, content: {
-                            Text("Visite o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name) pela primeira vez")
+                            Text("Visite o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)")
                                 .font(.system(size: 15.0))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.leading)
