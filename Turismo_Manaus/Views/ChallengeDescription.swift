@@ -13,6 +13,7 @@ import CoreLocation
 
 struct ChallengeDescription: View {
     @Binding var isDetailViewShown: Bool
+    @State var isShowingAlertDesistir = false
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
         animation: .default)
@@ -152,28 +153,47 @@ struct ChallengeDescription: View {
                                 .stroke(Color.bgGlass1, lineWidth: 2)
                         )
                 }
-                ZStack {
+                
+                Button(action: {
                     
-                    HStack {
-                        Image(systemName: "trash")
-                            .foregroundColor(.white)
-                        Text("Desistir")
-                            .foregroundStyle(.white)
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                    }
-                    .padding(.horizontal,130.0)
-                    .padding(.vertical,12.0)
-                }.background(Color.redGlass)
-                    .cornerRadius(100.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 100.0)
-                            .stroke(Color.redGlass, lineWidth: 2)
-                    )
-                    .padding(.top, 16.0)
+                    isShowingAlertDesistir = true
+                }, label: {
+                    ZStack {
+                        
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundColor(.white)
+                            Text("Desistir")
+                                .foregroundStyle(.white)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                        }
+                        .padding(.horizontal,130.0)
+                        .padding(.vertical,12.0)
+                    }.background(Color.redGlass)
+                        .cornerRadius(100.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 100.0)
+                                .stroke(Color.redGlass, lineWidth: 2)
+                        )
+                        .padding(.top, 16.0)
+                })
+                
             }
+            .alert(isPresented: $isShowingAlertDesistir, content: {
+                Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
+                    secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
+                    isDetailViewShown = false
+
+                    // Coloca a função de desativar o desafio aqui
+                    // Coloca a função de desativar o desafio aqui
+                    // Coloca a função de desativar o desafio aqui
+                    // Coloca a função de desativar o desafio aqui
+                }))
+            })
             .padding(16.0)
         }
+        
     }
     
     func calculaPreco () {
