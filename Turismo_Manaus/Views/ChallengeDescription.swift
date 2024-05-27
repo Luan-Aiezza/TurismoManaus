@@ -12,7 +12,7 @@ import GameKit
 import CoreLocation
 
 struct ChallengeDescription: View {
-    @Binding var isDetailViewShown: Bool
+    @Binding var isDetailViewShown: Bool 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
         animation: .default)
@@ -186,3 +186,4 @@ struct ChallengeDescription: View {
         }
     }
 }
+
