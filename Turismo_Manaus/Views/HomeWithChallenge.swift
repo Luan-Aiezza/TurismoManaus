@@ -16,7 +16,7 @@ struct HomeWithChallenge : View {
     @State var selectedHorario = Horarios.todos
     @State var selectedDistancia = Distancias.todos
     @State var selectedPreco = Precos.todos
-    @State var locationViewModel = LocationViewModel()
+    @ObservedObject var locationViewModel: LocationViewModel
     @State var player = GKLocalPlayer.local
     @Environment(\.managedObjectContext) private var viewContext
     @State var isShowingFilterView = false
@@ -31,7 +31,7 @@ struct HomeWithChallenge : View {
     
     var body: some View {
         if isDetailViewShown {
-            ChallengeDescription(isDetailViewShown: $isDetailViewShown)
+            ChallengeDescription(isDetailViewShown: $isDetailViewShown, locationViewModel: locationViewModel)
                 .onAppear {
                     GKAccessPoint.shared.isActive = false
                 }
@@ -59,6 +59,7 @@ struct HomeWithChallenge : View {
                             // Filtros
                             Button(action: {
                                 isShowingFilterView.toggle()
+                                calculaDistancias()
                             }, label: {
                                 
                                 Image(systemName: "slider.horizontal.3")
@@ -67,8 +68,12 @@ struct HomeWithChallenge : View {
                             }).padding()
                                 .sheet(isPresented: $isShowingFilterView) {
                                     FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
-                                               locationViewModel: locationViewModel)
+                                               isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
                                     .presentationDetents([.large])
+                                    .presentationBackground(content: {
+                                        Color(.bgGlass2)
+                                            .blur(radius: 25)
+                                    })
                                     .onAppear {
                                         GKAccessPoint.shared.isActive = false
                                     }
@@ -116,7 +121,6 @@ struct HomeWithChallenge : View {
                             Button("Recusar") {
                                 isShowingModal = false
                             }
-                            
                             Button("Aceitar") {
                                 addDesafio(pontoId: transformString(ponto.name))
                                 isShowingModal = false
@@ -130,13 +134,35 @@ struct HomeWithChallenge : View {
                     Spacer()
                     
                 }
-                .padding()
+                .padding(16.0)
             }
             .onAppear {
                 GKAccessPoint.shared.isActive = true
             }
         }
         
+    }
+    
+    func calculaDistancias() {
+        print(".....")
+        for i in 0..<PontosTuristicos.count {
+            let transformedString = transformString(PontosTuristicos[i].name)
+            print(transformedString)
+            let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+            let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
+            let distanceinMeters = (location1.distance(from: location2))
+            let distanceInKilometers = distanceinMeters/1000
+            print(PontosTuristicos[i].name)
+            print(distanceInKilometers)
+            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distancia = Distancias.tres
+            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
+                PontosTuristicos[i].distancia = Distancias.cinco
+            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+                
+                PontosTuristicos[i].distancia = Distancias.dez
+            }
+            
+        }
     }
     
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
@@ -184,10 +210,5 @@ struct HomeWithChallenge : View {
         }
         
     }
-    
-}
-
-#Preview {
-    HomeWithChallenge()
     
 }

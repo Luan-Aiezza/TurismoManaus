@@ -32,8 +32,8 @@ struct ChallengeCard: View {
                         VStack (alignment: .leading, content: {
                             Text("Visite o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name) pela primeira vez")
                                 .font(.system(size: 15.0))
-                                .multilineTextAlignment(.leading)
                                 .foregroundColor(.white)
+                                .multilineTextAlignment(.leading)
                             if dias > 1 {
                                 Text("\(dias) dias restantes")
                                     .font(.system(size: 12.0))

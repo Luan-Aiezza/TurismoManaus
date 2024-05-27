@@ -39,7 +39,7 @@ struct UI: View{
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         VStack{
-                            HomeWithChallenge()
+                            HomeWithChallenge(locationViewModel: locationViewModel)
                         }
                     } else {
                         VStack{

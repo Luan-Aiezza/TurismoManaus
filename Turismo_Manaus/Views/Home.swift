@@ -96,9 +96,13 @@ struct Home : View {
                     })
                     .padding()
                         .sheet(isPresented: $isShowingFilterView) {
-                            FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
+                            FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
                                 
                                 .presentationDetents([.large])
+                                .presentationBackground(content: {
+                                    Color(.bgGlass2)
+                                        .blur(radius: 25)
+                                })
                                 .onAppear {
                                     GKAccessPoint.shared.isActive = false
                                 }

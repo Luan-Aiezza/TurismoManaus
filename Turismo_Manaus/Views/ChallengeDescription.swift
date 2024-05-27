@@ -11,9 +11,17 @@ import SceneKit
 import GameKit
 import CoreLocation
 
+enum ActiveAlert: Identifiable {
+    case alert1, alert2
+    
+    var id: Int {
+        hashValue
+    }
+}
+
 struct ChallengeDescription: View {
     @Binding var isDetailViewShown: Bool
-    @State var isShowingAlertDesistir = false
+    @State private var activeAlert: ActiveAlert?
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
         animation: .default) private var desafios: FetchedResults<Desafios>
@@ -21,6 +29,9 @@ struct ChallengeDescription: View {
     @State var preco = "$$"
     @Environment(\.openURL) var openURL
     @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var locationViewModel: LocationViewModel
+    @State var distanceinMeters = 0.0
+
 
     private func deleteAllItems() {
         withAnimation {
@@ -43,6 +54,7 @@ struct ChallengeDescription: View {
                 .ignoresSafeArea()
                 .onAppear {
                     calculaPreco()
+                    calculaDistancia()
                 }
             if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                 VStack  {
@@ -186,28 +198,58 @@ struct ChallengeDescription: View {
                         })
                         
                     }
-                    ZStack {
+                    if distanceinMeters > 50.0 {
+                        Button(action: {
+                            activeAlert = .alert2
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                    Text("Concluir")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.vertical,12.0)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .background(Color.bgGlass1)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.bgGlass1, lineWidth: 2)
+                            )
+                            .padding(.vertical, 16.0)
+                        })
                         
-                        HStack {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.white)
-                            Text("Concluir")
-                                .foregroundStyle(.white)
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                        
+                    } else {
+                        ZStack {
+                            
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.white)
+                                Text("Concluir")
+                                    .foregroundStyle(.white)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            }
+                            .padding(.vertical,12.0)
                         }
-                        .padding(.vertical,12.0)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.greenButton)
+                        .cornerRadius(100.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 100.0)
+                                .stroke(Color.greenButton, lineWidth: 2)
+                        )
+                        .padding(.vertical, 16.0)
                     }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.bgGlass1)
-                    .cornerRadius(100.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 100.0)
-                            .stroke(Color.bgGlass1, lineWidth: 2)
-                    )
-                    .padding(.vertical, 16.0)
+                    
                     Button {
-                        isShowingAlertDesistir = true
+                        activeAlert = .alert1
                     } label: {
                         ZStack {
                             
@@ -231,14 +273,24 @@ struct ChallengeDescription: View {
                     )
                     Spacer()
                 }
-                .alert(isPresented: $isShowingAlertDesistir, content: {
-                    Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
-                          secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
-                        isDetailViewShown = false
-                        deleteAllItems()
-                        
-                    }))
-                })
+                .alert(item: $activeAlert) { alert in
+                            switch alert {
+                            case .alert1:
+                                return Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
+                                             secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
+                                           isDetailViewShown = false
+                                           deleteAllItems()
+                                           
+                                       }))
+                            case .alert2:
+                                return Alert(
+                                    title: Text("Você ainda não está no local!"),
+                                    message: Text("Se aproxime do local escolhido para concluir o desafio"),
+                                    dismissButton: .default(Text("OK"))
+                                )
+                            }
+                        }
+                
                 .padding(.horizontal, 16.0)
                 .padding(.vertical,24.0)
             }
@@ -254,6 +306,15 @@ struct ChallengeDescription: View {
             preco = "$$$"
         }
     }
+    
+    func calculaDistancia() {
+        print(".....")
+        let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+        let location2 = CLLocation(latitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.latitude) ?? 0.0, longitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.longitude) ?? 0.0)
+        distanceinMeters = (location1.distance(from: location2))
+    }
+    
+    
     
 }
 
