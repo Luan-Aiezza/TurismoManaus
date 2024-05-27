@@ -47,6 +47,7 @@ struct ChallengeDescription: View {
                     })
                     Spacer()
                     Text("Desafio ativo")
+                        .padding(.vertical, 8.0)
                         .foregroundStyle(.white)
                         .font(.title3)
                         .fontWeight(.semibold)
@@ -63,12 +64,12 @@ struct ChallengeDescription: View {
                         .fontWeight(.semibold)
                     Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)")
                         .foregroundStyle(.white)
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.semibold)
                     Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.desc)")
                         .foregroundStyle(.white)
                         .font(.body)
-                        .padding(.top, 16.0)
+                        .padding(.vertical, 16.0)
                     HStack {
                         ZStack {
                             Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
@@ -116,7 +117,7 @@ struct ChallengeDescription: View {
                     ZStack {
                         
                         HStack {
-                            Image(systemName: "arrow.up.right.square")
+                            Image(systemName: "location")
                                 .foregroundColor(.white)
                             Text("Ver no mapa")
                                 .foregroundStyle(.white)
@@ -155,6 +156,26 @@ struct ChallengeDescription: View {
                 ZStack {
                     
                     HStack {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.white)
+                        Text("Concluir")
+                            .foregroundStyle(.white)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                    }
+                    .padding(.vertical,12.0)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.bgGlass1)
+                    .cornerRadius(100.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 100.0)
+                            .stroke(Color.bgGlass1, lineWidth: 2)
+                    )
+                    .padding(.vertical, 16.0)
+                ZStack {
+                    
+                    HStack {
                         Image(systemName: "trash")
                             .foregroundColor(.white)
                         Text("Desistir")
@@ -162,17 +183,19 @@ struct ChallengeDescription: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                     }
-                    .padding(.horizontal,130.0)
                     .padding(.vertical,12.0)
-                }.background(Color.redGlass)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.redGlass)
                     .cornerRadius(100.0)
                     .overlay(
                         RoundedRectangle(cornerRadius: 100.0)
                             .stroke(Color.redGlass, lineWidth: 2)
                     )
-                    .padding(.top, 16.0)
+                Spacer()
             }
-            .padding(16.0)
+            .padding(.horizontal, 16.0)
+            .padding(.vertical,24.0)
         }
     }
     
