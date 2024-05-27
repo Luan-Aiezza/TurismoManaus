@@ -56,7 +56,7 @@ struct OnboardingPage1: View {
             Text("Bem-vindo(a) ao Simbora Manaus!\nSeja desafiado a visitar os pontos turísticos de Manaus!")
                 .foregroundColor(.white)
             HStack{
-                Image("onboard1")
+                Image("Group1515")
                     .padding()
             }
         }
@@ -71,7 +71,7 @@ struct OnboardingPage2: View {
             Text("Utilize o filtro para personalizar seu desafio\nou\nIgnore o filtro e sorteie às cegas")
                 .foregroundColor(.white)
             HStack{
-                Image("onboard2")
+                Image("Group1516")
             }
         }
     }
@@ -83,7 +83,7 @@ struct OnboardingPage3: View {
             Text("Você também pode visualizar suas \nconquistas no seu perfil Game Center")
                 .foregroundColor(.white)
             HStack{
-                Image("onboard3")
+                Image("Group1519")
             }
         }
     }
