@@ -130,6 +130,7 @@ struct FilterView: View {
                 }
                 Spacer()
             }.padding(16.0)
+                .foregroundStyle(.black)
         }
         .ignoresSafeArea()
         

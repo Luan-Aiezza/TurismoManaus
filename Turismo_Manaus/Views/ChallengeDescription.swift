@@ -238,3 +238,4 @@ struct ChallengeDescription: View {
     }
     
 }
+

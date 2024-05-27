@@ -10,12 +10,12 @@ import Foundation
 public class PontoTuristico {
     let id: UUID
     var name, desc, latitude, longitude, maps, status: String
-    let horarios: Horarios
+    let horarios: [Horarios]
     var categoria: Categorias
     var preco: Precos
     var distancia: Distancias
     
-    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: Horarios, distancia: Distancias, status: String, maps: String) {
+    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], distancia: Distancias, status: String, maps: String) {
         self.id = id
         self.name = name
         self.desc = desc
