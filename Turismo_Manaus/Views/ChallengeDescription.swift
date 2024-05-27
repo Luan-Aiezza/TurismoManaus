@@ -44,207 +44,204 @@ struct ChallengeDescription: View {
                 .onAppear {
                     calculaPreco()
                 }
-            VStack  {
-                HStack {
-                    Button(action: {
-                        isDetailViewShown.toggle()
-                    }, label: {
-                        ZStack {
-                            HStack {
-                                Image(systemName: "chevron.backward")
-                                    .foregroundColor(.white)
-                                
-                                Text("Voltar")
-                                    .foregroundStyle(.white)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                            }
-                        }
-                        
-                    })
-                    Spacer()
-                    Text("Desafio ativo")
-                        .padding(.vertical, 8.0)
-                        .foregroundStyle(.white)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                }
-                
-                VStack(alignment: .leading, content: {
-                    Text("Visitar o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name) pela primeira vez")
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 24.0)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                    Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)")
-                        .foregroundStyle(.white)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.desc)")
-                        .foregroundStyle(.white)
-                        .font(.body)
-                        .padding(.vertical, 16.0)
+            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                VStack  {
                     HStack {
-                        ZStack {
-                            Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
-                                .foregroundStyle(.white)
-                                .padding(.horizontal,10.0)
-                                .padding(.vertical, 3.0)
-                        }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 7.0)
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                        
-                        ZStack {
-                            Text("\(preco)")
-                                .foregroundStyle(.white)
-                                .padding(.horizontal,10.0)
-                                .padding(.vertical, 3.0)
-                        }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 7.0)
-                                .stroke(Color.white, lineWidth: 1)
-                            
-                        )
-                        .padding(.horizontal, 12.0)
-                        ZStack {
-                            Text("\(capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.status))")
-                                .foregroundStyle(.white)
-                                .padding(.horizontal,10.0)
-                                .padding(.vertical, 3.0)
-                        }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 7.0)
-                                .stroke(Color.white, lineWidth: 1)
-                            
-                        )
-                    }
-                    
-                    Text("Av. Eduardo ribeiro - Centro, Manaus - AM, 69010-000")
-                        .foregroundStyle(.white)
-                        .padding(.vertical,24.0)
-                        .font(.body)
-                })
-                
-                HStack {
-                    Button(action: {
-                        if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
-                            openURL(url)
-                        }
-                        
-                    }, label: {
-                        ZStack {
-                            
-                            HStack {
-                                Image(systemName: "location")
-                                    .foregroundColor(.white)
-                                Text("Ver no mapa")
-                                    .foregroundStyle(.white)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
+                        Button(action: {
+                            isDetailViewShown.toggle()
+                        }, label: {
+                            ZStack {
+                                HStack {
+                                    Image(systemName: "chevron.backward")
+                                        .foregroundColor(.white)
+                                    
+                                    Text("Voltar")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
                             }
-                            .padding(.horizontal,16.0)
-                            .padding(.vertical,12.0)
-                        }.background(Color.bgGlass1)
-                            .cornerRadius(100.0)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 100.0)
-                                    .stroke(Color.bgGlass1, lineWidth: 2)
-                            )
-                    })
-                    
-                    Spacer()
-                    Button(action: {
-                        if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
-                            openURL(url)
-                        }
-                    }, label: {
-                        ZStack {
                             
-                            HStack {
-                                Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.white)
-                                Text("Saber mais")
-                                    .foregroundStyle(.white)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                            }
-                            .padding(.horizontal,16.0)
-                            .padding(.vertical,12.0)
-                        }.background(Color.bgGlass1)
-                            .cornerRadius(100.0)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 100.0)
-                                    .stroke(Color.bgGlass1, lineWidth: 2)
-                            )
-                    })
-                    
-                }
-                ZStack {
-                    
-                    HStack {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.white)
-                        Text("Concluir")
+                        })
+                        Spacer()
+                        Text("Desafio ativo")
+                            .padding(.vertical, 8.0)
                             .foregroundStyle(.white)
                             .font(.title3)
                             .fontWeight(.semibold)
+                        Spacer()
+                        Spacer()
+                        Spacer()
                     }
-                    .padding(.vertical,12.0)
-                }
-                .frame(maxWidth: .infinity)
-                .background(Color.bgGlass1)
-                .cornerRadius(100.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 100.0)
-                        .stroke(Color.bgGlass1, lineWidth: 2)
-                )
-                .padding(.vertical, 16.0)
-                Button {
-                    isShowingAlertDesistir = true
-                } label: {
+                    
+                    VStack(alignment: .leading, content: {
+                        
+                        Text("Visitar o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name) pela primeira vez")
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 24.0)
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)")
+                            .foregroundStyle(.white)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.desc)")
+                            .foregroundStyle(.white)
+                            .font(.body)
+                            .padding(.vertical, 16.0)
+                        HStack {
+                            ZStack {
+                                Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal,10.0)
+                                    .padding(.vertical, 3.0)
+                            }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 7.0)
+                                    .stroke(Color.white, lineWidth: 1)
+                            )
+                            
+                            ZStack {
+                                Text("\(preco)")
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal,10.0)
+                                    .padding(.vertical, 3.0)
+                            }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 7.0)
+                                    .stroke(Color.white, lineWidth: 1)
+                                
+                            )
+                            .padding(.horizontal, 12.0)
+                            ZStack {
+                                Text("\(capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.status))")
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal,10.0)
+                                    .padding(.vertical, 3.0)
+                            }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 7.0)
+                                    .stroke(Color.white, lineWidth: 1)
+                                
+                            )
+                        }
+                        
+                        Text("Av. Eduardo ribeiro - Centro, Manaus - AM, 69010-000")
+                            .foregroundStyle(.white)
+                            .padding(.vertical,24.0)
+                            .font(.body)
+                    })
+                    
+                    HStack {
+                        Button(action: {
+                            if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
+                                openURL(url)
+                            }
+                            
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "location")
+                                        .foregroundColor(.white)
+                                    Text("Ver no mapa")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.horizontal,16.0)
+                                .padding(.vertical,12.0)
+                            }.background(Color.bgGlass1)
+                                .cornerRadius(100.0)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 100.0)
+                                        .stroke(Color.bgGlass1, lineWidth: 2)
+                                )
+                        })
+                        
+                        Spacer()
+                        Button(action: {
+                            if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
+                                openURL(url)
+                            }
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "arrow.up.right.square")
+                                        .foregroundColor(.white)
+                                    Text("Saber mais")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.horizontal,16.0)
+                                .padding(.vertical,12.0)
+                            }.background(Color.bgGlass1)
+                                .cornerRadius(100.0)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 100.0)
+                                        .stroke(Color.bgGlass1, lineWidth: 2)
+                                )
+                        })
+                        
+                    }
                     ZStack {
                         
                         HStack {
-                            Image(systemName: "trash")
+                            Image(systemName: "checkmark")
                                 .foregroundColor(.white)
-                            Text("Desistir")
+                            Text("Concluir")
                                 .foregroundStyle(.white)
                                 .font(.title3)
                                 .fontWeight(.semibold)
                         }
                         .padding(.vertical,12.0)
                     }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.bgGlass1)
+                    .cornerRadius(100.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 100.0)
+                            .stroke(Color.bgGlass1, lineWidth: 2)
+                    )
+                    .padding(.vertical, 16.0)
+                    Button {
+                        isShowingAlertDesistir = true
+                    } label: {
+                        ZStack {
+                            
+                            HStack {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.white)
+                                Text("Desistir")
+                                    .foregroundStyle(.white)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            }
+                            .padding(.vertical,12.0)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.redGlass)
+                    .cornerRadius(100.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 100.0)
+                            .stroke(Color.redGlass, lineWidth: 2)
+                    )
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity)
-                .background(Color.redGlass)
-                .cornerRadius(100.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 100.0)
-                        .stroke(Color.redGlass, lineWidth: 2)
-                )
-                Spacer()
+                .alert(isPresented: $isShowingAlertDesistir, content: {
+                    Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
+                          secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
+                        isDetailViewShown = false
+                        deleteAllItems()
+                        
+                    }))
+                })
+                .padding(.horizontal, 16.0)
+                .padding(.vertical,24.0)
             }
-            .alert(isPresented: $isShowingAlertDesistir, content: {
-                Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
-                    secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
-                    isDetailViewShown = false
-                    // Coloca a função de desativar o desafio aqui
-                    // Coloca a função de desativar o desafio aqui
-                    // Coloca a função de desativar o desafio aqui
-                    // Coloca a função de desativar o desafio aqui
-                }))
-            })
-            .padding(.horizontal, 16.0)
-            .padding(.vertical,24.0)
-        }
-        .onDisappear{
-            deleteAllItems()
-
         }
     }
     

@@ -22,15 +22,16 @@ struct FilterView: View {
     var body: some View {
         
         ZStack {
-            Color.bgGlass1
-                .ignoresSafeArea()
-                .blur(radius: 50.0)
-                .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                .overlay(
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.clear), alignment: .bottom
-                )
+        
+//            Color.bgGlass1
+//                .ignoresSafeArea()
+//                .blur(radius: 50.0)
+//                .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+//                .overlay(
+//                    Rectangle()
+//                        .frame(height: 1)
+//                        .foregroundColor(.clear), alignment: .bottom
+//                )
             VStack {
                 VStack {
                     HStack {
@@ -133,7 +134,7 @@ struct FilterView: View {
                 }
                 Spacer()
             }.padding(16.0)
-                .foregroundStyle(.black)
+            .foregroundStyle(.black)
         }
         .ignoresSafeArea()
         

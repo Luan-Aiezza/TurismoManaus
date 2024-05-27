@@ -12,14 +12,6 @@ import GameKit
 import CoreLocation
 import Foundation
 
-
-
-class HomeViewModel {
-    
-    init(pontoSelecionado: PontoTuristico? = nil) {
-    }
-}
-
 struct Home : View {
     @State var selectedCategoria = Categorias.todos
     @State var selectedHorario = Horarios.todos
@@ -41,8 +33,7 @@ struct Home : View {
             
             Color.backgroundColor
             
-            VStack{
-                Spacer()
+            VStack (spacing: 40){
                 VStack{
                     Text("Oi, \(player.displayName)!")
                         .font(.title)
@@ -51,17 +42,13 @@ struct Home : View {
                         .font(.title3)
                         .fontWeight(.thin)
                 }
-                Spacer()
-                
                 Carrossel(currentIndex: $currentIndex)
-                
                 
                 HStack {
                     
                     // Iniciar Random
                     Button(action: {
                         Task{
-                            //                            pontoSelecionado = selecionarPontoTuristicoAleatorio()
                             locationViewModel.pontoSelecionado = selecionarPontoTuristicoAleatorio()
                             for (index, element) in PontosTuristicos.enumerated(){
                                 if locationViewModel.pontoSelecionado?.name == element.name{
@@ -106,9 +93,11 @@ struct Home : View {
                         Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .frame(width: 21.662, height: 18.056)
-                    }).padding()
+                    })
+                    .padding()
                         .sheet(isPresented: $isShowingFilterView) {
                             FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, locationViewModel: locationViewModel)
+                                
                                 .presentationDetents([.large])
                                 .onAppear {
                                     GKAccessPoint.shared.isActive = false
@@ -119,32 +108,31 @@ struct Home : View {
                     
                 }
                 .padding()
-                Spacer()
-                Spacer()
                 
             }
-            
             .padding()
             .foregroundStyle(.white)
             .sheet(isPresented: $isShowingModal) {
-                
-                if let ponto = locationViewModel.pontoSelecionado {                    ZStack {
-                        Color.bgGlass1
-                            .ignoresSafeArea()
-                            .blur(radius: 50.0)
-                            .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            .overlay(
-                                Rectangle()
-                                    .frame(height: 1)
-                                    .foregroundColor(.clear), alignment: .bottom
-                            )
-                        VStack {
+                if let ponto = locationViewModel.pontoSelecionado {                    
+                    ZStack {
+                        Color.black
+                            .opacity(0.8)
+//                        LinearGradient(colors: [.black, .gray], startPoint: .top, endPoint: .bottom)
+                        
+//                            .ignoresSafeArea()
+//                            .blur(radius: 50.0)
+//                            .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+//                            .overlay(
+//                                Rectangle()
+//                                    .frame(height: 1)
+//                                    .foregroundColor(.clear), alignment: .bottom
+//                            )
+                        VStack(spacing: 12) {
                             Text("Desafio lançado!")
                                 .font(.title)
-                                .foregroundStyle(.white)
-                                Spacer()
                             Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
                                 .font(.headline)
+                                .multilineTextAlignment(.center)
                             Image(transformString(ponto.name))
                                 .resizable()
                                 .scaledToFit()
@@ -154,10 +142,11 @@ struct Home : View {
                                 .padding(.vertical, 24.0)
                             
                             HStack{
+                                // Recusar
                                 Button(action: {
                                     isShowingModal = false
                                 }
-                                        , label: {
+                                , label: {
                                     ZStack {
                                         
                                         HStack {
@@ -176,11 +165,12 @@ struct Home : View {
                                         )
                                 })
                                 Spacer()
+                                // Aceitar
                                 Button(action: {
                                     addDesafio(pontoId: transformString(ponto.name))
                                     isShowingModal = false
                                 }
-                                        , label: {
+                                , label: {
                                     ZStack {
                                         
                                         HStack {
@@ -200,19 +190,30 @@ struct Home : View {
                                        
                                 })
                             }
-                            Spacer()
-                        }.padding(.horizontal, 16.0)
-                            .padding(.vertical,24.0)
+
+                            Text("")
+                            Text("")
+            
+                        }
+                        .padding(.horizontal, 16.0)
+                        .padding(.vertical,24.0)
+                        .foregroundStyle(.white)
+
                         
-                    }.presentationDetents([.medium])
+                    }.presentationDetents([.fraction(0.6)])
                         .ignoresSafeArea()
-                    
+                        .presentationBackground(content: {
+                            Color(.bgGlass2)
+                                .blur(radius: 25)
+                        })
+                        
                     
                 } else {
                     Text("Nenhum filtro selecionado")
                 }
                 
             }
+            
             .padding()
             
         }
@@ -302,162 +303,6 @@ struct Home : View {
             
         }
     }
-    
-}
-
-struct UI: View{
-    @StateObject private var viewModel = MyViewModel()
-    @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var locationViewModel = LocationViewModel()
-    
-    @State private var player = GKLocalPlayer.local
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Pontos_Visitados>
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
-        animation: .default)
-    private var desafios: FetchedResults<Desafios>
-    
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
-    
-    var body: some View {
-        ZStack{
-            Color.backgroundColor
-                .ignoresSafeArea()
-            Group {
-                if viewModel.isLoading {
-                    LoadingView()
-                } else {
-                    
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                        VStack{
-                            HomeWithChallenge()
-                        }
-                    } else {
-                        VStack{
-                            Home(locationViewModel: locationViewModel, player: viewModel.player)
-                        }
-                    }
-                }
-            }
-            .onAppear {
-                viewModel.performTask()
-            }
-        }
-    }
-    
-    private func authenticateUser() {
-        let player = GKLocalPlayer.local
-        player.authenticateHandler = { vc, error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            if let vc = vc {
-                // Present the Game Center view controller
-                DispatchQueue.main.async {
-                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                        if let window = scene.windows.first {
-                            window.rootViewController?.present(vc, animated: true, completion: nil)
-                        }
-                    }
-                }
-            } else if player.isAuthenticated {
-                // Player is authenticated
-                print("Player authenticated!")
-                print(player.displayName)
-                GKAccessPoint.shared.location = .topLeading
-                GKAccessPoint.shared.showHighlights = false
-                GKAccessPoint.shared.isActive = true
-                print(locationViewModel.latitude)
-                print(locationViewModel.longitude)
-                deleteAllItems()
-                
-                // You can perform additional actions here
-            }
-        }
-    }
-    
-    
-    
-    
-    private func addItem() {
-        let player = GKLocalPlayer.local
-        let newItem = Pontos_Visitados(context: viewContext)
-        newItem.id = UUID()
-        newItem.quant_idas = 3
-        newItem.user_id = player.teamPlayerID
-        print(newItem)
-        print(player.teamPlayerID)
-        do {
-            try viewContext.save()
-            print(newItem)
-            unlockAchievement()
-        } catch {
-        }
-        
-    }
-    private func unlockAchievement() {
-        let achievement = GKAchievement(identifier: "cigs_1")
-        achievement.percentComplete = 100
-        achievement.showsCompletionBanner = true
-        GKAchievement.report([achievement]) { error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            print("done!")
-        }
-    }
-    
-    private func deleteAllItems() {
-        withAnimation {
-            for item in desafios {
-                viewContext.delete(item)
-            }
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                print("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func viewItem() {
-        for i in 0..<items.count {
-            print("Idas \(items[i].quant_idas)")
-            print("UserId \(items[i].user_id ?? "")")
-        }
-        
-    }
-}
-
-struct LoadingView: View {
-    var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            VStack {
-                Image(.appIcon29X29)
-                    .resizable()
-                    .frame(width: 160, height: 160)
-            }
-        }
-        
-    }
-}
-
-
-
-#Preview {
-    UI()
     
 }
 

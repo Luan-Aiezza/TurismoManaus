@@ -48,11 +48,10 @@ struct HomeWithChallenge : View {
                             .font(.title3)
                     }
                     Spacer()
-                    Spacer()
+
                     VStack {
+                        
                         Carrossel(currentIndex: $currentIndex)
-                        
-                        
                         
                         HStack {
                             
@@ -82,6 +81,7 @@ struct HomeWithChallenge : View {
                             
                         }
                     }
+                    
                     Spacer()
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
