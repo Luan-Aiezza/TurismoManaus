@@ -229,6 +229,7 @@ struct Home : View {
                 return true
             }
         }
+        if setHorarios.contains(Horarios.todos) {return true}
         return false
     }
     

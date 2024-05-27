@@ -202,7 +202,7 @@ struct ChallengeDescription: View {
                         })
                         
                     }
-                    if distanceinMeters > 50.0 {
+                    if distanceinMeters > 2000000.0 {
                         Button(action: {
                             activeAlert = .alert2
                         }, label: {
@@ -287,12 +287,12 @@ struct ChallengeDescription: View {
                                 return Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
                                              secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
                                            isDetailViewShown = false
-                                           deleteAllItems()
+                                           registraDesafioFracassado()
                                            
                                        }))
                             case .alert2:
                                 return Alert(
-                                    title: Text("Você ainda não está no local!"),
+                                    title: Text("Você ainda não está no local"),
                                     message: Text("Se aproxime do local escolhido para concluir o desafio"),
                                     dismissButton: .default(Text("OK"))
                                 )
@@ -319,19 +319,32 @@ struct ChallengeDescription: View {
         print(".....")
         let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
         let location2 = CLLocation(latitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.latitude) ?? 0.0, longitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.longitude) ?? 0.0)
+        print(location1)
+        print(location2)
         distanceinMeters = (location1.distance(from: location2))
+        print(distanceinMeters)
     }
     
     private func registraLocalVisitado() {
         let player = GKLocalPlayer.local
+        
+        
+        
         if pontosvisitados.contains(where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID }) {
             pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!.quant_idas += 1
             var item = Pontos_Visitados(context: viewContext)
             item = pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!
+            
+            var desafio = Desafios(context: viewContext)
+            desafio = desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!
+            desafio.state = "Concluído"
+            
             do {
                 try viewContext.save()
                 print(item)
+                print(desafio)
                 unlockAchievement(item: item)
+                isDetailViewShown.toggle()
             } catch {
             }
             
@@ -339,16 +352,36 @@ struct ChallengeDescription: View {
             let newItem = Pontos_Visitados(context: viewContext)
             newItem.id = UUID()
             newItem.quant_idas = 1
-            newItem.user_id = player.teamPlayerID
+            newItem.user_id = player.gamePlayerID
             newItem.ponto_name = PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name
             print(newItem)
             print(player.teamPlayerID)
+            
+            var desafio = Desafios(context: viewContext)
+            desafio = desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!
+            desafio.state = "Concluido"
+            
             do {
                 try viewContext.save()
                 print(newItem)
+                print(desafio)
                 unlockAchievement(item: newItem)
+                isDetailViewShown.toggle()
             } catch {
             }
+        }
+    }
+    
+    private func registraDesafioFracassado () {
+        var desafio = Desafios(context: viewContext)
+        desafio = desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!
+        desafio.state = "Fracassado"
+        
+        do {
+            print(desafio)
+            try viewContext.save()
+            isDetailViewShown.toggle()
+        } catch {
         }
     }
     
@@ -367,6 +400,7 @@ struct ChallengeDescription: View {
         } else if item.quant_idas < 3 {
             let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
             achievement.percentComplete = Double(item.quant_idas/3 * 100)
+            achievement.showsCompletionBanner
             GKAchievement.report([achievement]) { error in
                 guard error == nil else {
                     print(error?.localizedDescription ?? "")

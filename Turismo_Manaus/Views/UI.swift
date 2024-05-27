@@ -39,7 +39,7 @@ struct UI: View{
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         VStack{
-                            HomeWithChallenge(locationViewModel: locationViewModel)
+                            HomeWithChallenge(locationViewModel: locationViewModel)                                
                         }
                     } else {
                         VStack{
@@ -88,7 +88,7 @@ struct UI: View{
     
     private func deleteAllItems() {
         withAnimation {
-            for item in desafios {
+            for item in items {
                 viewContext.delete(item)
             }
             
