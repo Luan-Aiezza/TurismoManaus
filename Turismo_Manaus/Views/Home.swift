@@ -169,6 +169,15 @@ struct Home : View {
         }
     }
     
+    func horarioInnerSelectedHorarios (horario: Horarios, setHorarios: [Horarios]) -> Bool {
+        for horarioSet in setHorarios {
+            if horario == horarioSet{
+                return true
+            }
+        }
+        return false
+    }
+    
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
         
         
@@ -176,7 +185,7 @@ struct Home : View {
             var corresponde = true
             
             if selectedHorario != Horarios.todos{
-                if ponto.horarios != selectedCategoria {
+                if !horarioInnerSelectedHorarios(horario: selectedHorario, setHorarios: ponto.horarios) {
                     corresponde = false
                 }
             }
