@@ -67,15 +67,17 @@ struct FilterView: View {
                     }
                     .padding(.top,16.0)
                     
+                    
                     Picker(selection: $selectedHorario, label: Text("")) {
                         Text("Todos").tag(Horarios.todos)
                         Text("Manhã").tag(Horarios.manha)
                         Text("Tarde").tag(Horarios.tarde)
                         Text("Noite").tag(Horarios.noite)
                     }
+                    .foregroundStyle(.blue)
                     .pickerStyle(SegmentedPickerStyle())
-                            .cornerRadius(8)
-                            .padding(.vertical, 8.0)
+                    .cornerRadius(8)
+                    .padding(.vertical, 8.0)
                 }
                 
                 VStack {
@@ -150,7 +152,6 @@ struct FilterView: View {
                             })
                         }
                     }
-                    .foregroundStyle(Color.black)
                     .padding()
                     
                 }
