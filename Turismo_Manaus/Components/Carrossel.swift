@@ -86,9 +86,9 @@ struct CardPoint: View {
 struct Carrossel: View {
     
     @Binding var currentIndex: Int
-    
-    
     @State var dragOfset: CGFloat = 0
+
+    
     
     var body: some View {
         VStack{

@@ -22,7 +22,8 @@ struct FilterView: View {
     var body: some View {
         
         ZStack {
-        
+            Color.black
+                .opacity(0.9)
 //            Color.bgGlass1
 //                .ignoresSafeArea()
 //                .blur(radius: 50.0)
@@ -49,15 +50,18 @@ struct FilterView: View {
                     }
                     .padding(.top,16.0)
                     
+                    MySegmentedControl()
+                    
                     Picker(selection: $selectedHorario, label: Text("")) {
                         Text("Todos").tag(Horarios.todos)
                         Text("Manhã").tag(Horarios.manha)
                         Text("Tarde").tag(Horarios.tarde)
                         Text("Noite").tag(Horarios.noite)
                     }
+                    .foregroundStyle(.blue)
                     .pickerStyle(SegmentedPickerStyle())
-                            .cornerRadius(8)
-                            .padding(.vertical, 8.0)
+                    .cornerRadius(8)
+                    .padding(.vertical, 8.0)
                 }
                 
                 VStack {
@@ -128,13 +132,12 @@ struct FilterView: View {
                             })
                         }
                     }
-                    .foregroundStyle(Color.black)
                     .padding()
                     
                 }
                 Spacer()
             }.padding(16.0)
-            .foregroundStyle(.black)
+            .foregroundStyle(.white)
         }
         .ignoresSafeArea()
         
