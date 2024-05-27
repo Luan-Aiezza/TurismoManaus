@@ -31,6 +31,10 @@ struct ChallengeDescription: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var locationViewModel: LocationViewModel
     @State var distanceinMeters = 0.0
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
+        animation: .default)
+    private var pontosvisitados: FetchedResults<Pontos_Visitados>
 
 
     private func deleteAllItems() {
@@ -226,26 +230,30 @@ struct ChallengeDescription: View {
                         
                         
                     } else {
-                        ZStack {
-                            
-                            HStack {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.white)
-                                Text("Concluir")
-                                    .foregroundStyle(.white)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
+                        Button(action: {
+                            registraLocalVisitado()
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                    Text("Concluir")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.vertical,12.0)
                             }
-                            .padding(.vertical,12.0)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .background(Color.greenButton)
-                        .cornerRadius(100.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 100.0)
-                                .stroke(Color.greenButton, lineWidth: 2)
-                        )
-                        .padding(.vertical, 16.0)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.greenButton)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.greenButton, lineWidth: 2)
+                            )
+                            .padding(.vertical, 16.0)
+                        })
                     }
                     
                     Button {
@@ -297,7 +305,7 @@ struct ChallengeDescription: View {
         }
     }
     
-    func calculaPreco () {
+    private func calculaPreco () {
         if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.barato {
             preco = "$"
         } else if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.medio {
@@ -307,14 +315,87 @@ struct ChallengeDescription: View {
         }
     }
     
-    func calculaDistancia() {
+    private func calculaDistancia() {
         print(".....")
         let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
         let location2 = CLLocation(latitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.latitude) ?? 0.0, longitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.longitude) ?? 0.0)
         distanceinMeters = (location1.distance(from: location2))
     }
     
+    private func registraLocalVisitado() {
+        let player = GKLocalPlayer.local
+        if pontosvisitados.contains(where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID }) {
+            pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!.quant_idas += 1
+            var item = Pontos_Visitados(context: viewContext)
+            item = pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!
+            do {
+                try viewContext.save()
+                print(item)
+                unlockAchievement(item: item)
+            } catch {
+            }
+            
+        } else {
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.teamPlayerID
+            newItem.ponto_name = PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name
+            print(newItem)
+            print(player.teamPlayerID)
+            do {
+                try viewContext.save()
+                print(newItem)
+                unlockAchievement(item: newItem)
+            } catch {
+            }
+        }
+    }
     
-    
+    private func unlockAchievement(item: Pontos_Visitados) {
+        if item.quant_idas == 1 || item.quant_idas == 3 || item.quant_idas == 5 || item.quant_idas == 10 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = 100
+            achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 3 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/3 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 5 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/5 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 10 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/10 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        }
+        
+    }
 }
 
