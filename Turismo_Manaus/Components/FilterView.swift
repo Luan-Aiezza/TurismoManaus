@@ -11,6 +11,7 @@ struct FilterView: View {
     @Binding var selectedHorario: Horarios
     @Binding var selectedDistancia: Distancias
     @Binding var selectedPreco: Precos
+    @Binding var isShowingFilterView: Bool
     
     @ObservedObject var locationViewModel: LocationViewModel
     
@@ -22,30 +23,46 @@ struct FilterView: View {
     var body: some View {
         
         ZStack {
-            Color.black
-                .opacity(0.9)
-//            Color.bgGlass1
-//                .ignoresSafeArea()
-//                .blur(radius: 50.0)
-//                .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-//                .overlay(
-//                    Rectangle()
-//                        .frame(height: 1)
-//                        .foregroundColor(.clear), alignment: .bottom
-//                )
+        
+   Color.black
+           .ignoresSafeArea()
+                .opacity(0.8)
+                .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.clear), alignment: .bottom
+                )
             VStack {
                 VStack {
                     HStack {
-                        Text("Cancelar")
+                        Button(action: {
+                            isShowingFilterView.toggle()
+                            selectedPreco = Precos.todos
+                            selectedHorario = Horarios.todos
+                            selectedDistancia = Distancias.todos
+                            selectedCategoria = Categorias.todos
+                        }, label: {
+                            Text("Cancelar")
+                                .foregroundStyle(.white)
+                        })
+                        
                         Spacer()
                         Text("Filtros")
+                            .foregroundStyle(.white)
                         Spacer()
-                        Text("   Salvar")
-                            .frame(width: 72)
+                        Button(action: {
+                            isShowingFilterView.toggle()
+                        }, label: {
+                            Text("   Salvar")
+                                .foregroundStyle(.white)
+                                .frame(width: 72)
+                        })
                     }
                     .padding(.vertical, 8.0)
                     HStack{
                         Text("Horário")
+                            .foregroundStyle(.white)
                         Spacer()
                     }
                     .padding(.top,16.0)
@@ -67,6 +84,7 @@ struct FilterView: View {
                 VStack {
                     HStack{
                         Text("Local")
+                            .foregroundStyle(.white)
                         Spacer()
                     }.padding(.top,16.0)
                     
@@ -84,6 +102,7 @@ struct FilterView: View {
                 VStack {
                     HStack{
                         Text("Preço")
+                            .foregroundStyle(.white)
                         Spacer()
                     }.padding(.top,16.0)
                     Picker(selection: $selectedPreco, label: Text("")) {
@@ -100,6 +119,7 @@ struct FilterView: View {
                     VStack {
                         HStack{
                             Text("Distância")
+                                .foregroundStyle(.white)
                             Spacer()
                         }
                         .padding(.top,16.0)
@@ -118,6 +138,7 @@ struct FilterView: View {
                     VStack(spacing: 20) {
                         HStack{
                             Text("Distância")
+                                .foregroundStyle(.white)
                             Spacer()
                         }
                         VStack (spacing: 20){
@@ -137,7 +158,7 @@ struct FilterView: View {
                 }
                 Spacer()
             }.padding(16.0)
-            .foregroundStyle(.white)
+                .foregroundStyle(.white)
         }
         .ignoresSafeArea()
         

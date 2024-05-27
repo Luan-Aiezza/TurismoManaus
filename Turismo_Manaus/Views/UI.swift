@@ -39,7 +39,7 @@ struct UI: View{
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         VStack{
-                            HomeWithChallenge()
+                            HomeWithChallenge(locationViewModel: locationViewModel)
                         }
                     } else {
                         VStack{
@@ -83,38 +83,6 @@ struct UI: View{
                 
                 // You can perform additional actions here
             }
-        }
-    }
-    
-    
-    
-    
-    private func addItem() {
-        let player = GKLocalPlayer.local
-        let newItem = Pontos_Visitados(context: viewContext)
-        newItem.id = UUID()
-        newItem.quant_idas = 3
-        newItem.user_id = player.teamPlayerID
-        print(newItem)
-        print(player.teamPlayerID)
-        do {
-            try viewContext.save()
-            print(newItem)
-            unlockAchievement()
-        } catch {
-        }
-        
-    }
-    private func unlockAchievement() {
-        let achievement = GKAchievement(identifier: "cigs_1")
-        achievement.percentComplete = 100
-        achievement.showsCompletionBanner = true
-        GKAchievement.report([achievement]) { error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            print("done!")
         }
     }
     

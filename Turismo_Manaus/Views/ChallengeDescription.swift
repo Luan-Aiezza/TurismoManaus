@@ -11,9 +11,17 @@ import SceneKit
 import GameKit
 import CoreLocation
 
+enum ActiveAlert: Identifiable {
+    case alert1, alert2
+    
+    var id: Int {
+        hashValue
+    }
+}
+
 struct ChallengeDescription: View {
     @Binding var isDetailViewShown: Bool
-    @State var isShowingAlertDesistir = false
+    @State private var activeAlert: ActiveAlert?
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
         animation: .default) private var desafios: FetchedResults<Desafios>
@@ -21,6 +29,13 @@ struct ChallengeDescription: View {
     @State var preco = "$$"
     @Environment(\.openURL) var openURL
     @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var locationViewModel: LocationViewModel
+    @State var distanceinMeters = 0.0
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
+        animation: .default)
+    private var pontosvisitados: FetchedResults<Pontos_Visitados>
+
 
     private func deleteAllItems() {
         withAnimation {
@@ -43,6 +58,7 @@ struct ChallengeDescription: View {
                 .ignoresSafeArea()
                 .onAppear {
                     calculaPreco()
+                    calculaDistancia()
                 }
             if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                 VStack  {
@@ -186,28 +202,62 @@ struct ChallengeDescription: View {
                         })
                         
                     }
-                    ZStack {
+                    if distanceinMeters > 50.0 {
+                        Button(action: {
+                            activeAlert = .alert2
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                    Text("Concluir")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.vertical,12.0)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .background(Color.bgGlass1)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.bgGlass1, lineWidth: 2)
+                            )
+                            .padding(.vertical, 16.0)
+                        })
                         
-                        HStack {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.white)
-                            Text("Concluir")
-                                .foregroundStyle(.white)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                        }
-                        .padding(.vertical,12.0)
+                        
+                    } else {
+                        Button(action: {
+                            registraLocalVisitado()
+                        }, label: {
+                            ZStack {
+                                
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                    Text("Concluir")
+                                        .foregroundStyle(.white)
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.vertical,12.0)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .background(Color.greenButton)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.greenButton, lineWidth: 2)
+                            )
+                            .padding(.vertical, 16.0)
+                        })
                     }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.bgGlass1)
-                    .cornerRadius(100.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 100.0)
-                            .stroke(Color.bgGlass1, lineWidth: 2)
-                    )
-                    .padding(.vertical, 16.0)
+                    
                     Button {
-                        isShowingAlertDesistir = true
+                        activeAlert = .alert1
                     } label: {
                         ZStack {
                             
@@ -231,21 +281,31 @@ struct ChallengeDescription: View {
                     )
                     Spacer()
                 }
-                .alert(isPresented: $isShowingAlertDesistir, content: {
-                    Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
-                          secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
-                        isDetailViewShown = false
-                        deleteAllItems()
-                        
-                    }))
-                })
+                .alert(item: $activeAlert) { alert in
+                            switch alert {
+                            case .alert1:
+                                return Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
+                                             secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
+                                           isDetailViewShown = false
+                                           deleteAllItems()
+                                           
+                                       }))
+                            case .alert2:
+                                return Alert(
+                                    title: Text("Você ainda não está no local!"),
+                                    message: Text("Se aproxime do local escolhido para concluir o desafio"),
+                                    dismissButton: .default(Text("OK"))
+                                )
+                            }
+                        }
+                
                 .padding(.horizontal, 16.0)
                 .padding(.vertical,24.0)
             }
         }
     }
     
-    func calculaPreco () {
+    private func calculaPreco () {
         if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.barato {
             preco = "$"
         } else if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.medio {
@@ -255,5 +315,87 @@ struct ChallengeDescription: View {
         }
     }
     
+    private func calculaDistancia() {
+        print(".....")
+        let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
+        let location2 = CLLocation(latitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.latitude) ?? 0.0, longitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.longitude) ?? 0.0)
+        distanceinMeters = (location1.distance(from: location2))
+    }
+    
+    private func registraLocalVisitado() {
+        let player = GKLocalPlayer.local
+        if pontosvisitados.contains(where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID }) {
+            pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!.quant_idas += 1
+            var item = Pontos_Visitados(context: viewContext)
+            item = pontosvisitados.first( where: { $0.ponto_name == PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name && $0.user_id == player.gamePlayerID })!
+            do {
+                try viewContext.save()
+                print(item)
+                unlockAchievement(item: item)
+            } catch {
+            }
+            
+        } else {
+            let newItem = Pontos_Visitados(context: viewContext)
+            newItem.id = UUID()
+            newItem.quant_idas = 1
+            newItem.user_id = player.teamPlayerID
+            newItem.ponto_name = PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name
+            print(newItem)
+            print(player.teamPlayerID)
+            do {
+                try viewContext.save()
+                print(newItem)
+                unlockAchievement(item: newItem)
+            } catch {
+            }
+        }
+    }
+    
+    private func unlockAchievement(item: Pontos_Visitados) {
+        if item.quant_idas == 1 || item.quant_idas == 3 || item.quant_idas == 5 || item.quant_idas == 10 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = 100
+            achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 3 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/3 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 5 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/5 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        } else if item.quant_idas < 10 {
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            achievement.percentComplete = Double(item.quant_idas/10 * 100)
+            GKAchievement.report([achievement]) { error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                print("done!")
+            }
+        }
+        
+    }
 }
 
