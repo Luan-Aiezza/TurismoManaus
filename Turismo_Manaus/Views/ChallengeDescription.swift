@@ -20,6 +20,7 @@ struct ChallengeDescription: View {
     private var desafios: FetchedResults<Desafios>
     @State var player = GKLocalPlayer.local
     @State var preco = "$$"
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         ZStack {
@@ -48,6 +49,7 @@ struct ChallengeDescription: View {
                     })
                     Spacer()
                     Text("Desafio ativo")
+                        .padding(.vertical, 8.0)
                         .foregroundStyle(.white)
                         .font(.title3)
                         .fontWeight(.semibold)
@@ -64,12 +66,12 @@ struct ChallengeDescription: View {
                         .fontWeight(.semibold)
                     Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)")
                         .foregroundStyle(.white)
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.semibold)
                     Text("\( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.desc)")
                         .foregroundStyle(.white)
                         .font(.body)
-                        .padding(.top, 16.0)
+                        .padding(.vertical, 16.0)
                     HStack {
                         ZStack {
                             Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
@@ -114,71 +116,99 @@ struct ChallengeDescription: View {
                 })
                 
                 HStack {
-                    ZStack {
-                        
-                        HStack {
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.white)
-                            Text("Ver no mapa")
-                                .foregroundStyle(.white)
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                    Button(action: {
+                        if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
+                            openURL(url)
                         }
-                        .padding(.horizontal,16.0)
-                        .padding(.vertical,12.0)
-                    }.background(Color.bgGlass1)
-                        .cornerRadius(100.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 100.0)
-                                .stroke(Color.bgGlass1, lineWidth: 2)
-                        )
+                        
+                    }, label: {
+                        ZStack {
+                            
+                            HStack {
+                                Image(systemName: "location")
+                                    .foregroundColor(.white)
+                                Text("Ver no mapa")
+                                    .foregroundStyle(.white)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            }
+                            .padding(.horizontal,16.0)
+                            .padding(.vertical,12.0)
+                        }.background(Color.bgGlass1)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.bgGlass1, lineWidth: 2)
+                            )
+                    })
                     
                     Spacer()
-                    ZStack {
-                        
-                        HStack {
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.white)
-                            Text("Saber mais")
-                                .foregroundStyle(.white)
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                    Button(action: {
+                        if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
+                            openURL(url)
                         }
-                        .padding(.horizontal,16.0)
-                        .padding(.vertical,12.0)
-                    }.background(Color.bgGlass1)
-                        .cornerRadius(100.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 100.0)
-                                .stroke(Color.bgGlass1, lineWidth: 2)
-                        )
-                }
-                
-                Button(action: {
+                    }, label: {
+                        ZStack {
+                            
+                            HStack {
+                                Image(systemName: "arrow.up.right.square")
+                                    .foregroundColor(.white)
+                                Text("Saber mais")
+                                    .foregroundStyle(.white)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            }
+                            .padding(.horizontal,16.0)
+                            .padding(.vertical,12.0)
+                        }.background(Color.bgGlass1)
+                            .cornerRadius(100.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 100.0)
+                                    .stroke(Color.bgGlass1, lineWidth: 2)
+                            )
+                    })
                     
-                    isShowingAlertDesistir = true
-                }, label: {
-                    ZStack {
-                        
-                        HStack {
-                            Image(systemName: "trash")
-                                .foregroundColor(.white)
-                            Text("Desistir")
-                                .foregroundStyle(.white)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                        }
-                        .padding(.horizontal,130.0)
-                        .padding(.vertical,12.0)
-                    }.background(Color.redGlass)
-                        .cornerRadius(100.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 100.0)
-                                .stroke(Color.redGlass, lineWidth: 2)
-                        )
-                        .padding(.top, 16.0)
-                })
-                
+                }
+                ZStack {
+                    
+                    HStack {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.white)
+                        Text("Concluir")
+                            .foregroundStyle(.white)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                    }
+                    .padding(.vertical,12.0)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.bgGlass1)
+                .cornerRadius(100.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 100.0)
+                        .stroke(Color.bgGlass1, lineWidth: 2)
+                )
+                .padding(.vertical, 16.0)
+                ZStack {
+                    
+                    HStack {
+                        Image(systemName: "trash")
+                            .foregroundColor(.white)
+                        Text("Desistir")
+                            .foregroundStyle(.white)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                    }
+                    .padding(.vertical,12.0)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.redGlass)
+                .cornerRadius(100.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 100.0)
+                        .stroke(Color.redGlass, lineWidth: 2)
+                )
+                Spacer()
             }
             .alert(isPresented: $isShowingAlertDesistir, content: {
                 Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
@@ -191,7 +221,8 @@ struct ChallengeDescription: View {
                     // Coloca a função de desativar o desafio aqui
                 }))
             })
-            .padding(16.0)
+            .padding(.horizontal, 16.0)
+            .padding(.vertical,24.0)
         }
         
     }
@@ -205,4 +236,5 @@ struct ChallengeDescription: View {
             preco = "$$$"
         }
     }
+    
 }

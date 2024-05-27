@@ -20,8 +20,6 @@ struct ChallengeCard: View {
     
     var body: some View {
         ZStack {
-            Color.bgGlass1
-                .cornerRadius(24.0)
             VStack {
                 HStack{
                     Spacer()
@@ -30,7 +28,6 @@ struct ChallengeCard: View {
                         .frame(width: 48, height: 63)
                         .scaledToFit()
                         .cornerRadius(16.0)
-                    Spacer()
                     VStack (alignment: .leading, content: {
                         Text("Visite o(a) \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name) pela primeira vez")
                             .font(.system(size: 15.0))
@@ -46,7 +43,7 @@ struct ChallengeCard: View {
                                 .foregroundColor(.neutral)
                         }
                     })
-                    Spacer()
+                    .padding(.horizontal, 12.0 )
                     Image(systemName: "chevron.forward")
                         .resizable()
                         .frame(width: 11.689, height: 16.963)
@@ -60,7 +57,9 @@ struct ChallengeCard: View {
             RoundedRectangle(cornerRadius: 24.0)
                 .stroke(Color.bgGlass1, lineWidth: 2)
         )
-        .frame(width: 350, height: 94)
+        .frame(maxWidth: .infinity)
+        .background(Color.bgGlass1)
+        .cornerRadius(24.0)
         .onAppear {
             dias = Int(desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.data_termino!.timeIntervalSince(Date()) / (60 * 60 * 24))
         }
@@ -68,7 +67,4 @@ struct ChallengeCard: View {
     
 }
 
-#Preview {
-    ChallengeCard()
-}
 
