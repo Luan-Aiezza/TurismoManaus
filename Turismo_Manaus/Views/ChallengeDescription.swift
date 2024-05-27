@@ -142,7 +142,7 @@ struct ChallengeDescription: View {
                             )
                         }
                         
-                        Text("Av. Eduardo ribeiro - Centro, Manaus - AM, 69010-000")
+                        Text("\(capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.endereco))")
                             .foregroundStyle(.white)
                             .padding(.vertical,24.0)
                             .font(.body)
@@ -398,7 +398,7 @@ struct ChallengeDescription: View {
                 print("done!")
             }
         } else if item.quant_idas < 3 {
-            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_3")
             achievement.percentComplete = Double(item.quant_idas/3 * 100)
             achievement.showsCompletionBanner = true
             GKAchievement.report([achievement]) { error in
@@ -409,7 +409,7 @@ struct ChallengeDescription: View {
                 print("done!")
             }
         } else if item.quant_idas < 5 {
-            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_5")
             achievement.percentComplete = Double(item.quant_idas/5 * 100)
             GKAchievement.report([achievement]) { error in
                 guard error == nil else {
@@ -419,7 +419,7 @@ struct ChallengeDescription: View {
                 print("done!")
             }
         } else if item.quant_idas < 10 {
-            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
+            let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_10")
             achievement.percentComplete = Double(item.quant_idas/10 * 100)
             GKAchievement.report([achievement]) { error in
                 guard error == nil else {

@@ -53,7 +53,18 @@ class MyViewModel: ObservableObject {
                 GKAccessPoint.shared.location = .topLeading
                 GKAccessPoint.shared.showHighlights = false
                 GKAccessPoint.shared.isActive = true
-                self.player = player            }
+                let achievement = GKAchievement(identifier: "edificiotheoffice_1")
+                achievement.percentComplete = 100
+                achievement.showsCompletionBanner = true
+                GKAchievement.report([achievement]) { error in
+                    guard error == nil else {
+                        print(error?.localizedDescription ?? "")
+                        return
+                    }
+                    print("done!")
+                }
+                self.player = player
+            }
         }
         
     }

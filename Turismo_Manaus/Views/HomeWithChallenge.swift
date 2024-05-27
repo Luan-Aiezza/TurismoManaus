@@ -47,44 +47,13 @@ struct HomeWithChallenge : View {
                         Text("Para onde vamos hoje?")
                             .font(.title3)
                     }
+                    
                     Spacer()
 
                     VStack {
                         
                         Carrossel(currentIndex: $currentIndex)
                         
-                        HStack {
-                            
-                            
-                            // Filtros
-                            Button(action: {
-                                isShowingFilterView.toggle()
-                                calculaDistancias()
-                            }, label: {
-                                
-                                Image(systemName: "slider.horizontal.3")
-                                    .resizable()
-                                    .frame(width: 21.662, height: 18.056)
-                            }).padding()
-                                .sheet(isPresented: $isShowingFilterView) {
-                                    FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco,
-                                               isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
-                                    .presentationDetents([.large])
-                                    .presentationBackground(content: {
-                                        Color(.bgGlass2)
-                                            .blur(radius: 25)
-                                    })
-                                    .onAppear {
-                                        GKAccessPoint.shared.isActive = false
-                                    }
-                                    .onDisappear {
-                                        GKAccessPoint.shared.isActive = true
-                                    }
-                                }
-                            
-                            
-                            
-                        }
                     }
                     
                     Spacer()
@@ -139,6 +108,7 @@ struct HomeWithChallenge : View {
             .onAppear {
                 GKAccessPoint.shared.isActive = true
             }
+            
         }
         
     }
