@@ -202,7 +202,7 @@ struct ChallengeDescription: View {
                         })
                         
                     }
-                    if distanceinMeters > 2000000.0 {
+                    if distanceinMeters > 80.0 {
                         Button(action: {
                             activeAlert = .alert2
                         }, label: {
@@ -400,7 +400,7 @@ struct ChallengeDescription: View {
         } else if item.quant_idas < 3 {
             let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_\(item.quant_idas)")
             achievement.percentComplete = Double(item.quant_idas/3 * 100)
-            achievement.showsCompletionBanner
+            achievement.showsCompletionBanner = true
             GKAchievement.report([achievement]) { error in
                 guard error == nil else {
                     print(error?.localizedDescription ?? "")
