@@ -38,13 +38,15 @@ struct FilterView: View {
                         Spacer()
                         Text("Filtros")
                         Spacer()
-                        Text("Salvar")
+                        Text("   Salvar")
+                            .frame(width: 72)
                     }
                     .padding(.vertical, 8.0)
                     HStack{
                         Text("Horário")
                         Spacer()
                     }
+                    .padding(.top,16.0)
                     
                     Picker(selection: $selectedHorario, label: Text("")) {
                         Text("Todos").tag(Horarios.todos)
@@ -54,14 +56,14 @@ struct FilterView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                             .cornerRadius(8)
+                            .padding(.vertical, 8.0)
                 }
-                .padding()
                 
                 VStack {
                     HStack{
                         Text("Local")
                         Spacer()
-                    }
+                    }.padding(.top,16.0)
                     
                     Picker(selection: $selectedCategoria, label: Text("")) {
                         Text("Todos").tag(Categorias.todos)
@@ -70,15 +72,15 @@ struct FilterView: View {
                         Text("Festas").tag(Categorias.festas)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .padding(.vertical, 8.0)
                 }
-                .padding()
                 
                 
                 VStack {
                     HStack{
                         Text("Preço")
                         Spacer()
-                    }
+                    }.padding(.top,16.0)
                     Picker(selection: $selectedPreco, label: Text("")) {
                         Text("Todos").tag(Precos.todos)
                         Text("$").tag(Precos.barato)
@@ -86,8 +88,8 @@ struct FilterView: View {
                         Text("$$$").tag(Precos.caro)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .padding(.vertical, 8.0)
                 }
-                .padding()
                 
                 if (locationViewModel.locationManager?.authorizationStatus != .denied) {
                     VStack {
@@ -95,6 +97,7 @@ struct FilterView: View {
                             Text("Distância")
                             Spacer()
                         }
+                        .padding(.top,16.0)
                         Picker(selection: $selectedDistancia, label: Text("")) {
                             Text("Todos").tag(Distancias.todos)
                             Text("Até 3km").tag(Distancias.tres)
@@ -102,8 +105,8 @@ struct FilterView: View {
                             Text("Até 10km").tag(Distancias.dez)
                         }
                         .pickerStyle(SegmentedPickerStyle())
+                        .padding(.vertical, 8.0)
                     }
-                    .padding()
                 }
                 
                 else {
