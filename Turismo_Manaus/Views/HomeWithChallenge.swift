@@ -25,6 +25,10 @@ struct HomeWithChallenge : View {
     @State var currentIndex = 10
     @State private var isDetailViewShown = false
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
+        animation: .default) private var desafios: FetchedResults<Desafios>
+    
     var body: some View {
         if isDetailViewShown {
             ChallengeDescription(isDetailViewShown: $isDetailViewShown)
@@ -80,12 +84,13 @@ struct HomeWithChallenge : View {
                     }
                     Spacer()
                     
-                    Spacer()
-                    Button(action: {
-                        isDetailViewShown.toggle()
-                    }, label: {
-                        ChallengeCard()
-                    })
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        Button(action: {
+                            isDetailViewShown.toggle()
+                        }, label: {
+                            ChallengeCard()
+                        })
+                    }
                     
                     
                     

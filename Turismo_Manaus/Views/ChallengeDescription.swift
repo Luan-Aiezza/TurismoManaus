@@ -16,11 +16,26 @@ struct ChallengeDescription: View {
     @State var isShowingAlertDesistir = false
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Desafios.id, ascending: true)],
-        animation: .default)
-    private var desafios: FetchedResults<Desafios>
+        animation: .default) private var desafios: FetchedResults<Desafios>
     @State var player = GKLocalPlayer.local
     @State var preco = "$$"
     @Environment(\.openURL) var openURL
+    @Environment(\.managedObjectContext) private var viewContext
+
+    private func deleteAllItems() {
+        withAnimation {
+            for item in desafios {
+                viewContext.delete(item)
+            }
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                print("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -189,17 +204,21 @@ struct ChallengeDescription: View {
                         .stroke(Color.bgGlass1, lineWidth: 2)
                 )
                 .padding(.vertical, 16.0)
-                ZStack {
-                    
-                    HStack {
-                        Image(systemName: "trash")
-                            .foregroundColor(.white)
-                        Text("Desistir")
-                            .foregroundStyle(.white)
-                            .font(.title3)
-                            .fontWeight(.semibold)
+                Button {
+                    isShowingAlertDesistir = true
+                } label: {
+                    ZStack {
+                        
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundColor(.white)
+                            Text("Desistir")
+                                .foregroundStyle(.white)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                        }
+                        .padding(.vertical,12.0)
                     }
-                    .padding(.vertical,12.0)
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color.redGlass)
@@ -214,7 +233,6 @@ struct ChallengeDescription: View {
                 Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
                     secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
                     isDetailViewShown = false
-
                     // Coloca a função de desativar o desafio aqui
                     // Coloca a função de desativar o desafio aqui
                     // Coloca a função de desativar o desafio aqui
@@ -224,7 +242,10 @@ struct ChallengeDescription: View {
             .padding(.horizontal, 16.0)
             .padding(.vertical,24.0)
         }
-        
+        .onDisappear{
+            deleteAllItems()
+
+        }
     }
     
     func calculaPreco () {
