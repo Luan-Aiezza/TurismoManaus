@@ -23,7 +23,7 @@ struct ChallengeCard: View {
             ZStack {
                 VStack {
                     HStack{
-                        Spacer()
+                
                         Image( transformString(desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id!) )
                             .resizable()
                             .frame(width: 48, height: 63)
@@ -49,7 +49,7 @@ struct ChallengeCard: View {
                             .resizable()
                             .frame(width: 11.689, height: 16.963)
                             .scaledToFit()
-                        Spacer()
+                 
                         //
                     }
                     .padding(12)
@@ -58,7 +58,6 @@ struct ChallengeCard: View {
                 RoundedRectangle(cornerRadius: 24.0)
                     .stroke(Color.bgGlass1, lineWidth: 2)
             )
-            .frame(maxWidth: .infinity)
             .background(Color.bgGlass1)
             .cornerRadius(24.0)
             .onAppear {

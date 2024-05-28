@@ -39,7 +39,7 @@ struct Home : View {
             Color.backgroundColor
             
             VStack{
-                VStack (spacing: 16){
+                VStack (spacing: 32){
                     VStack{
                         Text("Oi, \(player.displayName)!")
                             .font(.title)
@@ -49,7 +49,7 @@ struct Home : View {
                             .fontWeight(.thin)
                     }
                     
-                    VStack(spacing: 16){
+                    VStack(spacing: 32){
                         
                         Carrossel(currentIndex: $currentIndex)
                         
@@ -121,7 +121,6 @@ struct Home : View {
                             }
                             
                         }
-                        .padding()
                     }
                     
                 }
@@ -228,14 +227,7 @@ struct Home : View {
                     }
                     
                 }
-                
-                
-                
-                RoundedRectangle(cornerRadius: 24)
-                    .frame(width: 80, height: 80)
-                .opacity(0)
-                
-                
+
             }
             .padding()
             .padding()

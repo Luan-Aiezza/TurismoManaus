@@ -42,18 +42,33 @@ struct HomeWithChallenge : View {
                     .ignoresSafeArea()
                 
                 VStack{
-                    VStack (spacing: 16){
+                    Spacer()
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        Button(action: {
+                            isDetailViewShown.toggle()
+                        }, label: {
+                            ChallengeCard()
+                        })
+                    }
+                }
+                .padding()
+                .padding(.horizontal)
+                
+                VStack{
+                    Spacer()
+                    Text(" ")
+                    VStack (spacing: 32){
                         VStack{
                             Text("Olá, \(player.displayName)!")
                                 .font(.title)
                                 .bold()
-                            Text("Para onde vamos hoje?")
+                            Text("Boa sorte com o desafio!")
                                 .font(.title3)
                                 .fontWeight(.thin)
 
                         }
                         
-                        VStack(spacing: 16) {
+                        VStack(spacing: 32) {
                             Carrossel(currentIndex: $currentIndex)
                             
                             HStack {
@@ -123,7 +138,6 @@ struct HomeWithChallenge : View {
                                 }
                                 
                             }
-                            .padding()
                         }
                     }
                     .padding()
@@ -198,17 +212,17 @@ struct HomeWithChallenge : View {
                         
                     }
                     
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                        Button(action: {
-                            isDetailViewShown.toggle()
-                        }, label: {
-                            ChallengeCard()
-                        })
-                    }
+                    RoundedRectangle(cornerRadius: 24)
+                        .frame(width: 80, height: 80)
+                        .opacity(0)
+                    Spacer()
+                    
                     
                 }
                 .padding()
                 .padding()
+                
+                
             }
             .onAppear {
                 GKAccessPoint.shared.isActive = true
