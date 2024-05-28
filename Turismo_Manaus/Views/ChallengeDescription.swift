@@ -177,7 +177,7 @@ struct ChallengeDescription: View {
                         
                         Spacer()
                         Button(action: {
-                            if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.maps) {
+                            if let url = URL(string: PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.link) {
                                 openURL(url)
                             }
                         }, label: {
