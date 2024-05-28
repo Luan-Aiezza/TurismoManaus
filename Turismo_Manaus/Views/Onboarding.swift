@@ -6,6 +6,7 @@ import Foundation
 
 struct OnboardingView: View {
     @State private var currentPage = 0
+    @Binding var hasCompletedOnboarding:  Bool
     
     var body: some View {
         ZStack{
@@ -27,6 +28,7 @@ struct OnboardingView: View {
                         currentPage += 1
                     } else {
                         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+                        hasCompletedOnboarding = true
                     }
                 }) {
                     ZStack {
@@ -90,11 +92,11 @@ struct OnboardingPage3: View {
 }
 
 struct ContentView: View {
-    @State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+    @State var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     
     var body: some View {
         if !hasCompletedOnboarding {
-            OnboardingView()
+            OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
         } else {
             UI()
         }
