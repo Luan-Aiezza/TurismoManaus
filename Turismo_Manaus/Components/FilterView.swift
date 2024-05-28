@@ -23,8 +23,7 @@ struct FilterView: View {
     var body: some View {
         
         ZStack {
-        
-   Color.black
+            Color.fundofiltro
            .ignoresSafeArea()
                 .opacity(0.8)
                 .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
@@ -44,25 +43,25 @@ struct FilterView: View {
                             selectedCategoria = Categorias.todos
                         }, label: {
                             Text("Cancelar")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.fundofiltroInv)
                         })
                         
                         Spacer()
                         Text("Filtros")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.fundofiltroInv)
                         Spacer()
                         Button(action: {
                             isShowingFilterView.toggle()
                         }, label: {
                             Text("   Salvar")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.fundofiltroInv)
                                 .frame(width: 72)
                         })
                     }
                     .padding(.vertical, 8.0)
                     HStack{
                         Text("Horário")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.fundofiltroInv)
                         Spacer()
                     }
                     .padding(.top,16.0)
@@ -83,7 +82,7 @@ struct FilterView: View {
                 VStack {
                     HStack{
                         Text("Local")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.fundofiltroInv)
                         Spacer()
                     }.padding(.top,16.0)
                     
@@ -101,7 +100,7 @@ struct FilterView: View {
                 VStack {
                     HStack{
                         Text("Preço")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.fundofiltroInv)
                         Spacer()
                     }.padding(.top,16.0)
                     Picker(selection: $selectedPreco, label: Text("")) {
@@ -118,7 +117,7 @@ struct FilterView: View {
                     VStack {
                         HStack{
                             Text("Distância")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.fundofiltroInv)
                             Spacer()
                         }
                         .padding(.top,16.0)
@@ -137,7 +136,7 @@ struct FilterView: View {
                     VStack(spacing: 20) {
                         HStack{
                             Text("Distância")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.fundofiltroInv)
                             Spacer()
                         }
                         VStack (spacing: 20){

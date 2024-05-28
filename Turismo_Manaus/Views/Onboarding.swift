@@ -53,10 +53,11 @@ struct OnboardingView: View {
 
 struct OnboardingPage1: View {
     var body: some View {
-        VStack(spacing: 100){
+        VStack(spacing: 80){
             
-            Text("Bem-vindo(a) ao Simbora Manaus!\nSeja desafiado a visitar os pontos turísticos de Manaus!")
+            Text("Bem-vindo(a) ao Simbora Manaus! Seja desafiado a visitar os pontos turísticos de Manaus!")
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
             HStack{
                 Image("Group1515")
                     .padding()
@@ -70,8 +71,10 @@ struct OnboardingPage2: View {
     var body: some View {
         
         VStack(spacing: 80){
-            Text("Utilize o filtro para personalizar seu desafio\nou\nIgnore o filtro e sorteie às cegas")
+            Text("Utilize o filtro para personalizar seu desafio ou Ignore o filtro e sorteie às cegas")
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+
             HStack{
                 Image("Group1516")
             }
@@ -82,8 +85,10 @@ struct OnboardingPage2: View {
 struct OnboardingPage3: View {
     var body: some View {
         VStack(spacing: 60){
-            Text("Você também pode visualizar suas \nconquistas no seu perfil Game Center")
+            Text("Você também pode visualizar suas conquistas no seu perfil Game Center")
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+
             HStack{
                 Image("Group1519")
             }
