@@ -40,23 +40,163 @@ struct HomeWithChallenge : View {
                 
                 Color.backgroundColor
                     .ignoresSafeArea()
+                
                 VStack{
-                    VStack{
-                        Text("Olá, \(player.displayName)!")
-                            .font(.title)
-                        Text("Para onde vamos hoje?")
-                            .font(.title3)
-                    }
-                    
-                    Spacer()
+                    VStack (spacing: 16){
+                        VStack{
+                            Text("Olá, \(player.displayName)!")
+                                .font(.title)
+                                .bold()
+                            Text("Para onde vamos hoje?")
+                                .font(.title3)
+                                .fontWeight(.thin)
 
-                    VStack {
+                        }
                         
-                        Carrossel(currentIndex: $currentIndex)
+                        VStack(spacing: 16) {
+                            Carrossel(currentIndex: $currentIndex)
+                            
+                            HStack {
+                                // Iniciar Random
+                                Button(action: {
+                                    Task{
+                                        locationViewModel.pontoSelecionado = selecionarPontoTuristicoAleatorio()
+                                        for (index, element) in PontosTuristicos.enumerated(){
+                                            if locationViewModel.pontoSelecionado?.name == element.name{
+                                                withAnimation(Animation.smooth) {
+                                                    currentIndex = index
+                                                    Task {
+                                                        try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
+                                                        isShowingModal.toggle()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                }, label: {
+                                    ZStack {
+                                        Color.bgGlass1
+                                            .cornerRadius(100.0)
+                                        Text("Sortear")
+                                            .font(.headline)
+                                            .foregroundColor(.accentColorYellow)
+                                            .padding(.horizontal, 16.0)
+                                            .padding(.vertical, 12.0)
+                                    }
+                                    .frame(width: 96, height: 46)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 100.0)
+                                            .stroke(Color.bgGlass1, lineWidth: 2)
+                                    )
+                                    
+                                })
+                                
+                                
+                                // Filtros
+                                Button(action: {
+                                    isShowingFilterView.toggle()
+                                    calculaDistancias()
+                                }, label: {
+                                    
+                                    Image(systemName: "slider.horizontal.3")
+                                        .resizable()
+                                        .frame(width: 21.662, height: 18.056)
+                                })
+                                .padding()
+                                .sheet(isPresented: $isShowingFilterView) {
+                                    FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
+                                    
+                                        .presentationDetents([.large])
+                                        .presentationBackground(content: {
+                                            Color(.bgGlass2)
+                                                .blur(radius: 25)
+                                        })
+                                        .onAppear {
+                                            GKAccessPoint.shared.isActive = false
+                                        }
+                                        .onDisappear {
+                                            GKAccessPoint.shared.isActive = true
+                                        }
+                                }
+                                
+                            }
+                            .padding()
+                        }
+                    }
+                    .padding()
+                    .foregroundStyle(.white)
+                    .sheet(isPresented: $isShowingModal) {
+                        if let ponto = locationViewModel.pontoSelecionado {
+                            ZStack {
+                                Color.black
+                                    .opacity(0.8)
+                                
+                                VStack(spacing: 12) {
+                                    Text("Desafio lançado!")
+                                        .font(.title)
+                                    Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                                        .font(.headline)
+                                        .multilineTextAlignment(.center)
+                                    Image(transformString(ponto.name))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .scaledToFill()
+                                        .frame(width: 358, height: 176)
+                                        .cornerRadius(15.0)
+                                        .padding(.vertical, 24.0)
+                                    
+                                    HStack{
+                                        
+                                        // Aceitar
+                                        Button(action: {
+                                            isShowingModal = false
+                                        }
+                                               , label: {
+                                            ZStack {
+                                                
+                                                HStack {
+                                                    Text("Ok")
+                                                        .foregroundStyle(.accentColorYellow)
+                                                        .font(.headline)
+                                                }
+                                                .padding(.vertical,12.0)
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color.bgGlass1)
+                                            .cornerRadius(100.0)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 100.0)
+                                                    .stroke(Color.bgGlass1, lineWidth: 2)
+                                            )
+                                            
+                                        })
+                                    }
+                                    
+                                    Text("")
+                                    Text("")
+                                    
+                                }
+                                .padding(.horizontal, 16.0)
+                                .padding(.vertical,24.0)
+                                .foregroundStyle(.white)
+                                
+                                
+                            }.presentationDetents([.fraction(0.6)])
+                                .ignoresSafeArea()
+                                .presentationBackground(content: {
+                                    Color(.bgGlass2)
+                                        .blur(radius: 25)
+                                })
+                            
+                            
+                        } else {
+                            Text("Nenhum filtro selecionado")
+                        }
                         
                     }
-                    
-                    Spacer()
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         Button(action: {
@@ -66,44 +206,9 @@ struct HomeWithChallenge : View {
                         })
                     }
                     
-                    
-                    
                 }
                 .padding()
-                .foregroundStyle(.white)
-                .sheet(isPresented: $isShowingModal) {
-                    
-                    if let ponto = locationViewModel.pontoSelecionado {
-                        Text("Desafio lançado!")
-                            .font(.title)
-                            .foregroundStyle(.black)
-                        Text("Visite o(a) \(ponto.name) em até uma semana!")
-                        Image("Card")
-                        
-                        HStack{
-                            Text(String(describing: ponto.categoria))
-                            Text(String(describing: ponto.preco))
-                            Text(String(describing: ponto.status))
-                        }
-                        
-                        HStack{
-                            Button("Recusar") {
-                                isShowingModal = false
-                            }
-                            Button("Aceitar") {
-                                addDesafio(pontoId: transformString(ponto.name))
-                                isShowingModal = false
-                            }
-                        }
-                        
-                    } else {
-                        Text("Nenhum filtro selecionado")
-                    }
-                    
-                    Spacer()
-                    
-                }
-                .padding(16.0)
+                .padding()
             }
             .onAppear {
                 GKAccessPoint.shared.isActive = true
