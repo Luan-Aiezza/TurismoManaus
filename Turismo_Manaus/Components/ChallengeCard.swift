@@ -21,9 +21,8 @@ struct ChallengeCard: View {
     var body: some View {
         if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
             ZStack {
-                VStack {
+                VStack{
                     HStack{
-                
                         Image( transformString(desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id!) )
                             .resizable()
                             .frame(width: 48, height: 63)
@@ -50,8 +49,7 @@ struct ChallengeCard: View {
                             .frame(width: 11.689, height: 16.963)
                             .scaledToFit()
                             .foregroundStyle(.white)
-                 
-                        //
+
                     }
                     .padding(12)
                 }

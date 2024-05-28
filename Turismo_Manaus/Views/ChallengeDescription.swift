@@ -271,14 +271,15 @@ struct ChallengeDescription: View {
                             }
                             .padding(.vertical,12.0)
                         }
+                        .frame(maxWidth: .infinity)
+                        .background(Color.redGlass)
+                        .cornerRadius(100.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 100.0)
+                                .stroke(Color.redGlass, lineWidth: 2)
+                        )
                     }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.redGlass)
-                    .cornerRadius(100.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 100.0)
-                            .stroke(Color.redGlass, lineWidth: 2)
-                    )
+                    
                     Spacer()
                 }
                 .alert(item: $activeAlert) { alert in
