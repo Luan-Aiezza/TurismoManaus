@@ -43,7 +43,8 @@ struct HomeWithChallenge : View {
                 
                 VStack{
                     Spacer()
-                    VStack (spacing: 32){
+                    Text(" ")
+                    VStack (spacing: 16){
                         VStack{
                             Text("Olá, \(player.displayName)!")
                                 .font(.title)
