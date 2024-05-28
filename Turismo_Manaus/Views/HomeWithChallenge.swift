@@ -43,8 +43,21 @@ struct HomeWithChallenge : View {
                 
                 VStack{
                     Spacer()
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        Button(action: {
+                            isDetailViewShown.toggle()
+                        }, label: {
+                            ChallengeCard()
+                        })
+                    }
+                }
+                .padding()
+                .padding(.horizontal)
+                
+                VStack{
+                    Spacer()
                     Text(" ")
-                    VStack (spacing: 16){
+                    VStack (spacing: 32){
                         VStack{
                             Text("Olá, \(player.displayName)!")
                                 .font(.title)
@@ -55,7 +68,7 @@ struct HomeWithChallenge : View {
 
                         }
                         
-                        VStack(spacing: 16) {
+                        VStack(spacing: 32) {
                             Carrossel(currentIndex: $currentIndex)
                             
                             HStack {
@@ -198,18 +211,18 @@ struct HomeWithChallenge : View {
                         }
                         
                     }
+                    
+                    RoundedRectangle(cornerRadius: 24)
+                        .frame(width: 80, height: 80)
+                        .opacity(0)
                     Spacer()
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
-                        Button(action: {
-                            isDetailViewShown.toggle()
-                        }, label: {
-                            ChallengeCard()
-                        })
-                    }
+                    
                     
                 }
                 .padding()
                 .padding()
+                
+                
             }
             .onAppear {
                 GKAccessPoint.shared.isActive = true
