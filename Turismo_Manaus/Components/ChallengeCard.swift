@@ -43,6 +43,7 @@ struct ChallengeCard: View {
                                     .foregroundColor(.neutral)
                             }
                         })
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal, 12.0 )
                         Image(systemName: "chevron.forward")
                             .resizable()
@@ -53,7 +54,9 @@ struct ChallengeCard: View {
                     }
                     .padding(12)
                 }
-            }.overlay(
+            }
+            .frame(maxWidth: .infinity)
+            .overlay(
                 RoundedRectangle(cornerRadius: 24.0)
                     .stroke(Color.bgGlass1, lineWidth: 2)
             )
