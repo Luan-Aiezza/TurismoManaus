@@ -49,6 +49,7 @@ struct ChallengeCard: View {
                             .resizable()
                             .frame(width: 11.689, height: 16.963)
                             .scaledToFit()
+                            .foregroundStyle(.white)
                  
                         //
                     }
