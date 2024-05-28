@@ -42,12 +42,13 @@ struct HomeWithChallenge : View {
                     .ignoresSafeArea()
                 
                 VStack{
-                    VStack (spacing: 16){
+                    Spacer()
+                    VStack (spacing: 32){
                         VStack{
                             Text("Olá, \(player.displayName)!")
                                 .font(.title)
                                 .bold()
-                            Text("Para onde vamos hoje?")
+                            Text("Boa sorte com o desafio!")
                                 .font(.title3)
                                 .fontWeight(.thin)
 
@@ -123,7 +124,6 @@ struct HomeWithChallenge : View {
                                 }
                                 
                             }
-                            .padding()
                         }
                     }
                     .padding()
@@ -197,7 +197,7 @@ struct HomeWithChallenge : View {
                         }
                         
                     }
-                    
+                    Spacer()
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         Button(action: {
                             isDetailViewShown.toggle()
