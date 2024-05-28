@@ -52,7 +52,6 @@ class MyViewModel: ObservableObject {
                 print("Player authenticated!")
                 GKAccessPoint.shared.location = .topLeading
                 GKAccessPoint.shared.showHighlights = false
-                GKAccessPoint.shared.isActive = true
                 let achievement = GKAchievement(identifier: "edificiotheoffice_1")
                 achievement.percentComplete = 100
                 achievement.showsCompletionBanner = true
@@ -63,6 +62,7 @@ class MyViewModel: ObservableObject {
                     }
                     print("done!")
                 }
+                GKAccessPoint.shared.isActive = true
                 self.player = player
             }
         }
