@@ -39,7 +39,36 @@ struct Home : View {
             Color.backgroundColor
             
             VStack{
-                VStack (spacing: 32){
+                HStack{
+                    Spacer()
+                    // Filtros
+                    Button(action: {
+                        isShowingFilterView.toggle()
+                        calculaDistancias()
+                    }, label: {
+                        
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .frame(width: 21.662, height: 18.056)
+                    })
+                    .padding()
+                    .sheet(isPresented: $isShowingFilterView) {
+                        FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
+                        
+                            .presentationDetents([.large])
+                            .presentationBackground(content: {
+                                Color(.bgGlass2)
+                                    .blur(radius: 25)
+                            })
+                            .onAppear {
+                                GKAccessPoint.shared.isActive = false
+                            }
+                            .onDisappear {
+                                GKAccessPoint.shared.isActive = true
+                            }
+                    }
+                }
+                VStack (spacing: 40){
                     VStack{
                         Text("Oi, \(player.displayName)!")
                             .font(.title)
@@ -49,7 +78,7 @@ struct Home : View {
                             .fontWeight(.thin)
                     }
                     
-                    VStack(spacing: 32){
+                    VStack(spacing: 60){
                         
                         Carrossel(currentIndex: $currentIndex)
                         
@@ -71,54 +100,26 @@ struct Home : View {
                                             
                                         }
                                     }
+                                    
                                 }
-                                
                                 
                             }, label: {
                                 ZStack {
-                                    Color.bgGlass1
-                                        .cornerRadius(100.0)
                                     Text("Sortear")
-                                        .font(.headline)
+                                        .font(.title3)
+                                        .bold()
                                         .foregroundColor(.accentColorYellow)
-                                        .padding(.horizontal, 16.0)
-                                        .padding(.vertical, 12.0)
+                                        .padding(.horizontal, 26.0) //Antes 26
+                                        .padding(.vertical, 18.0) //antes 18
                                 }
-                                .frame(width: 96, height: 46)
+                                .background(Color.bgGlass1)
+                                .cornerRadius(100.0)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 100.0)
                                         .stroke(Color.bgGlass1, lineWidth: 2)
                                 )
                                 
                             })
-                            
-                            
-                            // Filtros
-                            Button(action: {
-                                isShowingFilterView.toggle()
-                                calculaDistancias()
-                            }, label: {
-                                
-                                Image(systemName: "slider.horizontal.3")
-                                    .resizable()
-                                    .frame(width: 21.662, height: 18.056)
-                            })
-                            .padding()
-                            .sheet(isPresented: $isShowingFilterView) {
-                                FilterView(selectedCategoria: $selectedCategoria, selectedHorario: $selectedHorario, selectedDistancia: $selectedDistancia, selectedPreco: $selectedPreco, isShowingFilterView: $isShowingFilterView, locationViewModel: locationViewModel)
-                                
-                                    .presentationDetents([.large])
-                                    .presentationBackground(content: {
-                                        Color(.bgGlass2)
-                                            .blur(radius: 25)
-                                    })
-                                    .onAppear {
-                                        GKAccessPoint.shared.isActive = false
-                                    }
-                                    .onDisappear {
-                                        GKAccessPoint.shared.isActive = true
-                                    }
-                            }
                             
                         }
                     }
@@ -131,16 +132,7 @@ struct Home : View {
                         ZStack {
                             Color.black
                                 .opacity(0.8)
-                            //                        LinearGradient(colors: [.black, .gray], startPoint: .top, endPoint: .bottom)
-                            
-                            //                            .ignoresSafeArea()
-                            //                            .blur(radius: 50.0)
-                            //                            .border(Color.bgGlass1, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            //                            .overlay(
-                            //                                Rectangle()
-                            //                                    .frame(height: 1)
-                            //                                    .foregroundColor(.clear), alignment: .bottom
-                            //                            )
+                        
                             VStack(spacing: 12) {
                                 Text("Desafio lançado!")
                                     .font(.title)
