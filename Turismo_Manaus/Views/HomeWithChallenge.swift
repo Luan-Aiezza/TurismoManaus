@@ -144,68 +144,151 @@ struct HomeWithChallenge : View {
                     .foregroundStyle(.white)
                     .sheet(isPresented: $isShowingModal) {
                         if let ponto = locationViewModel.pontoSelecionado {
-                            ZStack {
-                                Color.black
-                                    .opacity(0.8)
-                                
-                                VStack(spacing: 12) {
-                                    Text("Desafio lançado!")
-                                        .font(.title)
-                                    Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
-                                        .font(.headline)
-                                        .multilineTextAlignment(.center)
-                                    Image(transformString(ponto.name))
-                                        .resizable()
-                                        .scaledToFit()
-                                        .scaledToFill()
-                                        .frame(width: 358, height: 176)
-                                        .cornerRadius(15.0)
-                                        .padding(.vertical, 24.0)
+                            if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                                ZStack {
+                                    Color.black
+                                        .opacity(0.8)
                                     
-                                    HStack{
+                                    VStack(spacing: 12) {
+                                        Text("Desafio lançado!")
+                                            .font(.title)
+                                        Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                                            .font(.headline)
+                                            .multilineTextAlignment(.center)
+                                        Image(transformString(ponto.name))
+                                            .resizable()
+                                            .scaledToFit()
+                                            .scaledToFill()
+                                            .frame(width: 358, height: 176)
+                                            .cornerRadius(15.0)
+                                            .padding(.vertical, 24.0)
                                         
-                                        // Aceitar
-                                        Button(action: {
-                                            isShowingModal = false
-                                        }
-                                               , label: {
-                                            ZStack {
-                                                
-                                                HStack {
-                                                    Text("Ok")
-                                                        .foregroundStyle(.accentColorYellow)
-                                                        .font(.headline)
-                                                }
-                                                .padding(.vertical,12.0)
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .background(Color.bgGlass1)
-                                            .cornerRadius(100.0)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 100.0)
-                                                    .stroke(Color.bgGlass1, lineWidth: 2)
-                                            )
+                                        HStack{
                                             
-                                        })
+                                            // Aceitar
+                                            Button(action: {
+                                                isShowingModal = false
+                                            }
+                                                   , label: {
+                                                ZStack {
+                                                    
+                                                    HStack {
+                                                        Text("Ok")
+                                                            .foregroundStyle(.accentColorYellow)
+                                                            .font(.headline)
+                                                    }
+                                                    .padding(.vertical,12.0)
+                                                }
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color.bgGlass1)
+                                                .cornerRadius(100.0)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 100.0)
+                                                        .stroke(Color.bgGlass1, lineWidth: 2)
+                                                )
+                                                
+                                            })
+                                        }
+                                        
+                                        Text("")
+                                        Text("")
+                                        
                                     }
+                                    .padding(.horizontal, 16.0)
+                                    .padding(.vertical,24.0)
+                                    .foregroundStyle(.white)
                                     
-                                    Text("")
-                                    Text("")
                                     
-                                }
-                                .padding(.horizontal, 16.0)
-                                .padding(.vertical,24.0)
-                                .foregroundStyle(.white)
-                                
-                                
-                            }.presentationDetents([.fraction(0.6)])
-                                .ignoresSafeArea()
-                                .presentationBackground(content: {
-                                    Color(.bgGlass2)
-                                        .blur(radius: 25)
-                                })
-                            
-                            
+                                }.presentationDetents([.fraction(0.6)])
+                                    .ignoresSafeArea()
+                                    .presentationBackground(content: {
+                                        Color(.bgGlass2)
+                                            .blur(radius: 25)
+                                    })
+                            } else {
+                                ZStack {
+                                    Color.black
+                                        .opacity(0.8)
+                                    VStack(spacing: 12) {
+                                        Text("Desafio lançado!")
+                                            .font(.title)
+                                        Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
+                                            .font(.headline)
+                                            .multilineTextAlignment(.center)
+                                        Image(transformString(ponto.name))
+                                            .resizable()
+                                            .scaledToFit()
+                                            .scaledToFill()
+                                            .frame(width: 358, height: 176)
+                                            .cornerRadius(15.0)
+                                            .padding(.vertical, 24.0)
+                                        
+                                        HStack{
+                                            // Recusar
+                                            Button(action: {
+                                                isShowingModal = false
+                                            }
+                                                   , label: {
+                                                ZStack {
+                                                    
+                                                    HStack {
+                                                        Text("Recusar")
+                                                            .foregroundStyle(.white)
+                                                            .font(.headline)
+                                                    }
+                                                    .padding(.vertical,12.0)
+                                                }
+                                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                                                .background(Color.bgGlass1)
+                                                .cornerRadius(100.0)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 100.0)
+                                                        .stroke(Color.bgGlass1, lineWidth: 2)
+                                                )
+                                            })
+                                            Spacer()
+                                            // Aceitar
+                                            Button(action: {
+                                                addDesafio(pontoId: transformString(ponto.name))
+                                                isShowingModal = false
+                                            }
+                                                   , label: {
+                                                ZStack {
+                                                    
+                                                    HStack {
+                                                        Text("Aceitar")
+                                                            .foregroundStyle(.accentColorYellow)
+                                                            .font(.headline)
+                                                    }
+                                                    .padding(.vertical,12.0)
+                                                }
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color.bgGlass1)
+                                                .cornerRadius(100.0)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 100.0)
+                                                        .stroke(Color.bgGlass1, lineWidth: 2)
+                                                )
+                                                
+                                            })
+                                        }
+                                        
+                                        Text("")
+                                        Text("")
+                                        
+                                    }
+                                    .padding(.horizontal, 16.0)
+                                    .padding(.vertical,24.0)
+                                    .foregroundStyle(.white)
+                                    
+                                    
+                                }.presentationDetents([.fraction(0.6)])
+                                    .ignoresSafeArea()
+                                    .presentationBackground(content: {
+                                        Color(.bgGlass2)
+                                            .blur(radius: 25)
+                                    })
+                            }
                         } else {
                             Text("Nenhum filtro selecionado")
                         }
@@ -292,6 +375,8 @@ struct HomeWithChallenge : View {
         newItem.data_termino = Calendar.current.date(byAdding: .day, value: 7, to: Date())
         newItem.ponto_id = pontoId
         newItem.user_id = player.gamePlayerID
+        newItem.state = "inProgress"
+        print(newItem)
         do {
             try viewContext.save()
             print(newItem)
@@ -300,4 +385,8 @@ struct HomeWithChallenge : View {
         
     }
     
+}
+
+extension Color {
+    static let backgroundColor = Color(UIColor(red: 17/255, green: 17/255, blue: 17/255, alpha: 1))
 }
