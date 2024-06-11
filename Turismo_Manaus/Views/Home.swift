@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
+import GameKit
+import CoreLocation
 
 struct Home : View {
     @State var selectedCategoria = Categorias.todos
@@ -310,10 +313,6 @@ struct Home : View {
         }
     }
     
-}
-
-extension Color {
-    static let backgroundColor = Color(UIColor(red: 17/255, green: 17/255, blue: 17/255, alpha: 1))
 }
 
 struct CustomModalView: View {
