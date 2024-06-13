@@ -38,6 +38,7 @@ struct UI: View{
                 } else {
                     
                     if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                        #warning("Se só tem um elemento, não precisa a VStack")
                         VStack{
                             HomeWithChallenge(locationViewModel: locationViewModel)                                
                         }

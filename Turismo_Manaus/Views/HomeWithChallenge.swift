@@ -56,6 +56,7 @@ struct HomeWithChallenge : View {
                 
                 VStack{
                     Spacer()
+                    #warning("E esse Text?")
                     Text(" ")
                     VStack (spacing: 32){
                         VStack{
@@ -231,7 +232,7 @@ struct HomeWithChallenge : View {
         }
         
     }
-    
+    #warning("Acho que tem código repetido ein...")
     func calculaDistancias() {
         print(".....")
         for i in 0..<PontosTuristicos.count {

@@ -16,6 +16,7 @@ struct OnboardingView: View {
                 if currentPage == 0 {
                     OnboardingPage1()
                         .padding(115)
+                    #warning("Cuidado com os Magic numbers!")
                 } else if currentPage == 1 {
                     OnboardingPage2()
                         .padding(76)
@@ -50,7 +51,7 @@ struct OnboardingView: View {
         }
     }
 }
-
+#warning("Poderia facilmente ser um única View, que recebe os parametros desejados, reutilizando assim o código!")
 struct OnboardingPage1: View {
     var body: some View {
         VStack(spacing: 80){
@@ -59,6 +60,7 @@ struct OnboardingPage1: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
             HStack{
+                #warning("Sempre bom utilizar os nomes que tenham significado, incluindo os nomes de assets")
                 Image("Group1515")
                     .padding()
             }
@@ -95,8 +97,9 @@ struct OnboardingPage3: View {
         }
     }
 }
-
+#warning("Sempre bom utilizar nomes que tenham significado.")
 struct ContentView: View {
+    #warning("Dar uma olhada no @AppStorage - https://www.hackingwithswift.com/quick-start/swiftui/what-is-the-appstorage-property-wrapper")
     @State var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     
     var body: some View {

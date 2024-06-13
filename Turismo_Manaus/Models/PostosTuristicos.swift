@@ -30,9 +30,11 @@ enum Distancias {
 }
 
 
-
+#warning("Lembrar do uso de JSON")
+#warning("Ao usar o UUID, lembrar que em cada execução são valores novos")
+#warning("E o nome desse arquivo? 🤣")
 public var PontosTuristicos: [PontoTuristico] = [
-    
+
     PontoTuristico(id: UUID(), name: "Parque Senador Jefferson Péres", desc: "Parque urbano amplo ao longo de um riacho com um pórtico de arcos em ferro, uma trilha coberta e monumentos.", categoria: Categorias.tradicionais, latitude: "-3.1308190156009417", longitude: "-60.01565870581663", preco: Precos.barato, horarios: [Horarios.todos], distancia: Distancias.todos, status: "dia e noite", maps: "https://maps.app.goo.gl/q3oLwFAFjdVN9wcDA", endereco: "Av. Lourenço da Silva Braga, 1507 - Centro, Manaus - AM", link: "“https://cultura.am.gov.br/espacos-culturais/parques-e-pracas/parque-senador-jefferson-peres/" ),
     
     PontoTuristico(id: UUID(), name: "Parque Estadual Sumaúma", desc: "Parque integrado por uma ampla área protegida, espaço com elementos do imaginário amazônico e trilhas.", categoria: Categorias.tradicionais, latitude: "-3.027970927183905", longitude: "-59.9796098154616", preco: Precos.barato, horarios: [Horarios.manha], distancia: Distancias.todos, status: "dia", maps: "https://maps.app.goo.gl/tr6gz9hRBmtbTgmT6", endereco: "Av. Bacuri, s/n - Cidade Nova, Manaus - AM, 69095-110", link: "https://www.instagram.com/parqueestadual_sumauma/?hl=pt"),

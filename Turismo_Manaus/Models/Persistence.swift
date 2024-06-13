@@ -37,7 +37,8 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentCloudKitContainer
-
+    
+    #warning("Quando estamos usando o design pattern Singleton, o init deve ser private!")
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "PontosDataModel")
         if inMemory {

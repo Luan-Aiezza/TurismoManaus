@@ -14,7 +14,7 @@ enum Tabs: String, CaseIterable {
     case ranking = "crown"
     case me = "person"
 }
-
+#warning("Remove os arquivos que não vão ser utilizados!")
 struct CustomTabBar: View {
     
     @Binding var selectTab: Tabs
@@ -46,7 +46,7 @@ struct CustomTabBar: View {
         
     }
 }
-
+#warning("Remover os comentários, sem dó!")
 //struct TabBar: View {
 //    @State private var isPresentingAchievements = false
 //    @State private var isPresentingLeaderboard = false

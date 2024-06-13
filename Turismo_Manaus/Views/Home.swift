@@ -13,6 +13,7 @@ import CoreLocation
 import Foundation
 
 struct Home : View {
+    #warning("Mix de português com inglês")
     @State var selectedCategoria = Categorias.todos
     @State var selectedHorario = Horarios.todos
     @State var selectedDistancia = Distancias.todos
@@ -50,6 +51,7 @@ struct Home : View {
                         Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .frame(width: 21.662, height: 18.056)
+#warning("A gente não repete comentário, mas esse aqui foi demais... Magic MUITO number!👆")
                     })
                     .padding()
                     .sheet(isPresented: $isShowingFilterView) {
@@ -87,13 +89,14 @@ struct Home : View {
                             // Iniciar Random
                             Button(action: {
                                 Task{
+                                    #warning("Funcionalidades não devem estar na View!")
                                     locationViewModel.pontoSelecionado = selecionarPontoTuristicoAleatorio()
                                     for (index, element) in PontosTuristicos.enumerated(){
                                         if locationViewModel.pontoSelecionado?.name == element.name{
                                             withAnimation(Animation.smooth) {
                                                 currentIndex = index
                                                 Task {
-                                                    try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2 seconds
+                                                    try await Task.sleep(nanoseconds: 1_000_000_000) // Wait for 2
                                                     isShowingModal.toggle()
                                                 }
                                             }
@@ -129,6 +132,7 @@ struct Home : View {
                 .foregroundStyle(.white)
                 .sheet(isPresented: $isShowingModal) {
                     if let ponto = locationViewModel.pontoSelecionado {
+                        #warning("Podia encapsular esta View em sua própria struct!")
                         ZStack {
                             Color.black
                                 .opacity(0.8)
@@ -196,7 +200,7 @@ struct Home : View {
                                         
                                     })
                                 }
-                                
+                                #warning("??? Podem dar uma olhadinha no @ScaledMetric: https://www.hackingwithswift.com/quick-start/swiftui/what-is-the-scaledmetric-property-wrapper")
                                 Text("")
                                 Text("")
                                 
@@ -289,6 +293,7 @@ struct Home : View {
             try viewContext.save()
             print(newItem)
         } catch {
+            #warning("Catchou nada né?")
         }
         
     }
@@ -304,6 +309,7 @@ struct Home : View {
             let distanceInKilometers = distanceinMeters/1000
             print(PontosTuristicos[i].name)
             print(distanceInKilometers)
+            #warning("Identração, tip: (ctrl + i)")
             if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distancia = Distancias.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
                 PontosTuristicos[i].distancia = Distancias.cinco
@@ -317,10 +323,12 @@ struct Home : View {
     
 }
 
+#warning("Poderia colocar as extensions em outro arquivo!")
+#warning("As cores poderiam ser um asset no .xcassets")
 extension Color {
     static let backgroundColor = Color(UIColor(red: 17/255, green: 17/255, blue: 17/255, alpha: 1))
 }
-
+#warning("Se não vai usar...TIRA!")
 struct CustomModalView: View {
     var body: some View {
         VStack {

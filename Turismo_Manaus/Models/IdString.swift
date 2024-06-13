@@ -7,6 +7,8 @@
 
 import Foundation
 
+#warning("Em geral funções globais funcionam como extensão de algum tipo!")
+
 public func removeAccents(from string: String) -> String {
     return string.applyingTransform(.stripCombiningMarks, reverse: false) ?? string
 }

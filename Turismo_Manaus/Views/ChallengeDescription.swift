@@ -14,6 +14,7 @@ import CoreLocation
 enum ActiveAlert: Identifiable {
     case alert1, alert2
     
+#warning("hasValue não garante unicidade!")
     var id: Int {
         hashValue
     }
@@ -107,6 +108,10 @@ struct ChallengeDescription: View {
                             .padding(.vertical, 16.0)
                         HStack {
                             ZStack {
+                                #warning("Cuidado com os forced unwraps")
+                                #warning("Como está a questão do Dark mode? por conta do foregroundStyle customizado!")
+                                #warning("Vale comentar também sobre style guides ou traits files!")
+                                
                                 Text("\( capitalizeFirstLetter( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.categoria.rawValue))")
                                     .foregroundStyle(.white)
                                     .padding(.horizontal,10.0)
