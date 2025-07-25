@@ -36,16 +36,9 @@ struct UI: View{
                 if viewModel.isLoading {
                     LoadingView()
                 } else {
-                    
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
                         VStack{
                             HomeWithChallenge(locationViewModel: locationViewModel)                                
                         }
-                    } else {
-                        VStack{
-                            Home(locationViewModel: locationViewModel, player: viewModel.player)
-                        }
-                    }
                 }
             }
             .onAppear {

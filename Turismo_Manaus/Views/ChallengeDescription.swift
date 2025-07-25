@@ -288,7 +288,9 @@ struct ChallengeDescription: View {
                             case .alert1:
                                 return Alert(title: Text("Deseja mesmo desistir do desafio?"), message: Text("Visitar o \( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name)"), primaryButton: Alert.Button.cancel(),
                                              secondaryButton: Alert.Button.destructive(Text("Desistir"), action: {
-                                           isDetailViewShown = false
+                                    
+                                    isDetailViewShown = true
+                                    
                                            registraDesafioFracassado()
                                            
                                        }))
