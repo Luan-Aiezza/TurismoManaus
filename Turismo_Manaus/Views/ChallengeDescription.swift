@@ -34,6 +34,7 @@ struct ChallengeDescription: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Pontos_Visitados.id, ascending: true)],
         animation: .default)
+    
     private var pontosvisitados: FetchedResults<Pontos_Visitados>
 
 
