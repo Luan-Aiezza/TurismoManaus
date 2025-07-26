@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 struct Carrossel: View {
     
     @Binding var currentIndex: Int
@@ -9,14 +7,18 @@ struct Carrossel: View {
     
     var body: some View {
         VStack{
-            ZStack{
-                ForEach(0 ..< PontosTuristicos.count, id: \.self) { index in
-                    CardPoint(name: PontosTuristicos[index].name)
-                        .scaleEffect(currentIndex == index ? 1.0 : 0.8)
-                        .opacity(currentIndex == index ? 1.0 : 0.5)
-                        .offset(x: CGFloat(index - currentIndex) * 300 + dragOfset)
+            ZStack {
+                ForEach(Array(PontosTuristicos.enumerated()), id: \.offset) { index, ponto in
+                    let isCurrent = (currentIndex == index)  // Changed from currentIndex.wrappedValue
+                    let offsetX = CGFloat(index - currentIndex) * 300 + dragOfset
+                    let scale: CGFloat = isCurrent ? 1.0 : 0.8
+                    let opacity: Double = isCurrent ? 1.0 : 0.5
+                    
+                    CardPoint(point: ponto)
+                        .scaleEffect(scale)
+                        .opacity(opacity)
+                        .offset(x: offsetX)
                 }
-                
             }
         }
         .gesture(
@@ -25,21 +27,20 @@ struct Carrossel: View {
                     let threshold: CGFloat = 50
                     
                     //arrastando pra esquerda
-                    if value.translation.width < threshold {
+                    if value.translation.width < -threshold {  // Fixed condition
                         withAnimation {
-                            currentIndex =  ((currentIndex + 1) % PontosTuristicos.count)
+                            currentIndex = ((currentIndex + 1) % PontosTuristicos.count)
                             print("aqui", currentIndex)
-                            
                         }
                     }
                     
                     //arrastando pra direita
-                    else if value.translation.width  > threshold {
+                    else if value.translation.width > threshold {
                         withAnimation {
-                            if currentIndex == 0 {currentIndex = PontosTuristicos.count - 1}
-                            else{
+                            if currentIndex == 0 {
+                                currentIndex = PontosTuristicos.count - 1
+                            } else {
                                 currentIndex = currentIndex - 1
-                                
                             }
                             print(currentIndex)
                         }
@@ -48,4 +49,3 @@ struct Carrossel: View {
         )
     }
 }
-
