@@ -20,6 +20,7 @@
 		6FD4C0402E3528C700DCC0D0 /* Prices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C03F2E3528C700DCC0D0 /* Prices.swift */; };
 		6FD4C0432E352CBE00DCC0D0 /* CardPointSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C0422E352CB600DCC0D0 /* CardPointSelected.swift */; };
 		6FD4C0452E352CD300DCC0D0 /* CardPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C0442E352CD300DCC0D0 /* CardPoint.swift */; };
+		6FD4C0472E352D0700DCC0D0 /* GradientRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C0462E352D0700DCC0D0 /* GradientRectangle.swift */; };
 		6FD79BAA2C04DA800014739E /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD79BA92C04DA800014739E /* Onboarding.swift */; };
 		CFEC5C1A2BEE5337004FCA4C /* Turismo_ManausApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC5C192BEE5337004FCA4C /* Turismo_ManausApp.swift */; };
 		CFEC5C1E2BEE5338004FCA4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		6FD4C03F2E3528C700DCC0D0 /* Prices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prices.swift; sourceTree = "<group>"; };
 		6FD4C0422E352CB600DCC0D0 /* CardPointSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPointSelected.swift; sourceTree = "<group>"; };
 		6FD4C0442E352CD300DCC0D0 /* CardPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPoint.swift; sourceTree = "<group>"; };
+		6FD4C0462E352D0700DCC0D0 /* GradientRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientRectangle.swift; sourceTree = "<group>"; };
 		6FD79BA92C04DA800014739E /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		CFEC5C162BEE5337004FCA4C /* Turismo_Manaus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Turismo_Manaus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEC5C192BEE5337004FCA4C /* Turismo_ManausApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turismo_ManausApp.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				6FD4C0422E352CB600DCC0D0 /* CardPointSelected.swift */,
 				6FD4C0442E352CD300DCC0D0 /* CardPoint.swift */,
+				6FD4C0462E352D0700DCC0D0 /* GradientRectangle.swift */,
 				6F4DC4022BFBF9A50061B523 /* Carrossel.swift */,
 			);
 			path = Carrossel;
@@ -276,6 +279,7 @@
 				D352D8EA2C0076F8001D617A /* ChallengeDescription.swift in Sources */,
 				6FD79BAA2C04DA800014739E /* Onboarding.swift in Sources */,
 				6FB51FB92C048F7500BBCD52 /* UI.swift in Sources */,
+				6FD4C0472E352D0700DCC0D0 /* GradientRectangle.swift in Sources */,
 				6FD4C0432E352CBE00DCC0D0 /* CardPointSelected.swift in Sources */,
 				D352D8E22BFFD288001D617A /* HomeWithChallenge.swift in Sources */,
 				6F97206C2BFBB4A4003A9578 /* Categories.swift in Sources */,
