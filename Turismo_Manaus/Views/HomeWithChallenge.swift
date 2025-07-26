@@ -12,10 +12,10 @@ import CoreLocation
 import Foundation
 
 struct HomeWithChallenge : View {
-    @State var selectedCategoria = Categorias.todos
-    @State var selectedHorario = Horarios.todos
-    @State var selectedDistancia = Distancias.todos
-    @State var selectedPreco = Precos.todos
+    @State var selectedCategoria = Categories.todos
+    @State var selectedHorario = Hours.todos
+    @State var selectedDistancia = Distances.todos
+    @State var selectedPreco = Prices.todos
     @ObservedObject var locationViewModel: LocationViewModel
     @State var player = GKLocalPlayer.local
     @Environment(\.managedObjectContext) private var viewContext
@@ -113,7 +113,7 @@ struct HomeWithChallenge : View {
                                 // Filtros
                                 Button(action: {
                                     isShowingFilterView.toggle()
-                                    calculaDistancias()
+                                    calculaDistances()
                                 }, label: {
                                     
                                     Image(systemName: "slider.horizontal.3")
@@ -315,7 +315,7 @@ struct HomeWithChallenge : View {
         
     }
     
-    func calculaDistancias() {
+    func calculaDistances() {
         print(".....")
         for i in 0..<PontosTuristicos.count {
             let transformedString = transformString(PontosTuristicos[i].name)
@@ -326,12 +326,12 @@ struct HomeWithChallenge : View {
             let distanceInKilometers = distanceinMeters/1000
             print(PontosTuristicos[i].name)
             print(distanceInKilometers)
-            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distancias.tres
+            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distances.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                PontosTuristicos[i].distance = Distancias.cinco
+                PontosTuristicos[i].distance = Distances.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
                 
-                PontosTuristicos[i].distance = Distancias.dez
+                PontosTuristicos[i].distance = Distances.dez
             }
             
         }
@@ -343,19 +343,19 @@ struct HomeWithChallenge : View {
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
-            if selectedCategoria != Categorias.todos{
+            if selectedCategoria != Categories.todos{
                 if ponto.categoria != selectedCategoria {
                     corresponde = false
                 }
             }
             
-            if selectedPreco != Precos.todos {
+            if selectedPreco != Prices.todos {
                 if ponto.preco != selectedPreco {
                     corresponde = false
                 }
             }
             
-            if selectedDistancia != Distancias.todos {
+            if selectedDistancia != Distances.todos {
                 if ponto.distance != selectedDistancia {
                     corresponde = false
                 }

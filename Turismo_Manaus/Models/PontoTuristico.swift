@@ -13,12 +13,12 @@ public class PontoTuristico {
     var name: String
     let imageName: ImageResource
     var desc, latitude, longitude, maps, status, endereco, link: String
-    let horarios: [Horarios]
-    var categoria: Categorias
-    var distance: Distancias = .todos
-    var preco: Precos
+    let horarios: [Hours]
+    var categoria: Categories
+    var distance: Distances = .todos
+    var preco: Prices
     
-    init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], status: String, maps: String, endereco: String, link: String) {
+    init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categories, latitude: String, longitude: String, preco: Prices, horarios: [Hours], status: String, maps: String, endereco: String, link: String) {
         self.id = id
         self.name = name
         self.imageName = imageName

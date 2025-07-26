@@ -7,10 +7,10 @@ import Foundation
 
 struct FilterView: View {
     
-    @Binding var selectedCategoria: Categorias
-    @Binding var selectedHorario: Horarios
-    @Binding var selectedDistancia: Distancias
-    @Binding var selectedPreco: Precos
+    @Binding var selectedCategoria: Categories
+    @Binding var selectedHorario: Hours
+    @Binding var selectedDistancia: Distances
+    @Binding var selectedPreco: Prices
     @Binding var isShowingFilterView: Bool
     
     @ObservedObject var locationViewModel: LocationViewModel
@@ -37,10 +37,10 @@ struct FilterView: View {
                     HStack {
                         Button(action: {
                             isShowingFilterView.toggle()
-                            selectedPreco = Precos.todos
-                            selectedHorario = Horarios.todos
-                            selectedDistancia = Distancias.todos
-                            selectedCategoria = Categorias.todos
+                            selectedPreco = Prices.todos
+                            selectedHorario = Hours.todos
+                            selectedDistancia = Distances.todos
+                            selectedCategoria = Categories.todos
                         }, label: {
                             Text("Cancelar")
                                 .foregroundStyle(Color.fundofiltroInv)
@@ -68,10 +68,10 @@ struct FilterView: View {
                     
                     
                     Picker(selection: $selectedHorario, label: Text("")) {
-                        Text("Todos").tag(Horarios.todos)
-                        Text("Manhã").tag(Horarios.manha)
-                        Text("Tarde").tag(Horarios.tarde)
-                        Text("Noite").tag(Horarios.noite)
+                        Text("Todos").tag(Hours.todos)
+                        Text("Manhã").tag(Hours.manha)
+                        Text("Tarde").tag(Hours.tarde)
+                        Text("Noite").tag(Hours.noite)
                     }
                     .foregroundStyle(.blue)
                     .pickerStyle(SegmentedPickerStyle())
@@ -87,10 +87,10 @@ struct FilterView: View {
                     }.padding(.top,16.0)
                     
                     Picker(selection: $selectedCategoria, label: Text("")) {
-                        Text("Todos").tag(Categorias.todos)
-                        Text("Tradicional").tag(Categorias.tradicionais)
-                        Text("Culinária").tag(Categorias.culinaria)
-                        Text("Festas").tag(Categorias.festas)
+                        Text("Todos").tag(Categories.todos)
+                        Text("Tradicional").tag(Categories.tradicionais)
+                        Text("Culinária").tag(Categories.culinaria)
+                        Text("Festas").tag(Categories.festas)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.vertical, 8.0)
@@ -104,10 +104,10 @@ struct FilterView: View {
                         Spacer()
                     }.padding(.top,16.0)
                     Picker(selection: $selectedPreco, label: Text("")) {
-                        Text("Todos").tag(Precos.todos)
-                        Text("$").tag(Precos.barato)
-                        Text("$$").tag(Precos.medio)
-                        Text("$$$").tag(Precos.caro)
+                        Text("Todos").tag(Prices.todos)
+                        Text("$").tag(Prices.barato)
+                        Text("$$").tag(Prices.medio)
+                        Text("$$$").tag(Prices.caro)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.vertical, 8.0)
@@ -122,10 +122,10 @@ struct FilterView: View {
                         }
                         .padding(.top,16.0)
                         Picker(selection: $selectedDistancia, label: Text("")) {
-                            Text("Todos").tag(Distancias.todos)
-                            Text("Até 3km").tag(Distancias.tres)
-                            Text("Até 5km").tag(Distancias.cinco)
-                            Text("Até 10km").tag(Distancias.dez)
+                            Text("Todos").tag(Distances.todos)
+                            Text("Até 3km").tag(Distances.tres)
+                            Text("Até 5km").tag(Distances.cinco)
+                            Text("Até 10km").tag(Distances.dez)
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .padding(.vertical, 8.0)

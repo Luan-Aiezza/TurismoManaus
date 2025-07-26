@@ -310,9 +310,9 @@ struct ChallengeDescription: View {
     }
     
     private func calculaPreco () {
-        if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.barato {
+        if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Prices.barato {
             preco = "$"
-        } else if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Precos.medio {
+        } else if (PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.preco) == Prices.medio {
             preco = "$$"
         } else {
             preco = "$$$"

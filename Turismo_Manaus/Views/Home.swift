@@ -11,10 +11,10 @@ import GameKit
 import CoreLocation
 
 struct Home : View {
-    @State var selectedCategoria = Categorias.todos
-    @State var selectedHorario = Horarios.todos
-    @State var selectedDistancia = Distancias.todos
-    @State var selectedPreco = Precos.todos
+    @State var selectedCategoria = Categories.todos
+    @State var selectedHorario = Hours.todos
+    @State var selectedDistancia = Distances.todos
+    @State var selectedPreco = Prices.todos
     
     @ObservedObject var locationViewModel: LocationViewModel
     
@@ -42,7 +42,7 @@ struct Home : View {
                     // Filtros
                     Button(action: {
                         isShowingFilterView.toggle()
-                        calculaDistancias()
+                        calculaDistances()
                     }, label: {
                         
                         Image(systemName: "slider.horizontal.3")
@@ -227,13 +227,13 @@ struct Home : View {
         }
     }
     
-    func horarioInnerSelectedHorarios (horario: Horarios, setHorarios: [Horarios]) -> Bool {
-        for horarioSet in setHorarios {
+    func horarioInnerSelectedHours (horario: Hours, setHours: [Hours]) -> Bool {
+        for horarioSet in setHours {
             if horario == horarioSet{
                 return true
             }
         }
-        if setHorarios.contains(Horarios.todos) {return true}
+        if setHours.contains(Hours.todos) {return true}
         return false
     }
     
@@ -243,25 +243,25 @@ struct Home : View {
         let pontosFiltrados = PontosTuristicos.filter { ponto in
             var corresponde = true
             
-            if selectedHorario != Horarios.todos{
-                if !horarioInnerSelectedHorarios(horario: selectedHorario, setHorarios: ponto.horarios) {
+            if selectedHorario != Hours.todos{
+                if !horarioInnerSelectedHours(horario: selectedHorario, setHours: ponto.horarios) {
                     corresponde = false
                 }
             }
             
-            if selectedCategoria != Categorias.todos{
+            if selectedCategoria != Categories.todos{
                 if ponto.categoria != selectedCategoria {
                     corresponde = false
                 }
             }
             
-            if selectedPreco != Precos.todos {
+            if selectedPreco != Prices.todos {
                 if ponto.preco != selectedPreco {
                     corresponde = false
                 }
             }
             
-            if selectedDistancia != Distancias.todos {
+            if selectedDistancia != Distances.todos {
                 if ponto.distance != selectedDistancia {
                     corresponde = false
                 }
@@ -291,7 +291,7 @@ struct Home : View {
         
     }
     
-    func calculaDistancias() {
+    func calculaDistances() {
         print(".....")
         for i in 0..<PontosTuristicos.count {
             let transformedString = transformString(PontosTuristicos[i].name)
@@ -302,12 +302,12 @@ struct Home : View {
             let distanceInKilometers = distanceinMeters/1000
             print(PontosTuristicos[i].name)
             print(distanceInKilometers)
-            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distancias.tres
+            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distances.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                PontosTuristicos[i].distance = Distancias.cinco
+                PontosTuristicos[i].distance = Distances.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
                 
-                PontosTuristicos[i].distance = Distancias.dez
+                PontosTuristicos[i].distance = Distances.dez
             }
             
         }
