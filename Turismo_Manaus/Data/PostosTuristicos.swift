@@ -4,6 +4,7 @@ import Foundation
 //TODO: verificar coordenadas de instacias grandes
 
 public var PontosTuristicos: [PontoTuristico] = [
+    
     PontoTuristico(
         id: UUID(),
         name: "Amazonas Shopping",
@@ -213,6 +214,21 @@ public var PontosTuristicos: [PontoTuristico] = [
         maps: "https://maps.app.goo.gl/jTo1ojCPAwkBa1dU7",
         endereco: "Av. Prof. Nilton Lins, 16 - Flores, Manaus - AM, 69058-300",
         link: "https://www.openlaranjeirasgallery.com.br/"),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Largo de São Sebastião",
+        imageName: .largosaosebastiao,
+        desc: "Praça cercada por árvores e prédios históricos com um grande monumento e apresentações artísticas.",
+        categoria: .tradicionais,
+        latitude: "-3.130395",
+        longitude: " -60.0225013",
+        preco: .barato,
+        horarios: [.todos],
+        status: "manhã, tarde e noite",
+        maps: "https://maps.app.goo.gl/5UJnZezpxnDMq2TF8",
+        endereco: "Largo de São Sebastião: Rua 10 de Julho - Centro, Manaus - AM, 69010-060",
+        link:"https://cultura.am.gov.br/espacos-culturais/parques-e-pracas/centro-cultural-largo-de-sao-sebastiao/"),
     
     PontoTuristico(
         id: UUID(),
