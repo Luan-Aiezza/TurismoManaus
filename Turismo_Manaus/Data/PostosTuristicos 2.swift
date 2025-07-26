@@ -124,7 +124,20 @@ public var PontosTuristicos: [PontoTuristico] = [
         endereco: "R. Costa Azevedo, 179 - Centro, Manaus - AM, 69010-230",
         link: "https://www.instagram.com/casario179/"),
     
-    
+    PontoTuristico(
+        id: UUID(),
+        name: "Goiaba Bar",
+        imageName: .goiababar,
+        desc: "Bar descolado e ao ar livre, conhecido pelos hambúrgueres artesanais, drinks e um clima animado, ideal para ir com amigos.",
+        categoria: .culinaria,
+        latitude: "-3.094263",
+        longitude: "-60.009090",
+        preco: .medio,
+        horarios: [.noite],
+        status: "noite",
+        maps: "https://maps.app.goo.gl/SFz1RLBX5HGAnEDL6",
+        endereco: "R. René de Nápolis - Adrianópolis, Manaus - AM, 69057-580",
+        link: "https://www.instagram.com/goiaba.bar/"),
     
     PontoTuristico(
         id: UUID(),
