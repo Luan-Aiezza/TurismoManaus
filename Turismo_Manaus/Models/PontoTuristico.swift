@@ -16,9 +16,8 @@ public class PontoTuristico {
     let horarios: [Horarios]
     var categoria: Categorias
     var preco: Precos
-    var distancia: Distancias
     
-    init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], distancia: Distancias, status: String, maps: String, endereco: String, link: String) {
+    init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], status: String, maps: String, endereco: String, link: String) {
         self.id = id
         self.name = name
         self.imageName = imageName
@@ -28,7 +27,6 @@ public class PontoTuristico {
         self.longitude = longitude
         self.preco = preco
         self.horarios = horarios
-        self.distancia = distancia
         self.status = status
         self.maps = maps
         self.endereco = endereco
