@@ -1,6 +1,8 @@
 import Foundation
 
-//TODO: remove enum Distancia
+//TODO: remove enum Distancia OK
+//TODO: verificar coordenadas de instacias grandes
+
 public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
@@ -53,8 +55,8 @@ public var PontosTuristicos: [PontoTuristico] = [
         imageName: .balneariojoseribeirosoaressesc,
         desc: "Um espaço de lazer com piscina e áreas para descanso e recreação.",
         categoria: Categorias.tradicionais,
-        latitude: "-3.06792565051311251",
-        longitude: "-60.044545826691326",
+        latitude: "-3.068322,",
+        longitude: "-60.044675",
         preco: Precos.medio,
         horarios: [Horarios.manha],
         status: "manhã",
@@ -73,8 +75,8 @@ public var PontosTuristicos: [PontoTuristico] = [
         preco: Precos.caro,
         horarios: [Horarios.noite],
         status: "noite",
-        maps: "https://maps.app.goo.gl/hQQ89Nd78Zz7NZy57",
-        endereco: "Av. Constantinopla, 288 - Alvorada, Manaus - AM, 69045-000",
-        link: "https://www.sesc.com.br/unidade/sesc-balneario-2/"),
+        maps: "https://maps.app.goo.gl/FB5dUJFBsRiqMQCt6",
+        endereco: "R. Rio Purús, 29 - Nossa Sra. das Gracas, Manaus - AM, 69053-050",
+        link: "https://www.instagram.com/cantare_karaoke/"),
 ]
 
