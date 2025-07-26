@@ -277,6 +277,36 @@ public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(
         id: UUID(),
+        name: "Palacete Provincial",
+        imageName: .palaceteprovincial,
+        desc: "Antiga sede da polícia do século XIX que abriga museus de arte, numismática, arqueologia e muito mais.",
+        categoria: .tradicionais,
+        latitude: "-3.135600",
+        longitude: "-60.021100",
+        preco: .barato,
+        horarios: [.manha],
+        status: "manhã",
+        maps: "https://maps.app.goo.gl/8suT7NpNiY1EYaWQA",
+        endereco: "Palacete Provincial: Praça Heliodoro Balbi, S/N - Centro, Manaus - AM, 69005-260",
+        link: "https://cultura.am.gov.br/espacos-culturais/museus/palacete-provincial/"),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Palácio Rio Negro",
+        imageName: .palaciorionegro,
+        desc: "Propriedade de um barão da borracha do séc. XIX com decoração da época, exposições históricas e jardins.",
+        categoria: .tradicionais,
+        latitude: "-3.135100",
+        longitude: "-60.016884",
+        preco: .barato,
+        horarios: [.manha],
+        status: "manhã",
+        maps: "https://maps.app.goo.gl/taKnhn7r9GqNgbnW7",
+        endereco: "Palácio Rio Negro: Av. Sete de Setembro, 1546 - Centro, Manaus - AM, 69005-141",
+        link: "https://cultura.am.gov.br/espacos-culturais/centros-culturais/centro-cultural-palacio-rio-negro/"),
+    
+    PontoTuristico(
+        id: UUID(),
         name: "Paróquia de São Sebastião",
         imageName: .paroquiadesaosebastiao,
         desc: "Templo católico central com vitrais coloridos e mármore em fino acabamento, com capacidade para 500 pessoas.",
@@ -367,6 +397,21 @@ public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(
         id: UUID(),
+        name: "Sorveteria Glacial",
+        imageName: .sorveteriaglacial,
+        desc: "Taças clássicas de sorvetes de massa, picolés e destaque às paletas mexicanas, em ambiente simples e casual.",
+        categoria: .culinaria,
+        latitude: "-3.133778",
+        longitude: "-60.020461",
+        preco: .barato,
+        horarios: [.tarde, .noite],
+        status: "tarde e noite",
+        maps: "https://maps.app.goo.gl/QjCdgGLoNkN7ph268",
+        endereco: "Comercial Amazônia - Av. Getúlio Vargas, 188 - Centro, Manaus - AM, 69020-010",
+        link: "https://www.instagram.com/sorveteriaglacial/?hl=pt-br"),
+    
+    PontoTuristico(
+        id: UUID(),
         name: "Teatro Amazonas",
         imageName: .teatroamazonas,
         desc: "Famoso teatro renascentista de 1896, auge da borracha na cidade, com capacidade para concertos e passeios.",
@@ -394,20 +439,6 @@ public var PontosTuristicos: [PontoTuristico] = [
         maps: "https://maps.app.goo.gl/qv3YNn6GYY8B4hVB7",
         endereco: "R. José Clemente, 608 - Centro, Manaus - AM, 69010-070",
         link: "http://www.editoravaler.com.br/"),
-    
-    PontoTuristico(
-        id: UUID(),
-        name: "Fabrica & Sorveteria Glacial",
-        imageName: .sorveteriaglacial,
-        desc: "Taças clássicas de sorvetes de massa, picolés e destaque às paletas mexicanas, em ambiente simples e casual.",
-        categoria: .culinaria,
-        latitude: "-3.133778",
-        longitude: "-60.020461",
-        preco: .barato,
-        horarios: [.tarde, .noite],
-        status: "tarde e noite",
-        maps: "https://maps.app.goo.gl/QjCdgGLoNkN7ph268",
-        endereco: "Comercial Amazônia - Av. Getúlio Vargas, 188 - Centro, Manaus - AM, 69020-010",
-        link: "https://www.instagram.com/sorveteriaglacial/?hl=pt-br"),
+
 ]
 
