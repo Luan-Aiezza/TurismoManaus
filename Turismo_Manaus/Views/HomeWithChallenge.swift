@@ -155,7 +155,7 @@ struct HomeWithChallenge : View {
                                         Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
                                             .font(.headline)
                                             .multilineTextAlignment(.center)
-                                        Image(transformString(ponto.name))
+                                        Image(ponto.imageName)
                                             .resizable()
                                             .scaledToFit()
                                             .scaledToFill()
@@ -215,7 +215,7 @@ struct HomeWithChallenge : View {
                                         Text("Visite o(a) \( Text(ponto.name).bold())  pela primeira vez no prazo de 1 semana.")
                                             .font(.headline)
                                             .multilineTextAlignment(.center)
-                                        Image(transformString(ponto.name))
+                                        Image(ponto.imageName)
                                             .resizable()
                                             .scaledToFit()
                                             .scaledToFill()
@@ -318,19 +318,22 @@ struct HomeWithChallenge : View {
     func calculaDistances() {
         print(".....")
         for i in 0..<PontosTuristicos.count {
-            let transformedString = transformString(PontosTuristicos[i].name)
-            print(transformedString)
+            
             let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
             let location2 = CLLocation(latitude: Double(PontosTuristicos[i].latitude) ?? 0.0, longitude: Double(PontosTuristicos[i].longitude) ?? 0.0)
+            
             let distanceinMeters = (location1.distance(from: location2))
             let distanceInKilometers = distanceinMeters/1000
-            print(PontosTuristicos[i].name)
-            print(distanceInKilometers)
-            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distances.tres
-            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                PontosTuristicos[i].distance = Distances.cinco
-            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+            
+            if distanceInKilometers <= 3.0 {
+                PontosTuristicos[i].distance = Distances.tres
                 
+            } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
+                
+                PontosTuristicos[i].distance = Distances.cinco
+                
+            } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
+
                 PontosTuristicos[i].distance = Distances.dez
             }
             
