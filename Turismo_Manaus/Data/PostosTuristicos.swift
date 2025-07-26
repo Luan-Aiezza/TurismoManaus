@@ -31,7 +31,7 @@ enum Distancias {
 
 
 
-public var PontosTuristicos: [PontoTuristico] = [
+public var PontosTuristicosUnsed: [PontoTuristico] = [
     
     PontoTuristico(id: UUID(), name: "Parque Senador Jefferson Péres", desc: "Parque urbano amplo ao longo de um riacho com um pórtico de arcos em ferro, uma trilha coberta e monumentos.", categoria: Categorias.tradicionais, latitude: "-3.1308190156009417", longitude: "-60.01565870581663", preco: Precos.barato, horarios: [Horarios.todos], distancia: Distancias.todos, status: "dia e noite", maps: "https://maps.app.goo.gl/q3oLwFAFjdVN9wcDA", endereco: "Av. Lourenço da Silva Braga, 1507 - Centro, Manaus - AM", link: "“https://cultura.am.gov.br/espacos-culturais/parques-e-pracas/parque-senador-jefferson-peres/" ),
     
