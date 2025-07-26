@@ -15,6 +15,7 @@ public class PontoTuristico {
     var desc, latitude, longitude, maps, status, endereco, link: String
     let horarios: [Horarios]
     var categoria: Categorias
+    var distance: Distancias = .todos
     var preco: Precos
     
     init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], status: String, maps: String, endereco: String, link: String) {

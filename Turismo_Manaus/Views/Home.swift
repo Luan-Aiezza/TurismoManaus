@@ -262,7 +262,7 @@ struct Home : View {
             }
             
             if selectedDistancia != Distancias.todos {
-                if ponto.distancia != selectedDistancia {
+                if ponto.distance != selectedDistancia {
                     corresponde = false
                 }
             }
@@ -302,12 +302,12 @@ struct Home : View {
             let distanceInKilometers = distanceinMeters/1000
             print(PontosTuristicos[i].name)
             print(distanceInKilometers)
-            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distancia = Distancias.tres
+            if distanceInKilometers <= 3.0 {                PontosTuristicos[i].distance = Distancias.tres
             } else if distanceInKilometers > 3.0 && distanceInKilometers <= 5.0 {
-                PontosTuristicos[i].distancia = Distancias.cinco
+                PontosTuristicos[i].distance = Distancias.cinco
             } else if distanceInKilometers > 5.0 && distanceInKilometers <= 10.0 {
                 
-                PontosTuristicos[i].distancia = Distancias.dez
+                PontosTuristicos[i].distance = Distancias.dez
             }
             
         }
