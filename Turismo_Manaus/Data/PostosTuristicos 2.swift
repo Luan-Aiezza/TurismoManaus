@@ -156,6 +156,21 @@ public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(
         id: UUID(),
+        name: "Jardim de Roselle",
+        imageName: .jardimderoselle,
+        desc: "Um espaço acolhedor, ideal para eventos, com clima rústico e rodeado pela natureza.",
+        categoria: .culinaria,
+        latitude: "-3.132060",
+        longitude: "-60.023256",
+        preco: .medio,
+        horarios: [.noite],
+        status: "manhã, tarde e noite",
+        maps: "https://maps.app.goo.gl/HxEWrbH9WVFhVhk16",
+        endereco: "R. Barroso, 279 - Centro, Manaus - AM, 69010-050",
+        link: "https://www.instagram.com/explore/locations/253564647/jardim-de-roselle/"),
+    
+    PontoTuristico(
+        id: UUID(),
         name: "Fabrica & Sorveteria Glacial ",
         imageName: .sorveteriaglacial,
         desc: "Taças clássicas de sorvetes de massa, picolés e destaque às paletas mexicanas, em ambiente simples e casual.",
