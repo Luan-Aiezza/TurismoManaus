@@ -141,6 +141,21 @@ public var PontosTuristicos: [PontoTuristico] = [
     
     PontoTuristico(
         id: UUID(),
+        name: "Igreja Nossa Senhora de Fátima",
+        imageName: .igrejanossasenhoradefatima,
+        desc: "Templo católico conhecido por sua arquitetura tradicional e devoção à santa portuguesa.",
+        categoria: .tradicionais,
+        latitude: "-3.122597",
+        longitude: "-60.014587",
+        preco: .barato,
+        horarios: [.manha, .tarde, .noite],
+        status: "manhã, tarde e noite",
+        maps: "https://maps.app.goo.gl/zmLN7wq9KdsY3TKb7",
+        endereco: "Av. Tarumã - Praça 14 de Janeiro, Manaus - AM, 69020-000",
+        link: "https://www.instagram.com/santuariodefatimamanaus"),
+    
+    PontoTuristico(
+        id: UUID(),
         name: "Fabrica & Sorveteria Glacial ",
         imageName: .sorveteriaglacial,
         desc: "Taças clássicas de sorvetes de massa, picolés e destaque às paletas mexicanas, em ambiente simples e casual.",
