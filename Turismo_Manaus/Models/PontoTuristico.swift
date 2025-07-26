@@ -6,18 +6,22 @@
 //
 
 import Foundation
+import SwiftUI
 
 public class PontoTuristico {
     let id: UUID
-    var name, desc, latitude, longitude, maps, status, endereco, link: String
+    var name: String
+    let imageName: ImageResource
+    var desc, latitude, longitude, maps, status, endereco, link: String
     let horarios: [Horarios]
     var categoria: Categorias
     var preco: Precos
     var distancia: Distancias
     
-    init(id: UUID, name: String, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], distancia: Distancias, status: String, maps: String, endereco: String, link: String) {
+    init(id: UUID, name: String, imageName: ImageResource, desc: String, categoria: Categorias, latitude: String, longitude: String, preco: Precos, horarios: [Horarios], distancia: Distancias, status: String, maps: String, endereco: String, link: String) {
         self.id = id
         self.name = name
+        self.imageName = imageName
         self.desc = desc
         self.categoria = categoria
         self.latitude = latitude
