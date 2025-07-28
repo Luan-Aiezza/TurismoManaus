@@ -38,7 +38,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Angatu Café Unidade Centro",
-        imageName: .angatucafeunidadecentro,
+        imageName: .angatu,
         desc: "Delicioso para café da manhã, e com serviço também para lanche da tarde e jantar! Cozinha regional muito boa.",
         categoria: .culinaria,
         latitude: "-3.128881",
@@ -68,7 +68,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Cantare Karaoke & Pub",
-        imageName: .cantarekaraokePub,
+        imageName: .kantare,
         desc: "Ponto de encontro aconchegante e descontraído para fãs de karaokê, com diversas opções de petiscos e drinques.",
         categoria: .culinaria,
         latitude: "-3.098881",
@@ -143,7 +143,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Jardim de Roselle",
-        imageName: .jardimderoselle,
+        imageName: .jardimleroselle,
         desc: "Um espaço acolhedor, ideal para eventos, com clima rústico e rodeado pela natureza.",
         categoria: .culinaria,
         latitude: "-3.132060",
@@ -158,7 +158,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "JSK Burgers - Adrianópolis",
-        imageName: .jskburgersadrianopolis,
+        imageName: .jskburgersadrianopolisHEIC,
         desc: "Hamburgueria popular, conhecida pelos lanches artesanais e ambiente descolado.",
         categoria: .culinaria,
         latitude: "-3.102109",
@@ -173,7 +173,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Kalena Café - Adrianópolis",
-        imageName: .kalenaadrianopolis,
+        imageName: .kalena,
         desc: "Pequeno ponto gastronômico à italiana com sacada e boemia serve cafés de barista entre salgados e doces.",
         categoria: .culinaria,
         latitude: "-3.110596",
@@ -188,7 +188,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Kurata Café Amazônico",
-        imageName: .kuratacafeamazonico,
+        imageName: .kurata,
         desc: "Café regional de qualidade, brunch, música ao vivo e ambiente cercado pela natureza.",
         categoria: .culinaria,
         latitude: "-3.116250",
@@ -248,7 +248,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Mirante de São Vicente",
-        imageName: .mirantedesaovicente,
+        imageName: .mirantedesaovicentee,
         desc: "Excelente opção de Lazer em Manaus, agregando modernidade a natureza no Centro Histórico de Manaus.",
         categoria: .tradicionais,
         latitude: "-3.134203",
@@ -263,7 +263,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Mizura Bar",
-        imageName: .mizurabar,
+        imageName: .mizura,
         desc: "Mizura é um oásis no deserto manauara. Uma leitura cosmopolita de belíssimas experiências gastronômicas acompanhados por drinks e frequentadores da melhor estirpe. Por fim, há de se registrar o altíssimo nível do staff. Vida longa ao Mizura.",
         categoria: .culinaria,
         latitude: "-3.097336",
@@ -338,7 +338,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Piaf Restaurante e Café",
-        imageName: .piafrestauranteecafe,
+        imageName: .restaurantepiaf,
         desc: "Na mesma praça que o Teatro Amazonas, a casa oferece cafés, salgados e refeições, em ambiente aconchegante.",
         categoria: .culinaria,
         latitude: "-3.129700",
@@ -368,7 +368,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Restaurante Choupana",
-        imageName: .restaurantechoupana,
+        imageName: .choupana,
         desc: "Um restaurante de comida regional. Serve Filé de tucunaré, pato no tucupi e outras comidas regionais, em casa com tijolo aparente, arte e mezanino.",
         categoria: .culinaria,
         latitude: "-3.108701",
@@ -383,7 +383,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Restaurante Vinhedo Rio Mar",
-        imageName: .restaurantevinhedoriomar,
+        imageName: .vinhedorioMar,
         desc: "Ambiente bonito, ótima estrutura e até entretenimento para crianças como alimentar os peixes.",
         categoria: .culinaria,
         latitude: "-3.104964",
@@ -398,7 +398,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Sorveteria Glacial",
-        imageName: .sorveteriaglacial,
+        imageName: .glacial,
         desc: "Taças clássicas de sorvetes de massa, picolés e destaque às paletas mexicanas, em ambiente simples e casual.",
         categoria: .culinaria,
         latitude: "-3.133778",
@@ -428,7 +428,7 @@ public var PontosTuristicos: [PontoTuristico] = [
     PontoTuristico(
         id: UUID(),
         name: "Valer Teatro",
-        imageName: .valerteatro,
+        imageName: .livrariavaler,
         desc: "Um espaço onde inovação, tradição e arte se encontram.",
         categoria: .tradicionais,
         latitude: "-3.131000",
@@ -440,5 +440,212 @@ public var PontosTuristicos: [PontoTuristico] = [
         endereco: "R. José Clemente, 608 - Centro, Manaus - AM, 69010-070",
         link: "http://www.editoravaler.com.br/"),
 
+    PontoTuristico(
+        id: UUID(),
+        name: "MAIS1 Café",
+        imageName: .maisumcafe,
+        desc: "O Mais1 Café é uma cafeteria aconchegante e moderna, ideal para quem aprecia cafés especiais e bebidas geladas. É o lugar perfeito para uma pausa rápida ou para aproveitar um momento agradável com amigos.",
+        categoria: .culinaria,
+        latitude: "-3.1102910872719303",
+        longitude: "-60.01066319999999",
+        preco: .barato,
+        horarios: [.manha, .tarde],
+        status: "manhã e tarde",
+        maps: "https://maps.app.goo.gl/hDvyWMqYWhhpGNsy5",
+        endereco: "Av. Paraiba, 721 - Adrianópolis, Manaus - AM, 69057-021",
+        link: "https://www.instagram.com/mais1.cafe/reels/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Muy Gringo",
+        imageName: .muygringo,
+        desc: "Burguerbar artesanal serve opções seletas e pratos individuais em espaço convidativo com mesas ao ar livre.",
+        categoria: .culinaria,
+        latitude: "-3.0907189354242104",
+        longitude: "-59.99215378650709",
+        preco: .medio,
+        horarios: [.tarde, .noite],
+        status: "tarde e noite",
+        maps: "https://maps.app.goo.gl/uwstzrzvGxVvsiReA",
+        endereco: "Park Mall Ephigênio - Av. Efigênio Salles, 2045 - Aleixo, Manaus - AM, 69060-000",
+        link: "http://www.roteros.com.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Subway",
+        imageName: .subway,
+        desc: "Rede de fast-food com opções saudáveis para montar sanduíches e saladas no balcão ao gosto do cliente.",
+        categoria: .culinaria,
+        latitude: "-3.087135563355105",
+        longitude: "-59.9971324809575",
+        preco: .medio,
+        horarios: [.manha, .tarde, .noite],
+        status: "manhã, tarde e noite",
+        maps: "https://maps.app.goo.gl/JR7yWxQjs4bwYkFp6",
+        endereco: "Avenida Ephigênio Salles, 2300 - Aleixo, Manaus - AM, 69060-020",
+        link: "https://www.subway.com.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Restaurante da Keila",
+        imageName: .restaurantedakeila,
+        desc: "Um refúgio natural, o Restaurante da Keila combina gastronomia regional com lazer à beira de um lago cercado de vegetação.",
+        categoria: .culinaria,
+        latitude: "-2.892022411770007",
+        longitude: "-59.9532760134437",
+        preco: .caro,
+        horarios: [.manha, .tarde],
+        status: "manha e tarde",
+        maps: "https://maps.app.goo.gl/CHWaj8sk5QSxGytm9",
+        endereco: "Km 030 da AM-010",
+        link: "https://www.instagram.com/restaurante_da_keila/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Soho Lounge Adrianópolis",
+        imageName: .soho,
+        desc: "Restaurante japonês moderno que combina ambiente aconchegante com um variado rodízio de sushi e pratos à la carte. Ideal para quem deseja saborear culinária japonesa de qualidade em Manaus.",
+        categoria: .culinaria,
+        latitude: "-3.0919752224629904",
+        longitude: "-60.00894445582504",
+        preco: .medio,
+        horarios: [.tarde, .noite],
+        status: "tarde e noite",
+        maps: "https://maps.app.goo.gl/ggNu4mY6Nix8L8E48",
+        endereco: "Av. Umberto Calderaro, 1712 - Adrianópolis, Manaus - AM, 69057-015",
+        link: "https://www.instagram.com/soholoungemanaus/?hl=pt-br"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Paladare Pizzaria",
+        imageName: .paladare,
+        desc: "Uma forneria descontraída e enxuta serve pizzas de forno a lenha de sabores compartilhados, salgados e doces.",
+        categoria: .culinaria,
+        latitude: "-3.1207615285973267",
+        longitude: "-60.007698528835",
+        preco: .medio,
+        horarios: [.noite],
+        status: "noite",
+        maps: "https://maps.app.goo.gl/GeG3LjEhw5KzLXfB9",
+        endereco: "Av. Castelo Branco, 1743 - Cachoeirinha, Manaus - AM, 69065-011",
+        link: "https://paladarepizzaria.com.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Orla 92 Mall",
+        imageName: .orla92,
+        desc: "O Orla 92 Mall, localizado na Av. Coronel Teixeira, bairro Ponta Negra em Manaus, é um food park moderno e aberto, com vista para a praia da Ponta Negra.",
+        categoria: .culinaria,
+        latitude: "-3.067422471124277",
+        longitude: "-60.09535108650497",
+        preco: .medio,
+        horarios: [.manha, .tarde, .noite],
+        status: "manha, tarde e noite",
+        maps: "https://maps.app.goo.gl/BjvLHVVq4Gjkb1Xz9",
+        endereco: "Av. Coronel Teixeira, 2775 - Ponta Negra, Manaus - AM, 69030-480",
+        link: "https://www.instagram.com/orla92mall/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Engenheiros do Café",
+        imageName: .engenheirosdocafe,
+        desc: "A Engenheiros do Café é uma cafeteria moderna perfeita para quem aprecia cafés especiais. Com ambiente aconchegante e vista privilegiada, oferece desde expressos a métodos filtrados, sendo uma ótima parada para relaxar e saborear a Amazônia em cada xícara.",
+        categoria: .culinaria,
+        latitude: "-3.0921791823054012",
+        longitude: "-60.037613817413266",
+        preco: .caro,
+        horarios: [.manha, .tarde, .noite],
+        status: "manha, tarde, noite",
+        maps: "https://maps.app.goo.gl/fKzrccqPe7hL91rz8",
+        endereco: "Av. Jacira Reis, 1486 - Chapada, Manaus - AM, 69040-270",
+        link: "https://www.instagram.com/engenheiros.docafe"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Arena da Amazônia",
+        imageName: .arenadaamazonia,
+        desc: "A Arena da Amazônia – Vivaldo Lima, ou simplesmente Arena da Amazônia, é um estádio multiuso localizado na cidade de Manaus, capital do Amazonas.",
+        categoria: .tradicionais,
+        latitude: "-3.082975706872306",
+        longitude: "-60.028083414514896",
+        preco: .medio,
+        horarios: [.manha, .tarde],
+        status: "manha e tarde",
+        maps: "https://maps.app.goo.gl/pRiXAXMFvfznJYJh7",
+        endereco: "Av. Constantino Nery, 5001 - Flores, Manaus - AM, 69058-795",
+        link: "https://www.cada.am.gov.br/arena-da-amazonia/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Mirage Park",
+        imageName: .mirage,
+        desc: "Aqui a diversão não tem idade! Com esse slogan distribuímos alegria, adrenalina, felicidades e momentos que são eternizados em lembranças por cada visitante que adentra o nosso portal.",
+        categoria: .tradicionais,
+        latitude: "-3.0834683317403107",
+        longitude: "-60.02307655737968",
+        preco: .medio,
+        horarios: [.noite],
+        status: "noite",
+        maps: "https://maps.app.goo.gl/PQ6e9xvAq1QDD4Ty6",
+        endereco: "Pq, Av. Mário Ypiranga, 3951 - Parque 10 de Novembro, Manaus - AM, 69050-030",
+        link: "https://www.miragepark.com.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Museu da Amazônia - MUSA",
+        imageName: .musa,
+        desc: "Área florestal com tours guiados pela flora, fauna e cultura amazônicas, além de uma torre com mirante.",
+        categoria: .tradicionais,
+        latitude: "-3.006942590612235",
+        longitude: "-59.9399621",
+        preco: .medio,
+        horarios: [.manha, .tarde],
+        status: "manha, tarde",
+        maps: "https://maps.app.goo.gl/DZSbEw3tvB7dzKHQA",
+        endereco: "Av. Margarita, 6305 - Cidade de Deus, Manaus - AM, 69099-415",
+        link: "http://www.museudaamazonia.org.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Manauara Shopping",
+        imageName: .manauara,
+        desc: "O Manauara Shopping homenageia em sua arquitetura a fauna, flora e a cultura amazonense, e conta com um mix completo de lojas e grandes marcas, além de um teatro com quase 600 lugares.",
+        categoria: .tradicionais,
+        latitude: "-3.104163307782565",
+        longitude: "-60.011986450927466",
+        preco: .barato,
+        horarios: [.manha, .tarde, .noite],
+        status: "manha, tarde e noite",
+        maps: "https://maps.app.goo.gl/6qHCQSiwzPVpngtR8",
+        endereco: "Manauara Shopping: Av. Mário Ypiranga, 1300 - Adrianópolis, Manaus - AM, 69053-165",
+        link: "https://manauarashopping.com.br/"
+    ),
+    
+    PontoTuristico(
+        id: UUID(),
+        name: "Bosque da Ciência - INPA",
+        imageName: .bosquedaciencia,
+        desc: "Parque ecológico onde você pode caminhar por trilhas na floresta, ver animais amazônicos como peixes-boi, ariranhas e quelônios, e conhecer projetos de conservação.",
+        categoria: .tradicionais,
+        latitude: "-3.097360548548184",
+        longitude: "-59.98781603054404",
+        preco: .barato,
+        horarios: [.manha, .tarde],
+        status: "manha, tarde",
+        maps: "https://maps.app.goo.gl/qsiSzF2RQhzhPqtd6",
+        endereco: "Av. Bem-Te-VI, s/n - Petrópolis, Manaus - AM, 69060-001",
+        link: "https://bosquedacienciaam.wixsite.com/agendamento"
+    )
 ]
 

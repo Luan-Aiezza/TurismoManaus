@@ -48,7 +48,6 @@ struct ChallengeDescription: View {
                 try viewContext.save()
             } catch {
                 let nsError = error as NSError
-                print("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
@@ -320,13 +319,9 @@ struct ChallengeDescription: View {
     }
     
     private func calculaDistancia() {
-        print(".....")
         let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
         let location2 = CLLocation(latitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.latitude) ?? 0.0, longitude: Double(PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.longitude) ?? 0.0)
-        print(location1)
-        print(location2)
         distanceinMeters = (location1.distance(from: location2))
-        print(distanceinMeters)
     }
     
     private func registraLocalVisitado() {
@@ -358,8 +353,6 @@ struct ChallengeDescription: View {
             newItem.quant_idas = 1
             newItem.user_id = player.gamePlayerID
             newItem.ponto_name = PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.name
-            print(newItem)
-            print(player.teamPlayerID)
             
             var desafio = Desafios(context: viewContext)
             desafio = desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!
@@ -367,8 +360,6 @@ struct ChallengeDescription: View {
             
             do {
                 try viewContext.save()
-                print(newItem)
-                print(desafio)
                 unlockAchievement(item: newItem)
                 isDetailViewShown.toggle()
             } catch {
@@ -382,7 +373,6 @@ struct ChallengeDescription: View {
         desafio.state = "Fracassado"
         
         do {
-            print(desafio)
             try viewContext.save()
             isDetailViewShown.toggle()
         } catch {

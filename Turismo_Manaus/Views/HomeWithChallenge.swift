@@ -316,7 +316,6 @@ struct HomeWithChallenge : View {
     }
     
     func calculaDistances() {
-        print(".....")
         for i in 0..<PontosTuristicos.count {
             
             let location1 = CLLocation(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude)
@@ -379,10 +378,8 @@ struct HomeWithChallenge : View {
         newItem.ponto_id = pontoId
         newItem.user_id = player.gamePlayerID
         newItem.state = "inProgress"
-        print(newItem)
         do {
             try viewContext.save()
-            print(newItem)
         } catch {
         }
         
