@@ -43,7 +43,7 @@ struct HomeWithChallenge : View {
                 
                 VStack{
                     Spacer()
-                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID }) {
+                    if desafios.contains(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID  }) {
                         Button(action: {
                             isDetailViewShown.toggle()
                         }, label: {
