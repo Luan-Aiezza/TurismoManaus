@@ -23,7 +23,7 @@ struct ChallengeCard: View {
             ZStack {
                 VStack{
                     HStack{
-                        Image( transformString(desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id!) )
+                        Image( PontosTuristicos.first(where: { transformString($0.name)  == desafios.first(where: { $0.state == "inProgress" && $0.user_id == player.gamePlayerID })!.ponto_id! })!.imageName )
                             .resizable()
                             .frame(width: 48, height: 63)
                             .scaledToFit()
@@ -43,8 +43,8 @@ struct ChallengeCard: View {
                                     .foregroundColor(.neutral)
                             }
                         })
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 12.0 )
+                        .padding(.leading, 12.0 )
+                        Spacer()
                         Image(systemName: "chevron.forward")
                             .resizable()
                             .frame(width: 11.689, height: 16.963)
