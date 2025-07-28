@@ -53,7 +53,7 @@
 		6FD4C0442E352CD300DCC0D0 /* CardPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPoint.swift; sourceTree = "<group>"; };
 		6FD4C0462E352D0700DCC0D0 /* GradientRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientRectangle.swift; sourceTree = "<group>"; };
 		6FD79BA92C04DA800014739E /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
-		CFEC5C162BEE5337004FCA4C /* Turismo_Manaus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Turismo_Manaus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFEC5C162BEE5337004FCA4C /* Simbora Manaus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simbora Manaus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEC5C192BEE5337004FCA4C /* Turismo_ManausApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turismo_ManausApp.swift; sourceTree = "<group>"; };
 		CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEC5C202BEE5338004FCA4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		CFEC5C172BEE5337004FCA4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CFEC5C162BEE5337004FCA4C /* Turismo_Manaus.app */,
+				CFEC5C162BEE5337004FCA4C /* Simbora Manaus.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,9 +204,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CFEC5C152BEE5337004FCA4C /* Turismo_Manaus */ = {
+		CFEC5C152BEE5337004FCA4C /* Simbora Manaus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFEC5C242BEE5338004FCA4C /* Build configuration list for PBXNativeTarget "Turismo_Manaus" */;
+			buildConfigurationList = CFEC5C242BEE5338004FCA4C /* Build configuration list for PBXNativeTarget "Simbora Manaus" */;
 			buildPhases = (
 				CFEC5C122BEE5337004FCA4C /* Sources */,
 				CFEC5C132BEE5337004FCA4C /* Frameworks */,
@@ -216,9 +216,9 @@
 			);
 			dependencies = (
 			);
-			name = Turismo_Manaus;
+			name = "Simbora Manaus";
 			productName = Turismo_Manaus;
-			productReference = CFEC5C162BEE5337004FCA4C /* Turismo_Manaus.app */;
+			productReference = CFEC5C162BEE5337004FCA4C /* Simbora Manaus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -236,7 +236,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CFEC5C112BEE5337004FCA4C /* Build configuration list for PBXProject "Turismo_Manaus" */;
+			buildConfigurationList = CFEC5C112BEE5337004FCA4C /* Build configuration list for PBXProject "Simbora Manaus" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -249,7 +249,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CFEC5C152BEE5337004FCA4C /* Turismo_Manaus */,
+				CFEC5C152BEE5337004FCA4C /* Simbora Manaus */,
 			);
 		};
 /* End PBXProject section */
@@ -497,7 +497,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CFEC5C112BEE5337004FCA4C /* Build configuration list for PBXProject "Turismo_Manaus" */ = {
+		CFEC5C112BEE5337004FCA4C /* Build configuration list for PBXProject "Simbora Manaus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFEC5C222BEE5338004FCA4C /* Debug */,
@@ -506,7 +506,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CFEC5C242BEE5338004FCA4C /* Build configuration list for PBXNativeTarget "Turismo_Manaus" */ = {
+		CFEC5C242BEE5338004FCA4C /* Build configuration list for PBXNativeTarget "Simbora Manaus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFEC5C252BEE5338004FCA4C /* Debug */,
