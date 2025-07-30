@@ -431,7 +431,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Turismo_Manaus/Preview Content\"";
-				DEVELOPMENT_TEAM = 9F6L7TWMC3;
+				DEVELOPMENT_TEAM = 4XY84J5345;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Turismo-Manaus-Info.plist";
@@ -446,7 +446,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mooncat.Turismo-Manaus";
+				PRODUCT_BUNDLE_IDENTIFIER = mooncat.SimboraManaus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -467,7 +467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Turismo_Manaus/Preview Content\"";
-				DEVELOPMENT_TEAM = 9F6L7TWMC3;
+				DEVELOPMENT_TEAM = 4XY84J5345;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Turismo-Manaus-Info.plist";
@@ -482,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mooncat.Turismo-Manaus";
+				PRODUCT_BUNDLE_IDENTIFIER = mooncat.SimboraManaus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
