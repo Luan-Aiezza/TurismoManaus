@@ -24,6 +24,7 @@ struct UI: View{
         animation: .default)
     private var desafios: FetchedResults<Desafios>
     
+    
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -43,6 +44,23 @@ struct UI: View{
             }
             .onAppear {
                 viewModel.performTask()
+                
+                if let desafio = desafios.first(where: {
+                    $0.state == "inProgress" && $0.user_id == player.gamePlayerID
+                }),
+                let termino = desafio.data_termino {
+                    
+                    let diasRestantes = termino.timeIntervalSince(Date()) / (60 * 60 * 24)
+                    
+                    if diasRestantes < 0 {
+                        desafio.state = "Fracassado"
+                        do {
+                            try viewContext.save()
+                        } catch {
+                            print("Erro ao salvar: \(error)")
+                        }
+                    }
+                }
             }
         }
     }
