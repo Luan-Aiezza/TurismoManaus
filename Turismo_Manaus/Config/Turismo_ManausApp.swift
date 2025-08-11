@@ -11,11 +11,16 @@ import SwiftUI
 struct Turismo_ManausApp: App {
     
     let persistenceController = PersistenceController.shared
+    @State var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
+            if !hasCompletedOnboarding {
+                OnboardingBase(hasCompletedOnboarding: $hasCompletedOnboarding)
+            } else {
+                UI()
+            }
+        }.environment(\.managedObjectContext, persistenceController.container.viewContext)
+        
     }
 }
