@@ -9,7 +9,7 @@ import SwiftUI
 import GameKit
 
 struct UI: View{
-    @StateObject private var viewModel = MyViewModel()
+    @StateObject private var viewModel = AuthUserViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var locationViewModel = LocationViewModel()
     

@@ -389,7 +389,6 @@ struct ChallengeDescription: View {
                     print(error?.localizedDescription ?? "")
                     return
                 }
-                print("done!")
             }
         } else if item.quant_idas < 3 {
             let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_3")
@@ -400,7 +399,6 @@ struct ChallengeDescription: View {
                     print(error?.localizedDescription ?? "")
                     return
                 }
-                print("done!")
             }
         } else if item.quant_idas < 5 {
             let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_5")
@@ -410,7 +408,6 @@ struct ChallengeDescription: View {
                     print(error?.localizedDescription ?? "")
                     return
                 }
-                print("done!")
             }
         } else if item.quant_idas < 10 {
             let achievement = GKAchievement(identifier: "\(transformString(item.ponto_name!))_10")
@@ -420,7 +417,6 @@ struct ChallengeDescription: View {
                     print(error?.localizedDescription ?? "")
                     return
                 }
-                print("done!")
             }
         }
         

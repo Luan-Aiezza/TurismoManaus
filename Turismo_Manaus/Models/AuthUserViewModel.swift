@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import GameKit
 
-class MyViewModel: ObservableObject {
+class AuthUserViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var player = GKLocalPlayer.local
     @FetchRequest(

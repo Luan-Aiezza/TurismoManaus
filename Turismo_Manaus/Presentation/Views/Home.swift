@@ -273,7 +273,7 @@ struct Home : View {
         return pontosFiltrados.randomElement()
     }
     
-    private func addDesafio( pontoId: String ) {
+    private func addChallenge( pontoId: String ) {
         let player = GKLocalPlayer.local
         let newItem = Desafios(context: viewContext)
         newItem.id = UUID()

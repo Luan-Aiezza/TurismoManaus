@@ -22,16 +22,3 @@ struct OnboardingPage2: View {
     }
 }
 
-
-struct ContentView: View {
-    @State var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-    
-    var body: some View {
-        if !hasCompletedOnboarding {
-            OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
-        } else {
-            UI()
-        }
-    }
-}
-
