@@ -313,22 +313,3 @@ struct Home : View {
     
 }
 
-struct CustomModalView: View {
-    var body: some View {
-        VStack {
-            Text("Conteúdo do Modal")
-                .font(.title)
-                .padding()
-            Spacer()
-            // Adiciona um espaço flexível para empurrar o conteúdo para cima
-            
-            // Personalize a altura ajustando o frame do conteúdo
-            Text("Este é um modal que ocupa apenas metade da tela.")
-                .padding()
-                .frame(height: UIScreen.main.bounds.height / 2)
-                .background(Color.blue)
-            
-            Spacer() // Adiciona um espaço flexível para empurrar o conteúdo para cima
-        }
-    }
-}

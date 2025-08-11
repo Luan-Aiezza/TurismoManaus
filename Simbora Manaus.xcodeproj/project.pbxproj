@@ -97,7 +97,6 @@
 				D352D8E12BFFD288001D617A /* HomeWithChallenge.swift */,
 				D352D8E92C0076F8001D617A /* ChallengeDescription.swift */,
 				6FB51FB82C048F7500BBCD52 /* UI.swift */,
-				6FB51FBA2C048FA400BBCD52 /* LoadingView.swift */,
 				D39DBB7F2C187E79002EAD0B /* Home.swift */,
 			);
 			path = Views;
@@ -150,7 +149,9 @@
 		6FE318272E4A13AB00AF49A6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6FE318352E4A181C00AF49A6 /* Components */,
 				6FE318282E4A13B500AF49A6 /* OnBording */,
+				6F0E80E42BEE897F00D2A8F5 /* Views */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -183,6 +184,14 @@
 			path = OnBoardingViewModel;
 			sourceTree = "<group>";
 		};
+		6FE318352E4A181C00AF49A6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6FB51FBA2C048FA400BBCD52 /* LoadingView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		CFEC5C0D2BEE5337004FCA4C = {
 			isa = PBXGroup;
 			children = (
@@ -209,7 +218,6 @@
 				D36259D22BF6FB90008A2ADD /* Turismo-Manaus-Info.plist */,
 				D36259D12BF6FB14008A2ADD /* Turismo_Manaus.entitlements */,
 				D339403F2BF3D1B600A26AAB /* Turismo_ManausDebug.entitlements */,
-				6F0E80E42BEE897F00D2A8F5 /* Views */,
 				6F0E80E52BEE899000D2A8F5 /* Models */,
 				D30EFD592C01CAC90035C371 /* Components */,
 				CFEC5C1D2BEE5338004FCA4C /* Assets.xcassets */,
