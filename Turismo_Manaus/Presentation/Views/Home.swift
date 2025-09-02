@@ -238,39 +238,8 @@ struct Home : View {
     }
     
     func selecionarPontoTuristicoAleatorio() -> PontoTuristico? {
-        
-        
-        let pontosFiltrados = PontosTuristicos.filter { ponto in
-            var corresponde = true
-            
-            if selectedHorario != Hours.todos{
-                if !horarioInnerSelectedHours(horario: selectedHorario, setHours: ponto.horarios) {
-                    corresponde = false
-                }
-            }
-            
-            if selectedCategoria != Categories.todos{
-                if ponto.categoria != selectedCategoria {
-                    corresponde = false
-                }
-            }
-            
-            if selectedPreco != Prices.todos {
-                if ponto.preco != selectedPreco {
-                    corresponde = false
-                }
-            }
-            
-            if selectedDistancia != Distances.todos {
-                if ponto.distance != selectedDistancia {
-                    corresponde = false
-                }
-            }
-            
-            return corresponde
-        }
-        
-        return pontosFiltrados.randomElement()
+        // Sempre retorna o restaurante Choupana
+        return PontosTuristicos.first { $0.name == "Restaurante Choupana" }
     }
     
     private func addChallenge( pontoId: String ) {

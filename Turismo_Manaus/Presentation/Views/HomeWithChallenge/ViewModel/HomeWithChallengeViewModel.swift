@@ -34,32 +34,8 @@ class HomeWithChallengeViewModel: ObservableObject {
     }
     
     func selectRandomTuristicPoint() -> PontoTuristico? {
-        
-        let pontosFiltrados = PontosTuristicos.filter { ponto in
-            var corresponde = true
-            
-            if selectedCategoria != Categories.todos{
-                if ponto.categoria != selectedCategoria {
-                    corresponde = false
-                }
-            }
-            
-            if selectedPreco != Prices.todos {
-                if ponto.preco != selectedPreco {
-                    corresponde = false
-                }
-            }
-            
-            if selectedDistancia != Distances.todos {
-                if ponto.distance != selectedDistancia {
-                    corresponde = false
-                }
-            }
-            
-            return corresponde
-        }
-        
-        return pontosFiltrados.randomElement()
+        // Sempre retorna o restaurante Choupana
+        return PontosTuristicos.first { $0.name == "Restaurante Choupana" }
     }
     
     
