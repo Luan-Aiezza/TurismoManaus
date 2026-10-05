@@ -32,7 +32,7 @@ Requirements: Xcode and an iPhone or simulator running **iOS 17.2 or later**. Lo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Luan-Aiezza/Turismo_Manaus.git
+   git clone https://github.com/Luan-Aiezza/TurismoManaus.git
    ```
 2. Open `Simbora Manaus.xcodeproj` in Xcode.
 3. Select an iPhone and press **Run** (⌘R).
